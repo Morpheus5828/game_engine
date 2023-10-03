@@ -1,5 +1,4 @@
 package sample;
-import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -7,7 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 
-public class App extends Application {
+public class MyApplication extends javafx.application.Application {
 
   @Override
   public void start(Stage stage) {

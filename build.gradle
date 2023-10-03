@@ -1,4 +1,5 @@
 plugins {
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
     id 'java'
     id 'application'
     id 'checkstyle'
@@ -6,15 +7,13 @@ plugins {
     id 'pmd'
     id "com.github.spotbugs" version "5.0.13"
     id 'org.openjfx.javafxplugin' version '0.1.0'
-    id 'org.beryx.jlink' version '2.26.0'
 }
 
 group 'fr.univ_amu'
-version '1.0-SNAPSHOT'
 
 javafx {
     version = "21"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    modules = [ 'javafx.controls']
 }
 
 checkstyle {
@@ -37,6 +36,7 @@ dependencies {
 test {
     finalizedBy jacocoTestReport // report is always generated after tests run
 }
+
 jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
 }
@@ -46,15 +46,7 @@ test {
 }
 
 application {
-    mainClass = 'sample.App'
-}
-
-tasks.named('jar') {
-    manifest {
-        attributes('Implementation-Title': project.name,
-                'Implementation-Version': project.version,
-                'main-Class': application.mainClass )
-    }
+    mainClass = 'sample.Main'
 }
 
 spotbugs {
@@ -71,6 +63,14 @@ spotbugsMain {
             outputLocation = output.get().asFile
             stylesheet = 'fancy-hist.xsl'
         }
+    }
+}
+
+jar {
+    manifest {
+        attributes("Implementation-Title": project.name,
+                "Implementation-Version": version,
+                "Main-Class": application.mainClass)
     }
 }
 
