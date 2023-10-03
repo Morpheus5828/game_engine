@@ -4,11 +4,18 @@ plugins {
     id 'checkstyle'
     id 'jacoco'
     id 'pmd'
-    id "com.github.spotbugs" version "5.0.12"
+    id "com.github.spotbugs" version "5.0.13"
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+    id 'org.beryx.jlink' version '2.26.0'
 }
 
 group 'fr.univ_amu'
 version '1.0-SNAPSHOT'
+
+javafx {
+    version = "21"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
 
 checkstyle {
     toolVersion = '10.3.4'
@@ -19,12 +26,12 @@ repositories {
 }
 
 dependencies {
-    testImplementation('org.junit.jupiter:junit-jupiter-api:5.9.0',
-            'org.assertj:assertj-core:3.23.1')
+    testImplementation('org.junit.jupiter:junit-jupiter-api:5.10.0',
+            'org.assertj:assertj-core:3.24.2')
     spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.12.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
-    implementation 'org.apache.logging.log4j:log4j-api:2.19.0'
-    implementation 'org.apache.logging.log4j:log4j-core:2.19.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
+    implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
+    implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
 }
 
 test {
@@ -39,7 +46,7 @@ test {
 }
 
 application {
-    mainClass = 'sample.MyJavaFrame'
+    mainClass = 'sample.App'
 }
 
 tasks.named('jar') {
@@ -60,7 +67,8 @@ spotbugsMain {
     reports {
         html {
             required = true
-            outputLocation = file("$buildDir/reports/spotbugs/main/spotbugs.html")
+            Provider<Directory> output = layout.buildDirectory.dir("reports/spotbugs/main/spotbugs.html")
+            outputLocation = output.get().asFile
             stylesheet = 'fancy-hist.xsl'
         }
     }
@@ -70,7 +78,8 @@ spotbugsTest {
     reports {
         html {
             required = true
-            outputLocation = file("$buildDir/reports/spotbugs/test/spotbugs.html")
+            Provider<Directory> output = layout.buildDirectory.dir("reports/spotbugs/test/spotbugs.html")
+            outputLocation = output.get().asFile
             stylesheet = 'fancy-hist.xsl'
         }
     }
