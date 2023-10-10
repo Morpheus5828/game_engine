@@ -1,4 +1,4 @@
-package sample;
+package engine;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -22,7 +22,7 @@ public class MyApplication extends javafx.application.Application {
   }
 
   private static Scene createScene() {
-    Image image = new Image("sample/image.png");
+    Image image = new Image("engine/images/image.png");
 
     //Setting the image view
     ImageView imageView = new ImageView(image);

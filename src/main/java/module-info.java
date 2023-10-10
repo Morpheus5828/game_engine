@@ -1,5 +1,5 @@
-module sample {
+module engine {
   requires javafx.controls;
 
-  exports sample;
+  exports engine;
 }
