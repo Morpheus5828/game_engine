@@ -9,14 +9,15 @@ public class Polygon extends AbstractShape {
     private int sides;
     private double corner;
 
-    public Polygon(double x, double y, double size, int sides) {
+    public Polygon(double x, double y, double radius, int sides) {
+        super();
         setCenter(new Position(x, y));
-        setApex(getApex());
-        this.radius = size;
+        this.radius = radius;
         this.sides = sides;
         this.corner = 2 * Math.PI / sides;
     }
 
+    @Override
     public List<Position> getApex() {
         List<Position> apex = new ArrayList<>();
         for (int i = 0; i < sides; i++) {

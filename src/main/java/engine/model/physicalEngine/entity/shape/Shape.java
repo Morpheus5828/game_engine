@@ -9,7 +9,5 @@ public interface Shape {
 
     Position getCenter(int index);
 
-    List<Position> getApex();
-
-    void setApex(List<Position> apex);
+    abstract List<Position> getApex();
 }
