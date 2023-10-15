@@ -9,7 +9,10 @@ public class Circle extends AbstractShape {
 
     public Circle(double x, double y, double radius) {
         setCenter(new Position(x, y));
-        this.radius = radius;
+            if(radius<0){
+                throw new IllegalArgumentException("le rayon ne peut pas etre negatif");
+            }
+            this.radius = radius;
     }
 
     @Override

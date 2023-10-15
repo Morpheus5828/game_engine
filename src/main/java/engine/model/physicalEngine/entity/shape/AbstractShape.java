@@ -14,7 +14,7 @@ public abstract class AbstractShape implements Shape {
     }
 
     @Override
-    public Position getCenter(int index) {
+    public Position getCenter() {
         return this.center;
     }
 

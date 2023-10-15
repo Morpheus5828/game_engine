@@ -69,4 +69,9 @@ public abstract class AbstractEntity implements Entity {
     public void setCollisionOn(boolean collisionOn) {
         this.collisionOn = collisionOn;
     }
+
+    @Override
+    public String toString(){
+        return "shape : "+shape;
+    }
 }

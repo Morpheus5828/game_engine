@@ -7,7 +7,7 @@ import engine.model.physicalEngine.entity.temp.Position;
 public interface Shape {
     void setCenter(Position point);
 
-    Position getCenter(int index);
+    Position getCenter();
 
     abstract List<Position> getApex();
 }
