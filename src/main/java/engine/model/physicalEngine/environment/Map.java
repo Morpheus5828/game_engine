@@ -3,7 +3,6 @@ package engine.model.physicalEngine.environment;
 import java.util.ArrayList;
 
 public class Map {
-    //private List<Entity> entityList = new ArrayList<>()  on attend de merge avec la branch Entity
     private double length;
     private double height;
 
