@@ -1,4 +1,4 @@
-package engine.model.physicalEngine.entity.temp;
+package engine.model.physicalEngine.shape.temp;
 
 public class Position {
     private double x;
