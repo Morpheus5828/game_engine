@@ -21,7 +21,6 @@ public class Rectangle implements Shape {
         this.length = length;
     }
 
-    @Override
     public List<Position> getApex() {
         List<Position> apex = new ArrayList<>();
         for (int i = 0; i < sides; i++) {

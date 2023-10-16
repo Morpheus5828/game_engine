@@ -6,8 +6,9 @@ import java.util.List;
 import engine.model.physicalEngine.shape.temp.Position;
 
 public class Circle implements Shape {
-    protected Position center;
-    protected double radius;
+    private Position center;
+    private double radius;
+    private boolean isMoving;
 
     public Circle(double x, double y, double radius) {
         setCenter(new Position(x, y));
@@ -18,13 +19,6 @@ public class Circle implements Shape {
     }
 
     @Override
-    public List<Position> getApex() {
-        List<Position> apex = new ArrayList<>();
-        return apex;
-    }
-
-
-    @Override
     public void setCenter(Position point) {
         this.center = point;
     }
@@ -33,4 +27,10 @@ public class Circle implements Shape {
     public Position getCenter() {
         return this.center;
     }
+
+    @Override
+    public void setIsMoving(boolean isMoving){this.isMoving=isMoving;}
+
+    @Override
+    public boolean IsMoving(){return this.isMoving;}
 }

@@ -9,5 +9,7 @@ public interface Shape {
 
     Position getCenter();
 
-    abstract List<Position> getApex();
+    void setIsMoving(boolean isMoving);
+
+    boolean IsMoving();
 }
