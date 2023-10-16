@@ -29,8 +29,8 @@ public class Velocity {
         setVelocityY(velocityY);
     }
 
-    public void addVelocity(float velocityX, float velocityY){
-        setVelocityX(getVelocityX() + velocityX);
-        setVelocityY(getVelocityY() + velocityY);
+    public void addVelocity(float bonusX, float bonusY){
+        setVelocityX(getVelocityX() + bonusX);
+        setVelocityY(getVelocityY() + bonusY);
     }
 }
