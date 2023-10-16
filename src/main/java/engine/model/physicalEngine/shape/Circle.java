@@ -32,5 +32,7 @@ public class Circle implements Shape {
     public void setIsMoving(boolean isMoving){this.isMoving=isMoving;}
 
     @Override
-    public boolean IsMoving(){return this.isMoving;}
+    public boolean isMoving(){return this.isMoving;}
+
+    public double getRadius(){return this.radius;}
 }

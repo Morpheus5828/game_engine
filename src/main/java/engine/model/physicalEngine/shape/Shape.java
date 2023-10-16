@@ -11,5 +11,5 @@ public interface Shape {
 
     void setIsMoving(boolean isMoving);
 
-    boolean IsMoving();
+    boolean isMoving();
 }
