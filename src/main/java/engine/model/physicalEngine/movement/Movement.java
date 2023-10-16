@@ -10,11 +10,29 @@ public class Movement {
         position = new Position(x, y);
         velocity = new Velocity(velocityX, velocityY);
     }
-    public void updatePositonX(){}
+    public void updatePositonX(Direction direction){
+        if(isColliding()){
+            if(direction == Direction.DROITE){
+                position.setX(position.getX() + velocity.getVelocityX());
+            }
+            else if(direction == Direction.GAUCHE){
+                position.setX(position.getX() - velocity.getVelocityX());
+            }
+        }
+    }
 
-    public void updatePositonY(){}
+    public void updatePositonY(Direction direction){
+        if(isColliding()){
+            if(direction == Direction.HAUT){
+                position.setY(position.getY() - velocity.getVelocityY());
+            }
+            else if(direction == Direction.BAS){
+                position.setY(position.getY() + velocity.getVelocityY());
+            }
+        }
+    }
 
-    public  boolean isColliding(){
+    public boolean isColliding(){
         return false;
     }
     public Direction getDirection() {
