@@ -1,8 +1,5 @@
 package engine.model.physicalEngine.shape;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import engine.model.physicalEngine.shape.temp.Position;
 
 public class Circle implements Shape {
@@ -16,7 +13,7 @@ public class Circle implements Shape {
             throw new IllegalArgumentException("Le rayon ne peut pas etre negatif");
         }
         this.radius = radius;
-        this.isMoving=false;
+        this.isMoving = false;
     }
 
     @Override
@@ -30,10 +27,16 @@ public class Circle implements Shape {
     }
 
     @Override
-    public void setIsMoving(boolean isMoving){this.isMoving=isMoving;}
+    public void setIsMoving(boolean isMoving) {
+        this.isMoving = isMoving;
+    }
 
     @Override
-    public boolean isMoving(){return this.isMoving;}
+    public boolean isMoving() {
+        return this.isMoving;
+    }
 
-    public double getRadius(){return this.radius;}
+    public double getRadius() {
+        return this.radius;
+    }
 }

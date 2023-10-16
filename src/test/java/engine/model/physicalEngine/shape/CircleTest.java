@@ -1,6 +1,4 @@
 package engine.model.physicalEngine.shape;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,35 +8,38 @@ import org.junit.jupiter.api.Test;
 public class CircleTest {
 
     @Test
-    void testsetCenter(){
-        Position pos1=new Position(5,5);
-        Circle circle1=new Circle(1,1,5);
-        circle1.setCenter(pos1);
-        assertEquals(circle1.getCenter(),pos1);
+    void testsetCenter() {
+        Position pos = new Position(5, 5);
+        Circle circle = new Circle(1, 1, 5);
+        circle.setCenter(pos);
+        assertEquals(circle.getCenter(), pos);
     }
 
     @Test
-    void testgetCenter(){
-        Position pos2=new Position(10,10);
-        Circle circle2=new Circle(10,10,5);
-        assertEquals(circle2.getCenter().getX(),pos2.getX());
-        assertEquals(circle2.getCenter().getY(),pos2.getY());
+    void testgetCenter() {
+        Position pos = new Position(10, 10);
+        Circle circle = new Circle(10, 10, 5);
+        assertEquals(circle.getCenter().getX(), pos.getX());
+        assertEquals(circle.getCenter().getY(), pos.getY());
     }
+
     @Test
-    void testsetIsMoving(){
-        boolean bool=true;
-        Circle circle1=new Circle(1,1,10);
-        circle1.setIsMoving(bool);
-        assertEquals(circle1.isMoving(),bool);
+    void testsetIsMoving() {
+        boolean bool = true;
+        Circle circle = new Circle(1, 1, 10);
+        circle.setIsMoving(bool);
+        assertEquals(circle.isMoving(), bool);
     }
+
     @Test
-    void testisMoving(){
-        Circle circle1=new Circle(10,10,10);
-        assertEquals(circle1.isMoving(),false);
+    void testisMoving() {
+        Circle circle = new Circle(10, 10, 10);
+        assertEquals(circle.isMoving(), false);
     }
+
     @Test
-    void testgetRadius(){
-        Circle circle1=new Circle(1,1,15);
-        assertEquals(circle1.getRadius(),15);
+    void testgetRadius() {
+        Circle circle = new Circle(1, 1, 15);
+        assertEquals(circle.getRadius(), 15);
     }
 }
