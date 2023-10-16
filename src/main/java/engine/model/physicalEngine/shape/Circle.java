@@ -7,7 +7,7 @@ public class Circle implements Shape {
     private double radius;
     private boolean isMoving;
 
-    public Circle(double x, double y, double radius) {
+    public Circle(float x, float y, double radius) {
         setCenter(new Position(x, y));
         if (radius < 0) {
             throw new IllegalArgumentException("Le rayon ne peut pas etre negatif");
@@ -36,6 +36,9 @@ public class Circle implements Shape {
         return this.isMoving;
     }
 
+    public void setRadius(double radius){
+        this.radius=radius;
+    }
     public double getRadius() {
         return this.radius;
     }

@@ -42,4 +42,11 @@ public class CircleTest {
         Circle circle = new Circle(1, 1, 15);
         assertEquals(circle.getRadius(), 15);
     }
+    @Test
+    void testsetRadius(){
+        Circle circle = new Circle(1, 1, 15);
+        double a=10;
+        circle.setRadius(a);
+        assertEquals(circle.getRadius(),a);
+    }
 }

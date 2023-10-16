@@ -15,6 +15,7 @@ public class Rectangle implements Shape {
         setCenter(new Position(x, y));
         this.height = height;
         this.length = length;
+        this.isMoving=false;
     }
 
     public List<Position> getApex() {
@@ -26,8 +27,14 @@ public class Rectangle implements Shape {
         return apex;
     }
 
+    public void setHeight(double height){
+        this.height=height;
+    }
     public double getHeight() {
         return this.height;
+    }
+    public void setLength(double length){
+        this.length=length;
     }
 
     public double getLength() {
