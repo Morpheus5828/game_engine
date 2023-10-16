@@ -16,6 +16,7 @@ public class Circle implements Shape {
             throw new IllegalArgumentException("Le rayon ne peut pas etre negatif");
         }
         this.radius = radius;
+        this.isMoving=false;
     }
 
     @Override
