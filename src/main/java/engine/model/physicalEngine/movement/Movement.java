@@ -24,10 +24,10 @@ public class Movement {
     public void updatePositonY(Direction direction){
         if(isColliding()){
             if(direction == Direction.HAUT){
-                position.setY(position.getY() - velocity.getVelocityY());
+                position.setY(position.getY() + velocity.getVelocityY());
             }
             else if(direction == Direction.BAS){
-                position.setY(position.getY() + velocity.getVelocityY());
+                position.setY(position.getY()  - velocity.getVelocityY());
             }
         }
     }
