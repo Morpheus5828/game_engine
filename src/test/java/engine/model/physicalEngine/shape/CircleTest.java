@@ -33,8 +33,9 @@ public class CircleTest {
     }
     @Test
     void testisMoving(){
+        boolean bool=true;
         Circle circle1=new Circle(10,10,10);
-
+        circle1.setIsMoving(bool);
         assertEquals(circle1.isMoving(),true);
     }
 }
