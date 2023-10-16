@@ -1,17 +1,22 @@
 package engine.model.physicalEngine.movement;
 
-public abstract class movement {
+public class Movement {
 
     protected Position position;
     protected Velocity velocity;
     protected Direction direction;
 
-    public void Movement(float x, float y, float velocityX, float velocityY) {
+    public Movement(float x, float y, float velocityX, float velocityY) {
         position = new Position(x, y);
         velocity = new Velocity(velocityX, velocityY);
     }
-    public abstract void updatePositon();
-    public abstract boolean isColliding();
+    public void updatePositonX(){}
+
+    public void updatePositonY(){}
+
+    public  boolean isColliding(){
+        return false;
+    }
     public Direction getDirection() {
         return direction;
     }
