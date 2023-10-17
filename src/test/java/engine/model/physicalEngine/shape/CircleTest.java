@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class CircleTest {
 
     @Test
-    void testsetCenter() {
+    void testSetCenter() {
         Position pos = new Position(5, 5);
         Circle circle = new Circle(1, 1, 5);
         circle.setCenter(pos);
@@ -16,7 +16,7 @@ public class CircleTest {
     }
 
     @Test
-    void testgetCenter() {
+    void testGetCenter() {
         Position pos = new Position(10, 10);
         Circle circle = new Circle(10, 10, 5);
         assertEquals(circle.getCenter().getX(), pos.getX());
@@ -24,7 +24,7 @@ public class CircleTest {
     }
 
     @Test
-    void testsetIsMoving() {
+    void testSetIsMoving() {
         boolean bool = true;
         Circle circle = new Circle(1, 1, 10);
         circle.setIsMoving(bool);
@@ -32,18 +32,18 @@ public class CircleTest {
     }
 
     @Test
-    void testisMoving() {
+    void testIsMoving() {
         Circle circle = new Circle(10, 10, 10);
         assertEquals(circle.isMoving(), false);
     }
 
     @Test
-    void testgetRadius() {
+    void testGetRadius() {
         Circle circle = new Circle(1, 1, 15);
         assertEquals(circle.getRadius(), 15);
     }
     @Test
-    void testsetRadius(){
+    void testSetRadius(){
         Circle circle = new Circle(1, 1, 15);
         double a=10;
         circle.setRadius(a);

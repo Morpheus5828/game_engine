@@ -1,6 +1,6 @@
 package engine.model.physicalEngine.shape;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import java.util.ArrayList;
+
 import java.util.List;
 import engine.model.physicalEngine.shape.temp.Position;
 import org.junit.jupiter.api.Test;
@@ -9,14 +9,14 @@ public class RectangleTest {
     @Test
     void testgetHeight(){
         Rectangle rec=new Rectangle(1,1,10,5);
-        assertEquals(rec.getHeight(),5);
+        assertEquals(rec.getWidth(),5);
     }
     @Test
     void testsetHeight(){
         Rectangle rec=new Rectangle(1,1,10,5);
         double a=10;
-        rec.setHeight(a);
-        assertEquals(rec.getHeight(),a);
+        rec.setWidth(a);
+        assertEquals(rec.getWidth(),a);
     }
     @Test
     void testgetLength(){
