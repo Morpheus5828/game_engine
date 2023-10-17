@@ -13,7 +13,7 @@ public class Drawing {
 
     public Drawing() {}
 
-    public List<FactoryShape> getFactoryShapeList() {*
+    public List<FactoryShape> getFactoryShapeList() {
         return factoryShapeList;
     }
 
