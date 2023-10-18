@@ -10,6 +10,7 @@ public class Rectangle implements Shape {
     private double length;
     private double width;
     private boolean isMoving;
+    private Velocity Velocity;
 
     public Rectangle(float x, float y, double length, double width) {
         setCenter(new Position(x, y));
