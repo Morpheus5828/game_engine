@@ -1,6 +1,6 @@
 package engine.model.physicalEngine.shape;
 
-import engine.model.physicalEngine.shape.temp.Position;
+import engine.model.physicalEngine.movement.*;
 
 public class Circle implements Shape {
     private Position center;
@@ -35,9 +35,10 @@ public class Circle implements Shape {
         return this.isMoving;
     }
 
-    public void setRadius(double radius){
-        this.radius=radius;
+    public void setRadius(double radius) {
+        this.radius = radius;
     }
+
     public double getRadius() {
         return this.radius;
     }

@@ -1,9 +1,9 @@
 package engine.model.physicalEngine.shape;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import engine.model.physicalEngine.shape.temp.Position;
 import org.junit.jupiter.api.Test;
+
+import engine.model.physicalEngine.movement.*;
 
 public class CircleTest {
 
@@ -42,11 +42,12 @@ public class CircleTest {
         Circle circle = new Circle(1, 1, 15);
         assertEquals(circle.getRadius(), 15);
     }
+
     @Test
-    void testSetRadius(){
+    void testSetRadius() {
         Circle circle = new Circle(1, 1, 15);
-        double a=10;
+        double a = 10;
         circle.setRadius(a);
-        assertEquals(circle.getRadius(),a);
+        assertEquals(circle.getRadius(), a);
     }
 }

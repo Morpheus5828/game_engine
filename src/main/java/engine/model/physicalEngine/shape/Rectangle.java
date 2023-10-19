@@ -3,22 +3,20 @@ package engine.model.physicalEngine.shape;
 import java.util.ArrayList;
 import java.util.List;
 
-import engine.model.physicalEngine.movement.Velocity;
-import engine.model.physicalEngine.shape.temp.Position;
-import engine.model.physicalEngine.movement.Velocity;
+import engine.model.physicalEngine.movement.*;
 
 public class Rectangle implements Shape {
     private Position center;
-    private double length;
-    private double width;
+    private float length;
+    private float width;
     private boolean isMoving;
     private Velocity Velocity;
 
-    public Rectangle(float x, float y, double length, double width) {
+    public Rectangle(float x, float y, float length, float width) {
         setCenter(new Position(x, y));
         this.width = width;
         this.length = length;
-        this.isMoving=false;
+        this.isMoving = false;
     }
 
     public List<Position> getApex() {
@@ -30,17 +28,19 @@ public class Rectangle implements Shape {
         return apex;
     }
 
-    public void setWidth(double width){
+    public void setWidth(float width) {
         this.width = width;
     }
-    public double getWidth() {
+
+    public float getWidth() {
         return this.width;
     }
-    public void setLength(double length){
-        this.length=length;
+
+    public void setLength(float length) {
+        this.length = length;
     }
 
-    public double getLength() {
+    public float getLength() {
         return this.length;
     }
 

@@ -1,6 +1,6 @@
 package engine.model.physicalEngine.shape;
 
-import engine.model.physicalEngine.shape.temp.Position;
+import engine.model.physicalEngine.movement.*;
 
 public interface Shape {
     void setCenter(Position point);
