@@ -1,14 +1,14 @@
 package engine.model.physicalEngine.movement;
 
 public class Velocity {
-    // test
     private float velocityX;
     private float velocityY;
 
-    public Velocity(float velocityX, float velocityY){
+    public Velocity(float velocityX, float velocityY) {
         this.velocityX = velocityX;
         this.velocityY = velocityY;
     }
+
     public float getVelocityX() {
         return velocityX;
     }
@@ -25,12 +25,12 @@ public class Velocity {
         this.velocityY = velocityY;
     }
 
-    public void setVelocity(float velocityX, float velocityY){
+    public void setVelocity(float velocityX, float velocityY) {
         setVelocityX(velocityX);
         setVelocityY(velocityY);
     }
 
-    public void addVelocity(float bonusX, float bonusY){
+    public void addVelocity(float bonusX, float bonusY) {
         setVelocityX(getVelocityX() + bonusX);
         setVelocityY(getVelocityY() + bonusY);
     }

@@ -9,14 +9,21 @@ public class Rectangle implements Shape {
     private Position center;
     private float length;
     private float width;
-    private boolean isMoving;
+    private boolean moving;
+    private boolean colliding;
     private Velocity Velocity;
+    private Direction direction;
+    private Position head;
 
-    public Rectangle(float x, float y, float length, float width) {
+    public Rectangle(float x, float y, float length, float width, boolean moving, Velocity velocity) {
         setCenter(new Position(x, y));
         this.width = width;
         this.length = length;
-        this.isMoving = false;
+        this.moving = moving;
+        this.colliding = true;
+        this.Velocity = velocity;
+        this.direction = null;
+        setHead();
     }
 
     public List<Position> getApex() {
@@ -45,8 +52,13 @@ public class Rectangle implements Shape {
     }
 
     @Override
-    public void setCenter(Position point) {
-        this.center = point;
+    public Position getHead() {
+        return this.head;
+    }
+
+    @Override
+    public void setHead() {
+        this.head = new Position(this.center.getX() + this.length / 2, this.center.getY() + this.width / 2);
     }
 
     @Override
@@ -55,12 +67,47 @@ public class Rectangle implements Shape {
     }
 
     @Override
-    public boolean isMoving() {
-        return isMoving;
+    public void setCenter(Position point) {
+        this.center = point;
     }
 
     @Override
-    public void setIsMoving(boolean isMoving) {
-        this.isMoving = isMoving;
+    public boolean isMoving() {
+        return this.moving;
+    }
+
+    @Override
+    public void setMoving(boolean moving) {
+        this.moving = moving;
+    }
+
+    @Override
+    public boolean isColliding() {
+        return this.colliding;
+    }
+
+    @Override
+    public void setColliding(boolean colliding) {
+        this.colliding = colliding;
+    }
+
+    @Override
+    public Velocity getVelocity() {
+        return this.Velocity;
+    }
+
+    @Override
+    public void setVelocity(Velocity velocity) {
+        this.Velocity = velocity;
+    }
+
+    @Override
+    public Direction getDirection() {
+        return this.direction;
+    }
+
+    @Override
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 }

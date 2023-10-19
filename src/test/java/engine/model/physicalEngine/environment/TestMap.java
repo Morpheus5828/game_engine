@@ -1,4 +1,4 @@
-package engine.model.physicalEngine.environement;
+package engine.model.physicalEngine.environment;
 
 import engine.model.physicalEngine.environment.Map;
 import engine.model.physicalEngine.shape.Circle;

@@ -24,26 +24,17 @@ public class Map {
     public boolean isShapeInPlan(Shape shape) {
         var x = shape.getCenter().getX();
         var y = shape.getCenter().getY();
-        if(shape instanceof Circle) {
+        if (shape instanceof Circle) {
             var radius = ((Circle) shape).getRadius();
-            if(
-                (x + radius > this.width) ||
-                (y + radius > this.height) ||
-                (x - radius < 0) ||
-                (y - radius < 0)
-            )
+            if ((x + radius > this.width) || (y + radius > this.height) || (x - radius < 0) || (y - radius < 0))
                 return false;
 
         } else if (shape instanceof Rectangle) {
             var shapeLength = ((Rectangle) shape).getLength();
             var shapeWidth = ((Rectangle) shape).getWidth();
 
-            if(
-                (x + shapeWidth > this.width) ||
-                (y + shapeLength > this.height) ||
-                (x - shapeWidth < 0) ||
-                (y - shapeLength < 0)
-            )
+            if ((x + shapeWidth > this.width) || (y + shapeLength > this.height) || (x - shapeWidth < 0)
+                    || (y - shapeLength < 0))
                 return false;
         }
 
@@ -55,7 +46,7 @@ public class Map {
     }
 
     public void addShape(Shape shape) {
-        if(isShapeInPlan(shape))
+        if (isShapeInPlan(shape))
             this.shapeList.add(shape);
     }
 

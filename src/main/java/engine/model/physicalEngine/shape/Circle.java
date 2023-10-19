@@ -4,20 +4,40 @@ import engine.model.physicalEngine.movement.*;
 
 public class Circle implements Shape {
     private Position center;
-    private double radius;
-    private boolean isMoving;
+    private float radius;
+    private boolean moving;
+    private boolean colliding;
+    private Velocity Velocity;
+    private Direction direction;
+    private Position head;
 
-    public Circle(float x, float y, double radius) {
-        setCenter(new Position(x, y));
+    public Circle(float x, float y, float radius, boolean moving, Velocity velocity) {
         if (radius < 0)
             throw new IllegalArgumentException("Le rayon ne peut pas etre negatif");
+        setCenter(new Position(x, y));
         this.radius = radius;
-        this.isMoving = false;
+        this.moving = moving;
+        this.colliding = true;
+        this.Velocity = velocity;
+        this.direction = null;
+        setHead();
+    }
+
+    public double getRadius() {
+        return this.radius;
+    }
+
+    public void setRadius(float radius) {
+        this.radius = radius;
     }
 
     @Override
-    public void setCenter(Position point) {
-        this.center = point;
+    public Position getHead() {
+        return this.head;
+    }
+
+    public void setHead() {
+        this.head = new Position(this.center.getX() + this.radius, this.center.getY());
     }
 
     @Override
@@ -26,20 +46,47 @@ public class Circle implements Shape {
     }
 
     @Override
-    public void setIsMoving(boolean isMoving) {
-        this.isMoving = isMoving;
+    public void setCenter(Position point) {
+        this.center = point;
+    }
+
+    @Override
+    public void setMoving(boolean isMoving) {
+        this.moving = isMoving;
     }
 
     @Override
     public boolean isMoving() {
-        return this.isMoving;
+        return this.moving;
     }
 
-    public void setRadius(double radius) {
-        this.radius = radius;
+    @Override
+    public boolean isColliding() {
+        return this.colliding;
     }
 
-    public double getRadius() {
-        return this.radius;
+    @Override
+    public void setColliding(boolean isColliding) {
+        this.colliding = isColliding;
+    }
+
+    @Override
+    public Velocity getVelocity() {
+        return this.Velocity;
+    }
+
+    @Override
+    public void setVelocity(Velocity velocity) {
+        this.Velocity = velocity;
+    }
+
+    @Override
+    public Direction getDirection() {
+        return this.direction;
+    }
+
+    @Override
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 }

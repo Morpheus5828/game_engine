@@ -27,7 +27,7 @@ public class CircleTest {
     void testSetIsMoving() {
         boolean bool = true;
         Circle circle = new Circle(1, 1, 10);
-        circle.setIsMoving(bool);
+        circle.setMoving(bool);
         assertEquals(circle.isMoving(), bool);
     }
 

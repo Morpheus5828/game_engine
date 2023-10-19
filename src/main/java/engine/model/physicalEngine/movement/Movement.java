@@ -9,86 +9,85 @@ public class Movement {
     private Direction direction;
     private Map map;
 
-
     public Movement(float x, float y, float velocityX, float velocityY, Map map) {
         this.position = new Position(x, y);
         this.velocity = new Velocity(velocityX, velocityY);
         this.map = map;
     }
 
-    public void updatePositonX(Direction direction){
-        if(!isColliding(this.map, direction)){
-            if(direction == Direction.DROITE){
+    public void updatePositonX(Direction direction) {
+        if (!isColliding(this.map, direction)) {
+            if (direction == Direction.RIGHT) {
                 position.setX(position.getX() + velocity.getVelocityX());
-            }
-            else if(direction == Direction.GAUCHE){
+            } else if (direction == Direction.LEFT) {
                 position.setX(position.getX() - velocity.getVelocityX());
             }
         }
     }
 
-    public void updatePositonY(Direction direction){
-        if(!isColliding(this.map, direction)){
-            if(direction == Direction.HAUT){
+    public void updatePositonY(Direction direction) {
+        if (!isColliding(this.map, direction)) {
+            if (direction == Direction.TOP) {
                 position.setY(position.getY() + velocity.getVelocityY());
-            }
-            else if(direction == Direction.BAS){
-                position.setY(position.getY()  - velocity.getVelocityY());
+            } else if (direction == Direction.BOTTOM) {
+                position.setY(position.getY() - velocity.getVelocityY());
             }
         }
     }
 
-    public boolean isColliding(Map map,Direction direction){
-
-        if(direction == Direction.HAUT){
+    public boolean isColliding(Map map, Direction direction) {
+        if (direction == Direction.TOP) {
             float testPosY = position.getY() + velocity.getVelocityY();
-            if(testPosY > map.getHeight()){
+            if (testPosY > map.getHeight()) {
                 return false;
             }
             for (Shape shape : map.getShapeList()) {
-                if(shape.getCenter().getY() == testPosY || (shape.getCenter().getY() > position.getY() && shape.getCenter().getY() < testPosY)){
+                if (shape.getCenter().getY() == testPosY
+                        || (shape.getCenter().getY() > position.getY() && shape.getCenter().getY() < testPosY)) {
                     return false;
                 }
             }
-        }
-        else if(direction == Direction.BAS){
+        } else if (direction == Direction.BOTTOM) {
             float testPosY = position.getY() - velocity.getVelocityY();
-            if(testPosY < 0){
+            if (testPosY < 0) {
                 return false;
             }
             for (Shape shape : map.getShapeList()) {
-                if(shape.getCenter().getY() == testPosY || (shape.getCenter().getY() < position.getY() && shape.getCenter().getY() > testPosY)){
+                if (shape.getCenter().getY() == testPosY
+                        || (shape.getCenter().getY() < position.getY() && shape.getCenter().getY() > testPosY)) {
                     return false;
                 }
             }
-        }
-        else if(direction == Direction.DROITE){
+        } else if (direction == Direction.RIGHT) {
             float testPosX = position.getX() + velocity.getVelocityX();
-            if(testPosX > map.getWidth()){
+            if (testPosX > map.getWidth()) {
                 return false;
             }
             for (Shape shape : map.getShapeList()) {
-                if(shape.getCenter().getX() == testPosX || (shape.getCenter().getX() > position.getX() && shape.getCenter().getX() < testPosX)){
+                if (shape.getCenter().getX() == testPosX
+                        || (shape.getCenter().getX() > position.getX() && shape.getCenter().getX() < testPosX)) {
                     return false;
                 }
             }
-        }
-        else if(direction == Direction.GAUCHE){
+        } else if (direction == Direction.LEFT) {
             float testPosX = position.getX() - velocity.getVelocityX();
-            if(testPosX < 0){
+            if (testPosX < 0) {
                 return false;
             }
             for (Shape shape : map.getShapeList()) {
-                if(shape.getCenter().getX() == testPosX || (shape.getCenter().getX() < position.getX() && shape.getCenter().getX() > testPosX)){
+                if (shape.getCenter().getX() == testPosX
+                        || (shape.getCenter().getX() < position.getX() && shape.getCenter().getX() > testPosX)) {
                     return false;
                 }
             }
         }
         return true;
     }
+
     public Direction getDirection() {
         return direction;
     }
+
     public void setDirection(Direction direction) {
         this.direction = direction;
     }

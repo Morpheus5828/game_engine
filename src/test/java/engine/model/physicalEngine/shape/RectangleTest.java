@@ -60,7 +60,7 @@ public class RectangleTest {
     void testsetIsMoving() {
         Rectangle rec = new Rectangle(1, 1, 10, 5);
         boolean bool = true;
-        rec.setIsMoving(bool);
+        rec.setMoving(bool);
         assertEquals(rec.isMoving(), true);
     }
 

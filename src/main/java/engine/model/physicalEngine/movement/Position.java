@@ -1,11 +1,10 @@
 package engine.model.physicalEngine.movement;
 
 public class Position {
-    // test
     private float x;
     private float y;
 
-    public Position(float x, float y){
+    public Position(float x, float y) {
         this.x = x;
         this.y = y;
     }
@@ -13,6 +12,7 @@ public class Position {
     public float getX() {
         return x;
     }
+
     public float getY() {
         return y;
     }
@@ -25,7 +25,7 @@ public class Position {
         this.y = y;
     }
 
-    public void setPosition(float x, float y){
+    public void setPosition(float x, float y) {
         setX(x);
         setY(y);
     }
