@@ -1,20 +1,23 @@
 package engine.model.physicalEngine.movement;
 
-//import engine.model.physicalEngine.environment.Map;
-//import engine.model.physicalEngine.shape.Shape;
+import engine.model.physicalEngine.environment.Map;
+import engine.model.physicalEngine.shape.Shape;
 
 public class Movement {
-    // test
-    protected Position position;
-    protected Velocity velocity;
-    protected Direction direction;
+    private Position position;
+    private Velocity velocity;
+    private Direction direction;
+    private Map map;
 
-    public Movement(float x, float y, float velocityX, float velocityY) {
-        position = new Position(x, y);
-        velocity = new Velocity(velocityX, velocityY);
+
+    public Movement(float x, float y, float velocityX, float velocityY, Map map) {
+        this.position = new Position(x, y);
+        this.velocity = new Velocity(velocityX, velocityY);
+        this.map = map;
     }
+
     public void updatePositonX(Direction direction){
-        if(isColliding()){
+        if(!isColliding(this.map, direction)){
             if(direction == Direction.DROITE){
                 position.setX(position.getX() + velocity.getVelocityX());
             }
@@ -25,7 +28,7 @@ public class Movement {
     }
 
     public void updatePositonY(Direction direction){
-        if(isColliding()){
+        if(!isColliding(this.map, direction)){
             if(direction == Direction.HAUT){
                 position.setY(position.getY() + velocity.getVelocityY());
             }
@@ -43,7 +46,7 @@ public class Movement {
                 return false;
             }
             for (Shape shape : map.getShapeList()) {
-                if(shape.getY() == testPosY || (shape.getY() > position.getY() && shape.getY() < testPosY)){
+                if(shape.getCenter().getY() == testPosY || (shape.getCenter().getY() > position.getY() && shape.getCenter().getY() < testPosY)){
                     return false;
                 }
             }
@@ -54,7 +57,7 @@ public class Movement {
                 return false;
             }
             for (Shape shape : map.getShapeList()) {
-                if(shape.getY() == testPosY || (shape.getY() < position.getY() && shape.getY() > testPosY)){
+                if(shape.getCenter().getY() == testPosY || (shape.getCenter().getY() < position.getY() && shape.getCenter().getY() > testPosY)){
                     return false;
                 }
             }
@@ -65,7 +68,7 @@ public class Movement {
                 return false;
             }
             for (Shape shape : map.getShapeList()) {
-                if(shape.getX() == testPosX || (shape.getX() > position.getX() && shape.getX() < testPosX)){
+                if(shape.getCenter().getX() == testPosX || (shape.getCenter().getX() > position.getX() && shape.getCenter().getX() < testPosX)){
                     return false;
                 }
             }
@@ -76,7 +79,7 @@ public class Movement {
                 return false;
             }
             for (Shape shape : map.getShapeList()) {
-                if(shape.getX() == testPosX || (shape.getX() < position.getX() && shape.getX() > testPosX)){
+                if(shape.getCenter().getX() == testPosX || (shape.getCenter().getX() < position.getX() && shape.getCenter().getX() > testPosX)){
                     return false;
                 }
             }

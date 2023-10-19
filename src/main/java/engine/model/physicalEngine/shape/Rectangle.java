@@ -3,7 +3,9 @@ package engine.model.physicalEngine.shape;
 import java.util.ArrayList;
 import java.util.List;
 
+import engine.model.physicalEngine.movement.Velocity;
 import engine.model.physicalEngine.shape.temp.Position;
+import engine.model.physicalEngine.movement.Velocity;
 
 public class Rectangle implements Shape {
     private Position center;

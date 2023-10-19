@@ -9,9 +9,8 @@ public class Circle implements Shape {
 
     public Circle(float x, float y, double radius) {
         setCenter(new Position(x, y));
-        if (radius < 0) {
+        if (radius < 0)
             throw new IllegalArgumentException("Le rayon ne peut pas etre negatif");
-        }
         this.radius = radius;
         this.isMoving = false;
     }
