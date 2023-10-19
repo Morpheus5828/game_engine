@@ -42,8 +42,8 @@ public class Movement {
                 return false;
             }
             for (Shape shape : map.getShapeList()) {
-                if (shape.getCenter().getY() == testPosY
-                        || (shape.getCenter().getY() > position.getY() && shape.getCenter().getY() < testPosY)) {
+                if (shape.getPosition().getY() == testPosY
+                        || (shape.getPosition().getY() > position.getY() && shape.getPosition().getY() < testPosY)) {
                     return false;
                 }
             }
@@ -53,8 +53,8 @@ public class Movement {
                 return false;
             }
             for (Shape shape : map.getShapeList()) {
-                if (shape.getCenter().getY() == testPosY
-                        || (shape.getCenter().getY() < position.getY() && shape.getCenter().getY() > testPosY)) {
+                if (shape.getPosition().getY() == testPosY
+                        || (shape.getPosition().getY() < position.getY() && shape.getPosition().getY() > testPosY)) {
                     return false;
                 }
             }
@@ -64,8 +64,8 @@ public class Movement {
                 return false;
             }
             for (Shape shape : map.getShapeList()) {
-                if (shape.getCenter().getX() == testPosX
-                        || (shape.getCenter().getX() > position.getX() && shape.getCenter().getX() < testPosX)) {
+                if (shape.getPosition().getX() == testPosX
+                        || (shape.getPosition().getX() > position.getX() && shape.getPosition().getX() < testPosX)) {
                     return false;
                 }
             }
@@ -75,8 +75,8 @@ public class Movement {
                 return false;
             }
             for (Shape shape : map.getShapeList()) {
-                if (shape.getCenter().getX() == testPosX
-                        || (shape.getCenter().getX() < position.getX() && shape.getCenter().getX() > testPosX)) {
+                if (shape.getPosition().getX() == testPosX
+                        || (shape.getPosition().getX() < position.getX() && shape.getPosition().getX() > testPosX)) {
                     return false;
                 }
             }

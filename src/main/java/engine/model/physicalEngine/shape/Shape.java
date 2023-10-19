@@ -1,15 +1,23 @@
 package engine.model.physicalEngine.shape;
 
+import java.util.List;
+
 import engine.model.physicalEngine.movement.*;
 
 public interface Shape {
+    List<Position> getApex();
+
     Position getHead();
 
     void setHead();
 
-    Position getCenter();
+    Position getPosition();
 
-    void setCenter(Position point);
+    void setPosition(Position point);
+
+    float getX();
+
+    float getY();
 
     boolean isMoving();
 

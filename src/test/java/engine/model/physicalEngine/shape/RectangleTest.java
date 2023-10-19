@@ -1,84 +1,137 @@
 package engine.model.physicalEngine.shape;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import engine.model.physicalEngine.movement.*;
 
 public class RectangleTest {
-    @Test
-    void testgetHeight() {
-        Rectangle rec = new Rectangle(1, 1, 10, 5);
-        assertEquals(rec.getWidth(), 5);
+    private Rectangle rectangle;
+    private Position position;
+    private float length;
+    private float width;
+    private boolean moving;
+    private Velocity velocity;
+
+    @BeforeEach
+    void setUp() {
+        position = new Position(0, 0);
+        length = 10;
+        width = 5;
+        moving = true;
+        velocity = new Velocity(0, 0);
+        rectangle = new Rectangle(position, length, width, moving, velocity);
     }
 
     @Test
-    void testsetHeight() {
-        Rectangle rec = new Rectangle(1, 1, 10, 5);
-        float a = 10;
-        rec.setWidth(a);
-        assertEquals(rec.getWidth(), a);
+    void testGetLength() {
+        assertEquals(10, rectangle.getLength());
     }
 
     @Test
-    void testgetLength() {
-        Rectangle rec = new Rectangle(1, 1, 10, 5);
-        assertEquals(rec.getLength(), 10);
+    void testSetLength() {
+        float newLength = 5;
+        rectangle.setLength(newLength);
+        assertEquals(newLength, rectangle.getLength());
     }
 
     @Test
-    void testsetLength() {
-        Rectangle rec = new Rectangle(1, 1, 10, 5);
-        float a = 10;
-        rec.setLength(a);
-        assertEquals(rec.getLength(), a);
+    void testGetWidth() {
+        assertEquals(5, rectangle.getWidth());
     }
 
     @Test
-    void testsetCenter() {
-        Rectangle rec = new Rectangle(1, 1, 10, 5);
-        rec.setCenter(new Position(5, 5));
-        assertEquals(rec.getCenter().getX(), 5);
-        assertEquals(rec.getCenter().getY(), 5);
+    void testSetWidth() {
+        float newWidth = 10;
+        rectangle.setWidth(newWidth);
+        assertEquals(newWidth, rectangle.getWidth());
     }
 
     @Test
-    void testgetCenter() {
-        Rectangle rec = new Rectangle(1, 1, 10, 5);
-        assertEquals(rec.getCenter().getX(), 1);
-        assertEquals(rec.getCenter().getY(), 1);
+    void testGetApex() {
+        List<Position> apex = new ArrayList<>();
+        apex.add(new Position(-5, -2.5f));
+        apex.add(new Position(-5, 2.5f));
+        apex.add(new Position(5, -2.5f));
+        apex.add(new Position(-5, 2.5f));
+        for (int i = 0; i < apex.size(); i++) {
+            assertEquals(apex.get(i).getX(), rectangle.getApex().get(i).getX());
+            assertEquals(apex.get(i).getY(), rectangle.getApex().get(i).getY());
+        }
     }
 
     @Test
-    void testisMoving() {
-        Rectangle rec = new Rectangle(1, 1, 10, 5);
-        assertEquals(rec.isMoving(), false);
+    void testGetPosition() {
+        assertEquals(position, rectangle.getPosition());
     }
 
     @Test
-    void testsetIsMoving() {
-        Rectangle rec = new Rectangle(1, 1, 10, 5);
-        boolean bool = true;
-        rec.setMoving(bool);
-        assertEquals(rec.isMoving(), true);
+    void testSetPostion() {
+        Position newPosition = new Position(10, 5);
+        rectangle.setPosition(newPosition);
+        assertEquals(newPosition, rectangle.getPosition());
     }
 
     @Test
-    void testgetApex() {
-        Rectangle rec = new Rectangle(1, 1, 10, 5);
-        List<Position> list = rec.getApex();
+    void testGetX() {
+        assertEquals(position.getX(), rectangle.getPosition().getX());
+    }
 
-        assertEquals(list.get(0).getX(), -4);
-        assertEquals(list.get(0).getY(), -1.5);
+    @Test
+    void testGetY() {
+        assertEquals(position.getY(), rectangle.getPosition().getY());
+    }
 
-        assertEquals(list.get(1).getX(), -4);
-        assertEquals(list.get(1).getY(), 3.5);
+    @Test
+    void testIsMoving() {
+        assertEquals(moving, rectangle.isMoving());
+    }
 
-        assertEquals(list.get(2).getX(), 6);
-        assertEquals(list.get(2).getY(), -1.5);
+    @Test
+    void testSetIsMoving() {
+        boolean newMoving = true;
+        rectangle.setMoving(newMoving);
+        assertEquals(newMoving, rectangle.isMoving());
+    }
 
-        assertEquals(list.get(3).getX(), -4);
-        assertEquals(list.get(3).getY(), 3.5);
+    @Test
+    void testIsColliding() {
+        assertEquals(true, rectangle.isColliding());
+    }
+
+    @Test
+    void testSetIsColliding() {
+        boolean newColliding = false;
+        rectangle.setColliding(newColliding);
+        assertEquals(newColliding, rectangle.isColliding());
+    }
+
+    @Test
+    void testGetVelocity() {
+        assertEquals(velocity, rectangle.getVelocity());
+    }
+
+    @Test
+    void testSetVelocity() {
+        Velocity newVelocity = new Velocity(2, 3);
+        rectangle.setVelocity(newVelocity);
+        assertEquals(newVelocity, rectangle.getVelocity());
+    }
+
+    @Test
+    void testGetDirection() {
+        assertEquals(null, rectangle.getDirection());
+    }
+
+    @Test
+    void testSetDirection() {
+        Direction newDirection = Direction.RIGHT;
+        rectangle.setDirection(newDirection);
+        assertEquals(newDirection, rectangle.getDirection());
     }
 }

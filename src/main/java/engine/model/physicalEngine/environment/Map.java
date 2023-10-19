@@ -22,8 +22,8 @@ public class Map {
     }
 
     public boolean isShapeInPlan(Shape shape) {
-        var x = shape.getCenter().getX();
-        var y = shape.getCenter().getY();
+        var x = shape.getPosition().getX();
+        var y = shape.getPosition().getY();
         if (shape instanceof Circle) {
             var radius = ((Circle) shape).getRadius();
             if ((x + radius > this.width) || (y + radius > this.height) || (x - radius < 0) || (y - radius < 0))

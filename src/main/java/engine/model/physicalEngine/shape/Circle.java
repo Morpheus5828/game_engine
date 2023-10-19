@@ -1,9 +1,12 @@
 package engine.model.physicalEngine.shape;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import engine.model.physicalEngine.movement.*;
 
 public class Circle implements Shape {
-    private Position center;
+    private Position position;
     private float radius;
     private boolean moving;
     private boolean colliding;
@@ -11,10 +14,10 @@ public class Circle implements Shape {
     private Direction direction;
     private Position head;
 
-    public Circle(float x, float y, float radius, boolean moving, Velocity velocity) {
+    public Circle(Position position, float radius, boolean moving, Velocity velocity) {
         if (radius < 0)
             throw new IllegalArgumentException("Le rayon ne peut pas etre negatif");
-        setCenter(new Position(x, y));
+        this.position = position;
         this.radius = radius;
         this.moving = moving;
         this.colliding = true;
@@ -32,22 +35,42 @@ public class Circle implements Shape {
     }
 
     @Override
+    public List<Position> getApex() {
+        List<Position> apex = new ArrayList<>();
+        apex.add(new Position(this.position.getX() - this.radius, this.position.getY()));
+        apex.add(new Position(this.position.getX() + this.radius, this.position.getY()));
+        apex.add(new Position(this.position.getX(), this.position.getY() - this.radius));
+        apex.add(new Position(this.position.getX(), this.position.getY() + this.radius));
+        return apex;
+    }
+
+    @Override
     public Position getHead() {
         return this.head;
     }
 
     public void setHead() {
-        this.head = new Position(this.center.getX() + this.radius, this.center.getY());
+        this.head = new Position(this.position.getX() + this.radius, this.position.getY());
     }
 
     @Override
-    public Position getCenter() {
-        return this.center;
+    public Position getPosition() {
+        return this.position;
     }
 
     @Override
-    public void setCenter(Position point) {
-        this.center = point;
+    public void setPosition(Position point) {
+        this.position = point;
+    }
+
+    @Override
+    public float getX() {
+        return this.position.getX();
+    }
+
+    @Override
+    public float getY() {
+        return this.position.getY();
     }
 
     @Override
