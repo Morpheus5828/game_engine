@@ -1,7 +1,7 @@
 package engine.model.physicalEngine.movement;
 
-import engine.model.physicalEngine.environment.Map;
-import engine.model.physicalEngine.shape.Shape;
+//import engine.model.physicalEngine.environment.Map;
+//import engine.model.physicalEngine.shape.Shape;
 
 public class Movement {
     // test
