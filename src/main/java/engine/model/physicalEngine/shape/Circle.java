@@ -23,7 +23,7 @@ public class Circle implements Shape {
         this.colliding = true;
         this.Velocity = velocity;
         this.direction = null;
-        setHead();
+        this.head = new Position(this.position.getX() + this.radius / 2, this.position.getY());
     }
 
     public double getRadius() {
@@ -49,8 +49,9 @@ public class Circle implements Shape {
         return this.head;
     }
 
-    public void setHead() {
-        this.head = new Position(this.position.getX() + this.radius, this.position.getY());
+    @Override
+    public void setHead(Position position) {
+        this.head = position;
     }
 
     @Override

@@ -23,7 +23,7 @@ public class Rectangle implements Shape {
         this.colliding = true;
         this.Velocity = velocity;
         this.direction = null;
-        setHead();
+        this.head = new Position(position.getX() + length / 2, position.getY());
     }
 
     public float getLength() {
@@ -58,8 +58,8 @@ public class Rectangle implements Shape {
     }
 
     @Override
-    public void setHead() {
-        this.head = new Position(this.position.getX() + this.length / 2, this.position.getY() + this.width / 2);
+    public void setHead(Position position) {
+        this.head = position;
     }
 
     @Override

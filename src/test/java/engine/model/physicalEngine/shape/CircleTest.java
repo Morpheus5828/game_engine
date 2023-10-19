@@ -1,53 +1,137 @@
 package engine.model.physicalEngine.shape;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import engine.model.physicalEngine.movement.*;
 
 public class CircleTest {
+    private Circle circle;
+    private Position position;
+    private float radius;
+    private boolean moving;
+    private Velocity velocity;
 
-    // @Test
-    // void testSetCenter() {
-    //     Position pos = new Position(5, 5);
-    //     Circle circle = new Circle(1, 1, 5);
-    //     circle.setPostion(pos);
-    //     assertEquals(circle.getPosition(), pos);
-    // }
+    @BeforeEach
+    void setUp() {
+        position = new Position(0, 0);
+        radius = 10;
+        moving = true;
+        velocity = new Velocity(0, 0);
+        circle = new Circle(position, radius, moving, velocity);
+    }
 
-    // @Test
-    // void testGetCenter() {
-    //     Position pos = new Position(10, 10);
-    //     Circle circle = new Circle(10, 10, 5);
-    //     assertEquals(circle.getPosition().getX(), pos.getX());
-    //     assertEquals(circle.getPosition().getY(), pos.getY());
-    // }
+    @Test
+    void testGetRadius() {
+        assertEquals(10, circle.getRadius());
+    }
 
-    // @Test
-    // void testSetIsMoving() {
-    //     boolean bool = true;
-    //     Circle circle = new Circle(1, 1, 10);
-    //     circle.setMoving(bool);
-    //     assertEquals(circle.isMoving(), bool);
-    // }
+    @Test
+    void testSetRadius() {
+        float newRadius = 5;
+        circle.setRadius(newRadius);
+        assertEquals(newRadius, circle.getRadius());
+    }
 
-    // @Test
-    // void testIsMoving() {
-    //     Circle circle = new Circle(10, 10, 10);
-    //     assertEquals(circle.isMoving(), false);
-    // }
+    @Test
+    void testGetApex() {
+        List<Position> apex = new ArrayList<>();
+        apex.add(new Position(-10, 0));
+        apex.add(new Position(10, 0));
+        apex.add(new Position(0, -10));
+        apex.add(new Position(0, 10));
+        for (int i = 0; i < apex.size(); i++) {
+            assertEquals(apex.get(i).getX(), circle.getApex().get(i).getX());
+            assertEquals(apex.get(i).getY(), circle.getApex().get(i).getY());
+        }
+    }
 
-    // @Test
-    // void testGetRadius() {
-    //     Circle circle = new Circle(1, 1, 15);
-    //     assertEquals(circle.getRadius(), 15);
-    // }
+    @Test
+    void testGetHead() {
+        assertEquals(position.getX() + radius / 2, circle.getHead().getX());
+        assertEquals(position.getY(), circle.getHead().getY());
+    }
 
-    // @Test
-    // void testSetRadius() {
-    //     Circle circle = new Circle(1, 1, 15);
-    //     double a = 10;
-    //     circle.setRadius(a);
-    //     assertEquals(circle.getRadius(), a);
-    // }
+    @Test
+    void testSetHead() {
+        Position newPosition = new Position(position.getX() - radius / 2, circle.getHead().getY());
+        circle.setHead(newPosition);
+        assertEquals(newPosition.getX(), circle.getHead().getX());
+        assertEquals(newPosition.getY(), circle.getHead().getY());
+    }
+
+    @Test
+    void testGetPosition() {
+        assertEquals(position, circle.getPosition());
+    }
+
+    @Test
+    void testSetPostion() {
+        Position newPosition = new Position(10, 5);
+        circle.setPosition(newPosition);
+        assertEquals(newPosition, circle.getPosition());
+    }
+
+    @Test
+    void testGetX() {
+        assertEquals(position.getX(), circle.getPosition().getX());
+    }
+
+    @Test
+    void testGetY() {
+        assertEquals(position.getY(), circle.getPosition().getY());
+    }
+
+    @Test
+    void testIsMoving() {
+        assertEquals(moving, circle.isMoving());
+    }
+
+    @Test
+    void testSetIsMoving() {
+        boolean newMoving = true;
+        circle.setMoving(newMoving);
+        assertEquals(newMoving, circle.isMoving());
+    }
+
+    @Test
+    void testIsColliding() {
+        assertEquals(true, circle.isColliding());
+    }
+
+    @Test
+    void testSetIsColliding() {
+        boolean newColliding = false;
+        circle.setColliding(newColliding);
+        assertEquals(newColliding, circle.isColliding());
+    }
+
+    @Test
+    void testGetVelocity() {
+        assertEquals(velocity, circle.getVelocity());
+    }
+
+    @Test
+    void testSetVelocity() {
+        Velocity newVelocity = new Velocity(2, 3);
+        circle.setVelocity(newVelocity);
+        assertEquals(newVelocity, circle.getVelocity());
+    }
+
+    @Test
+    void testGetDirection() {
+        assertEquals(null, circle.getDirection());
+    }
+
+    @Test
+    void testSetDirection() {
+        Direction newDirection = Direction.RIGHT;
+        circle.setDirection(newDirection);
+        assertEquals(newDirection, circle.getDirection());
+    }
 }

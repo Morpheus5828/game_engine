@@ -9,7 +9,7 @@ public interface Shape {
 
     Position getHead();
 
-    void setHead();
+    void setHead(Position position);
 
     Position getPosition();
 

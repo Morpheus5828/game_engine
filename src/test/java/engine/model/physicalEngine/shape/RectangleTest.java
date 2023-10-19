@@ -66,6 +66,20 @@ public class RectangleTest {
     }
 
     @Test
+    void testGetHead() {
+        assertEquals(position.getX() + length / 2, rectangle.getHead().getX());
+        assertEquals(position.getY(), rectangle.getHead().getY());
+    }
+
+    @Test
+    void testSetHead() {
+        Position newPosition = new Position(position.getX() - length / 2, rectangle.getHead().getY());
+        rectangle.setHead(newPosition);
+        assertEquals(newPosition.getX(), rectangle.getHead().getX());
+        assertEquals(newPosition.getY(), rectangle.getHead().getY());
+    }
+
+    @Test
     void testGetPosition() {
         assertEquals(position, rectangle.getPosition());
     }
