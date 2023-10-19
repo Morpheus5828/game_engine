@@ -22,7 +22,7 @@ public class Rectangle implements Shape {
         this.moving = moving;
         this.colliding = true;
         this.Velocity = velocity;
-        this.direction = null;
+        this.direction = Direction.NONE;
         this.head = new Position(position.getX() + length / 2, position.getY());
     }
 

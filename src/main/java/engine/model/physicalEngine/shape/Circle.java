@@ -22,7 +22,7 @@ public class Circle implements Shape {
         this.moving = moving;
         this.colliding = true;
         this.Velocity = velocity;
-        this.direction = null;
+        this.direction = Direction.NONE;
         this.head = new Position(this.position.getX() + this.radius / 2, this.position.getY());
     }
 

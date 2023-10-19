@@ -1,5 +1,5 @@
 package engine.model.physicalEngine.movement;
 
 public enum Direction {
-    TOP, BOTTOM, LEFT, RIGHT;
+    TOP, BOTTOM, LEFT, RIGHT, NONE;
 }

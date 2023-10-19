@@ -38,7 +38,7 @@ public class Movement {
     public boolean isColliding(Map map, Direction direction) {
         if (direction == Direction.TOP) {
             float testPosY = position.getY() + velocity.getVelocityY();
-            if (testPosY > map.getHeight()) {
+            if (testPosY > map.getWidth()) {
                 return false;
             }
             for (Shape shape : map.getShapeList()) {
@@ -60,7 +60,7 @@ public class Movement {
             }
         } else if (direction == Direction.RIGHT) {
             float testPosX = position.getX() + velocity.getVelocityX();
-            if (testPosX > map.getWidth()) {
+            if (testPosX > map.getLength()) {
                 return false;
             }
             for (Shape shape : map.getShapeList()) {
