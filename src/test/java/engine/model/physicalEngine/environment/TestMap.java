@@ -8,11 +8,12 @@ import engine.model.physicalEngine.shape.Rectangle;
 import engine.model.physicalEngine.shape.Shape;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestMap {
     private Map map;
+    private Circle circle;
 
     @BeforeEach
     void setUp() {
@@ -20,7 +21,7 @@ public class TestMap {
         float radius = 10;
         boolean moving = true;
         Velocity velocity = new Velocity(0, 0);
-        Circle circle = new Circle(position, radius, moving, velocity);
+        circle = new Circle(position, radius, moving, velocity);
         map = new Map(100,100);
         map.getShapeList().add(circle);
     }
@@ -33,6 +34,42 @@ public class TestMap {
     @Test
     void TestGetWidth(){
         assertEquals(map.getWidth(),100.00);
+    }
+
+    @Test
+    void TestIsInPlan(){
+        assertTrue(map.isInPlan(circle.getPosition()));
+    }
+
+    @Test
+    void TestGetShapeList(){
+        assertThat(map.getShapeList().contains(circle));
+    }
+
+    @Test
+    void TestShapeIsInShape(){
+        Rectangle square = new Rectangle(new Position(101,101),10,10,true,new Velocity(0,0));
+        assertTrue(map.shapeIsInPlan(circle));
+        assertFalse(map.shapeIsInPlan(square));
+    }
+
+
+    @Test
+    void TestAddShape(){
+        Rectangle square = new Rectangle(new Position(101,101),10,10,true,new Velocity(0,0));
+        Rectangle rectangle = new Rectangle(new Position(10,10),15,10,true,new Velocity(0,0));
+        map.addShape(square);
+        map.addShape(rectangle);
+
+        assertTrue(map.getShapeList().contains(rectangle));
+        assertFalse(map.getShapeList().contains(square));
+    }
+
+    @Test
+    void TestRemoveShape(){
+        assertTrue(map.getShapeList().contains(circle));
+        map.removeShape(circle);
+        assertFalse(map.getShapeList().contains(circle));
     }
 
 
