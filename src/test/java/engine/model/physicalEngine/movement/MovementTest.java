@@ -1,8 +1,10 @@
 package engine.model.physicalEngine.movement;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import engine.model.physicalEngine.environment.Map;
-import org.junit.Before;
-import org.junit.Test;
 
 import static org.junit.Assert.*;
 
@@ -11,23 +13,23 @@ public class MovementTest {
     private Movement movement;
     private Map map;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         movement = new Movement(0.0, 0.0, 2.0, 2.0);
-        map = new Map(10,10);
+        map = new Map(10, 10);
     }
 
     @Test
     public void testUpdatePositionX() {
         movement.setDirection(Direction.RIGHT);
-        movement.updatePositonX(movement.getDirection(),map);
+        movement.updatePositonX(movement.getDirection(), map);
         assertEquals(2.0, movement.getPosition().getX());
     }
 
     @Test
     public void testUpdatePositionY() {
         movement.setDirection(Direction.UP);
-        movement.updatePositonY(movement.getDirection(),map);
+        movement.updatePositonY(movement.getDirection(), map);
         assertEquals(2.0f, movement.getPosition().getY());
     }
 
@@ -35,7 +37,7 @@ public class MovementTest {
     public void testIsColliding() {
 
         movement.setDirection(Direction.RIGHT);
-                 assertTrue(movement.isColliding(map,Direction.LEFT));
+        assertTrue(movement.isColliding(map, Direction.LEFT));
     }
 
 }
