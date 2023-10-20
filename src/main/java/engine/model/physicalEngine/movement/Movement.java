@@ -26,16 +26,16 @@ public class Movement {
 
     public void updatePositonY(Direction direction, Map map) {
         if (!isColliding(map, direction)) {
-            if (direction == Direction.TOP) {
+            if (direction == Direction.UP) {
                 position.setY(position.getY() + velocity.getVelocityY());
-            } else if (direction == Direction.BOTTOM) {
+            } else if (direction == Direction.DOWN) {
                 position.setY(position.getY() - velocity.getVelocityY());
             }
         }
     }
 
     public boolean isColliding(Map map, Direction direction) {
-        if (direction == Direction.TOP) {
+        if (direction == Direction.UP) {
             double testPosY = position.getY() + velocity.getVelocityY();
             if (testPosY > map.getWidth()) {
                 return false;
@@ -46,7 +46,7 @@ public class Movement {
                     return false;
                 }
             }
-        } else if (direction == Direction.BOTTOM) {
+        } else if (direction == Direction.DOWN) {
             double testPosY = position.getY() - velocity.getVelocityY();
             if (testPosY < 0) {
                 return false;
@@ -89,5 +89,9 @@ public class Movement {
 
     public void setDirection(Direction direction) {
         this.direction = direction;
+    }
+
+    public Position getPosition(){
+        return this.position;
     }
 }

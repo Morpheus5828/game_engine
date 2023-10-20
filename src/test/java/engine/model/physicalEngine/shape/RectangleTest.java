@@ -139,7 +139,7 @@ public class RectangleTest {
 
     @Test
     void testGetDirection() {
-        assertEquals(null, rectangle.getDirection());
+        assertEquals(Direction.NONE, rectangle.getDirection());
     }
 
     @Test

@@ -1,17 +1,16 @@
 package engine.model.physicalEngine.environment;
 
-import engine.model.physicalEngine.environment.Map;
+
 import engine.model.physicalEngine.movement.Position;
 import engine.model.physicalEngine.movement.Velocity;
 import engine.model.physicalEngine.shape.Circle;
 import engine.model.physicalEngine.shape.Rectangle;
-import engine.model.physicalEngine.shape.Shape;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TestMap {
+public class MapTest {
     private Map map;
     private Circle circle;
 

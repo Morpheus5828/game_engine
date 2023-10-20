@@ -125,7 +125,7 @@ public class CircleTest {
 
     @Test
     void testGetDirection() {
-        assertEquals(null, circle.getDirection());
+        assertEquals(Direction.NONE, circle.getDirection());
     }
 
     @Test
