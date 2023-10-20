@@ -13,7 +13,7 @@ import engine.model.physicalEngine.movement.*;
 public class CircleTest {
     private Circle circle;
     private Position position;
-    private float radius;
+    private double radius;
     private boolean moving;
     private Velocity velocity;
 

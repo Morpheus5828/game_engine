@@ -15,9 +15,9 @@ public interface Shape {
 
     void setPosition(Position point);
 
-    float getX();
+    double getX();
 
-    float getY();
+    double getY();
 
     boolean isMoving();
 

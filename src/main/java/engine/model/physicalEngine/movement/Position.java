@@ -1,31 +1,31 @@
 package engine.model.physicalEngine.movement;
 
 public class Position {
-    private float x;
-    private float y;
+    private double x;
+    private double y;
 
-    public Position(float x, float y) {
+    public Position(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
-    public float getX() {
+    public double getX() {
         return x;
     }
 
-    public float getY() {
+    public double getY() {
         return y;
     }
 
-    public void setX(float x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public void setY(float y) {
+    public void setY(double y) {
         this.y = y;
     }
 
-    public void setPosition(float x, float y) {
+    public void setPosition(double x, double y) {
         setX(x);
         setY(y);
     }

@@ -1,21 +1,20 @@
 package engine.model.physicalEngine.environment;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import engine.model.physicalEngine.movement.Position;
 import engine.model.physicalEngine.shape.*;
 
 public class Map {
-    private Set<Shape> shapeList;
-    private float length;
-    private float width;
+    private List<Shape> shapeList;
+    private double length;
+    private double width;
 
-    public Map(float length, float width) {
+    public Map(double length, double width) {
         this.length = length;
         this.width = width;
-        this.shapeList = new HashSet<>();
+        this.shapeList = new ArrayList<>();
     }
 
     public boolean isInPlan(Position position) {
@@ -41,15 +40,15 @@ public class Map {
             this.shapeList.add(shape);
     }
 
-    public Set<Shape> getShapeList() {
+    public List<Shape> getShapeList() {
         return this.shapeList;
     }
 
-    public float getLength() {
+    public double getLength() {
         return this.length;
     }
 
-    public float getWidth() {
+    public double getWidth() {
         return this.width;
     }
 }

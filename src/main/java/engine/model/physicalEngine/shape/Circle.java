@@ -7,14 +7,14 @@ import engine.model.physicalEngine.movement.*;
 
 public class Circle implements Shape {
     private Position position;
-    private float radius;
+    private double radius;
     private boolean moving;
     private boolean colliding;
     private Velocity Velocity;
     private Direction direction;
     private Position head;
 
-    public Circle(Position position, float radius, boolean moving, Velocity velocity) {
+    public Circle(Position position, double radius, boolean moving, Velocity velocity) {
         if (radius < 0)
             throw new IllegalArgumentException("Le rayon ne peut pas etre negatif");
         this.position = position;
@@ -65,12 +65,12 @@ public class Circle implements Shape {
     }
 
     @Override
-    public float getX() {
+    public double getX() {
         return this.position.getX();
     }
 
     @Override
-    public float getY() {
+    public double getY() {
         return this.position.getY();
     }
 

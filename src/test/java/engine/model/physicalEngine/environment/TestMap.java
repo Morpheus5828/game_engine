@@ -1,6 +1,8 @@
 package engine.model.physicalEngine.environment;
 
 import engine.model.physicalEngine.environment.Map;
+import engine.model.physicalEngine.movement.Position;
+import engine.model.physicalEngine.movement.Velocity;
 import engine.model.physicalEngine.shape.Circle;
 import engine.model.physicalEngine.shape.Rectangle;
 import engine.model.physicalEngine.shape.Shape;
@@ -12,57 +14,28 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestMap {
     private Map map;
 
-    // @BeforeEach
-    // public void init() {
-    //     map = new Map(10, 10);
-    // }
+    @BeforeEach
+    void setUp() {
+        Position position = new Position(0, 0);
+        float radius = 10;
+        boolean moving = true;
+        Velocity velocity = new Velocity(0, 0);
+        Circle circle = new Circle(position, radius, moving, velocity);
+        map = new Map(100,100);
+        map.getShapeList().add(circle);
+    }
 
-    // @Test
-    // public void testIsInPlan() {
-    //     assertFalse(map.isInPlan(22, 6));
-    //     assertTrue(map.isInPlan(2, 6));
-    //     assertTrue(map.isInPlan(0, 0));
-    //     assertFalse(map.isInPlan(22, 60));
-    //     assertFalse(map.isInPlan(2, 60));
-    // }
+    @Test
+    void TestGetLenght(){
+        assertEquals(map.getLength(),100.00);
+    }
 
-    // @Test
-    // public void testShapeIsInPlan() {
-    //     Shape circle = new Circle(5, 5, 2);
-    //     assertTrue(map.isShapeInPlan(circle));
-    //     circle = new Circle(2, 2, 1);
-    //     assertTrue(map.isShapeInPlan(circle));
-    //     circle = new Circle(0, 0, 1);
-    //     assertFalse(map.isShapeInPlan(circle));
-    //     circle = new Circle(5, 5, 10);
-    //     assertFalse(map.isShapeInPlan(circle));
+    @Test
+    void TestGetWidth(){
+        assertEquals(map.getWidth(),100.00);
+    }
 
-    //     Shape rectangle = new Rectangle(5, 5, 2, 3);
-    //     assertTrue(map.isShapeInPlan(rectangle));
-    //     rectangle = new Rectangle(2, 2, 1, 2);
-    //     assertTrue(map.isShapeInPlan(rectangle));
-    //     rectangle = new Rectangle(0, 0, 1, 5);
-    //     assertFalse(map.isShapeInPlan(rectangle));
-    //     rectangle = new Rectangle(5, 5, 20, 20);
-    //     assertFalse(map.isShapeInPlan(rectangle));
-    // }
 
-    // @Test
-    // public void testAddShape() {
-    //     Shape circle = new Circle(5, 5, 2);
-    //     assertEquals(0, map.getShapeList().size());
-    //     map.addShape(circle);
-    //     assertEquals(1, map.getShapeList().size());
-    // }
-
-    // @Test
-    // public void testRemoveShape() {
-    //     Shape circle = new Circle(5, 5, 2);
-    //     map.addShape(circle);
-    //     assertEquals(1, map.getShapeList().size());
-    //     map.removeShape(circle);
-    //     assertEquals(0, map.getShapeList().size());
-    // }
 
 
 

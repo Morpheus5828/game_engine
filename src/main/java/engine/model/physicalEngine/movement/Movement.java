@@ -7,16 +7,15 @@ public class Movement {
     private Position position;
     private Velocity velocity;
     private Direction direction;
-    private Map map;
 
-    public Movement(float x, float y, float velocityX, float velocityY, Map map) {
+    public Movement(double x, double y, double velocityX, double velocityY) {
         this.position = new Position(x, y);
         this.velocity = new Velocity(velocityX, velocityY);
-        this.map = map;
     }
 
-    public void updatePositonX(Direction direction) {
-        if (!isColliding(this.map, direction)) {
+
+    public void updatePositonX(Direction direction, Map map) {
+        if (!isColliding(map, direction)) {
             if (direction == Direction.RIGHT) {
                 position.setX(position.getX() + velocity.getVelocityX());
             } else if (direction == Direction.LEFT) {
@@ -25,8 +24,8 @@ public class Movement {
         }
     }
 
-    public void updatePositonY(Direction direction) {
-        if (!isColliding(this.map, direction)) {
+    public void updatePositonY(Direction direction, Map map) {
+        if (!isColliding(map, direction)) {
             if (direction == Direction.TOP) {
                 position.setY(position.getY() + velocity.getVelocityY());
             } else if (direction == Direction.BOTTOM) {
@@ -37,7 +36,7 @@ public class Movement {
 
     public boolean isColliding(Map map, Direction direction) {
         if (direction == Direction.TOP) {
-            float testPosY = position.getY() + velocity.getVelocityY();
+            double testPosY = position.getY() + velocity.getVelocityY();
             if (testPosY > map.getWidth()) {
                 return false;
             }
@@ -48,7 +47,7 @@ public class Movement {
                 }
             }
         } else if (direction == Direction.BOTTOM) {
-            float testPosY = position.getY() - velocity.getVelocityY();
+            double testPosY = position.getY() - velocity.getVelocityY();
             if (testPosY < 0) {
                 return false;
             }
@@ -59,7 +58,7 @@ public class Movement {
                 }
             }
         } else if (direction == Direction.RIGHT) {
-            float testPosX = position.getX() + velocity.getVelocityX();
+            double testPosX = position.getX() + velocity.getVelocityX();
             if (testPosX > map.getLength()) {
                 return false;
             }
@@ -70,7 +69,7 @@ public class Movement {
                 }
             }
         } else if (direction == Direction.LEFT) {
-            float testPosX = position.getX() - velocity.getVelocityX();
+            double testPosX = position.getX() - velocity.getVelocityX();
             if (testPosX < 0) {
                 return false;
             }

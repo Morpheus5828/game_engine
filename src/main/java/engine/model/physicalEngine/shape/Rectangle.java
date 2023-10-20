@@ -7,8 +7,8 @@ import engine.model.physicalEngine.movement.*;
 
 public class Rectangle implements Shape {
     private Position position;
-    private float length;
-    private float width;
+    private double length;
+    private double width;
     private boolean moving;
     private boolean colliding;
     private Velocity Velocity;
@@ -26,7 +26,7 @@ public class Rectangle implements Shape {
         this.head = new Position(position.getX() + length / 2, position.getY());
     }
 
-    public float getLength() {
+    public double getLength() {
         return this.length;
     }
 
@@ -34,7 +34,7 @@ public class Rectangle implements Shape {
         this.length = length;
     }
 
-    public float getWidth() {
+    public double getWidth() {
         return this.width;
     }
 
@@ -73,12 +73,12 @@ public class Rectangle implements Shape {
     }
 
     @Override
-    public float getX() {
+    public double getX() {
         return this.position.getX();
     }
 
     @Override
-    public float getY() {
+    public double getY() {
         return this.position.getY();
     }
 
