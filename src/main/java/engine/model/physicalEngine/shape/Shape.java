@@ -15,6 +15,8 @@ public interface Shape {
 
     void setPosition(Position point);
 
+    void setPosition(double x, double y);
+
     double getX();
 
     double getY();

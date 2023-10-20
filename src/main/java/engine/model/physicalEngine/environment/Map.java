@@ -51,4 +51,6 @@ public class Map {
     public double getWidth() {
         return this.width;
     }
+
+
 }

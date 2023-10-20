@@ -65,6 +65,11 @@ public class Circle implements Shape {
     }
 
     @Override
+    public void setPosition(double x, double y) {
+        this.position.setPosition(x, y);
+    }
+
+    @Override
     public double getX() {
         return this.position.getX();
     }

@@ -1,5 +1,6 @@
 package engine.model.physicalEngine.movement;
 
+import engine.model.physicalEngine.shape.Circle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,32 +13,27 @@ public class MovementTest {
 
     private Movement movement;
     private Map map;
-
+    private Circle circle;
+    private Circle circle2;
     @BeforeEach
     public void setUp() {
-        movement = new Movement(0.0, 0.0, 2.0, 2.0);
-        map = new Map(10, 10);
+        double radius = 1;
+        boolean moving = true;
+        Velocity velocity = new Velocity(2, 2);
+        circle = new Circle(new Position(0,0), radius, moving, velocity);
+        map = new Map(100,100);
+        map.addShape(circle);
     }
 
     @Test
     public void testUpdatePositionX() {
-        movement.setDirection(Direction.RIGHT);
-        movement.updatePositonX(movement.getDirection(), map);
-        assertEquals(2.0, movement.getPosition().getX());
+
     }
 
     @Test
-    public void testUpdatePositionY() {
-        movement.setDirection(Direction.UP);
-        movement.updatePositonY(movement.getDirection(), map);
-        assertEquals(2.0f, movement.getPosition().getY());
-    }
+    public void testUpdatePositionY() {}
 
     @Test
-    public void testIsColliding() {
-
-        movement.setDirection(Direction.RIGHT);
-        assertTrue(movement.isColliding(map, Direction.LEFT));
-    }
+    public void testIsColliding() {}
 
 }

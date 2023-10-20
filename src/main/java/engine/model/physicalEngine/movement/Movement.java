@@ -3,84 +3,41 @@ package engine.model.physicalEngine.movement;
 import engine.model.physicalEngine.environment.Map;
 import engine.model.physicalEngine.shape.Shape;
 
+import java.util.List;
+
 public class Movement {
-    private Position position;
-    private Velocity velocity;
     private Direction direction;
 
-    public Movement(double x, double y, double velocityX, double velocityY) {
-        this.position = new Position(x, y);
-        this.velocity = new Velocity(velocityX, velocityY);
+    public Movement(Direction direction) {
+        this.direction = direction;
     }
 
+    /*
+    un mouvement est un objet qui va etre appeler par une shape pour se deplacer, donc la postion et la velocite est recupere
+     dans la shape et le mouvement va juste se deplacer en fonction de la direction et de la velocite.
+     */
 
-    public void updatePositonX(Direction direction, Map map) {
-        if (!isColliding(map, direction)) {
+
+    public void updatePositonX(Direction direction, Shape shape, Map map) {
+        if(!isColliding(shape, map, direction)){
             if (direction == Direction.RIGHT) {
-                position.setX(position.getX() + velocity.getVelocityX());
-            } else if (direction == Direction.LEFT) {
-                position.setX(position.getX() - velocity.getVelocityX());
+                shape.setPosition(shape.getPosition().getX() + shape.getVelocity().getVelocityX(), shape.getPosition().getY());
+            }
+            else if (direction == Direction.LEFT) {
+                shape.setPosition(shape.getPosition().getX() - shape.getVelocity().getVelocityX(), shape.getPosition().getY());
             }
         }
     }
 
-    public void updatePositonY(Direction direction, Map map) {
-        if (!isColliding(map, direction)) {
+    public void updatePositonY(Direction direction, Shape shape, Map map) {
+        if (!isColliding(shape, map, direction)) {
             if (direction == Direction.UP) {
-                position.setY(position.getY() + velocity.getVelocityY());
-            } else if (direction == Direction.DOWN) {
-                position.setY(position.getY() - velocity.getVelocityY());
+                shape.setPosition(shape.getPosition().getX(), shape.getPosition().getY() + shape.getVelocity().getVelocityY());
+            }
+            else if (direction == Direction.DOWN) {
+                shape.setPosition(shape.getPosition().getX(), shape.getPosition().getY() - shape.getVelocity().getVelocityY());
             }
         }
-    }
-
-    public boolean isColliding(Map map, Direction direction) {
-        if (direction == Direction.UP) {
-            double testPosY = position.getY() + velocity.getVelocityY();
-            if (testPosY > map.getWidth()) {
-                return false;
-            }
-            for (Shape shape : map.getShapeList()) {
-                if (shape.getPosition().getY() == testPosY
-                        || (shape.getPosition().getY() > position.getY() && shape.getPosition().getY() < testPosY)) {
-                    return false;
-                }
-            }
-        } else if (direction == Direction.DOWN) {
-            double testPosY = position.getY() - velocity.getVelocityY();
-            if (testPosY < 0) {
-                return false;
-            }
-            for (Shape shape : map.getShapeList()) {
-                if (shape.getPosition().getY() == testPosY
-                        || (shape.getPosition().getY() < position.getY() && shape.getPosition().getY() > testPosY)) {
-                    return false;
-                }
-            }
-        } else if (direction == Direction.RIGHT) {
-            double testPosX = position.getX() + velocity.getVelocityX();
-            if (testPosX > map.getLength()) {
-                return false;
-            }
-            for (Shape shape : map.getShapeList()) {
-                if (shape.getPosition().getX() == testPosX
-                        || (shape.getPosition().getX() > position.getX() && shape.getPosition().getX() < testPosX)) {
-                    return false;
-                }
-            }
-        } else if (direction == Direction.LEFT) {
-            double testPosX = position.getX() - velocity.getVelocityX();
-            if (testPosX < 0) {
-                return false;
-            }
-            for (Shape shape : map.getShapeList()) {
-                if (shape.getPosition().getX() == testPosX
-                        || (shape.getPosition().getX() < position.getX() && shape.getPosition().getX() > testPosX)) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     public Direction getDirection() {
@@ -91,7 +48,33 @@ public class Movement {
         this.direction = direction;
     }
 
-    public Position getPosition(){
-        return this.position;
+    public boolean isColliding(Shape shape, Map map, Direction direction) {
+        List<Position> apex = shape.getApex();
+        for (Shape shape2 : map.getShapeList()) {
+            if (shape2 != shape) {
+                List<Position> apex2 = shape2.getApex();
+                for (int i = 0; i < apex.size(); i++) {
+                    switch (direction){
+                        case UP -> {
+                            if (apex.get(i).getY() < apex2.get(i).getY() && apex.get(i).getY() + shape.getVelocity().getVelocityY() >= apex2.get(i).getY())
+                                return true;
+                        }
+                        case DOWN -> {
+                            if (apex.get(i).getY() > apex2.get(i).getY() && apex.get(i).getY() - shape.getVelocity().getVelocityY() <= apex2.get(i).getY())
+                                return true;
+                        }
+                        case RIGHT -> {
+                            if (apex.get(i).getX() < apex2.get(i).getX() && apex.get(i).getX() + shape.getVelocity().getVelocityX() >= apex2.get(i).getX())
+                                return true;
+                        }
+                        case LEFT -> {
+                            if (apex.get(i).getX() > apex2.get(i).getX() && apex.get(i).getX() - shape.getVelocity().getVelocityX() <= apex2.get(i).getX())
+                                return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
