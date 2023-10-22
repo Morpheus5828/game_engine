@@ -6,24 +6,22 @@ import java.util.List;
 import engine.model.physicalEngine.movement.*;
 
 public class Rectangle implements Shape {
-    private Position position;
+    private Position center;
     private double length;
     private double width;
     private boolean moving;
     private boolean colliding;
-    private Velocity Velocity;
-    private Direction direction;
+    private Velocity velocity;
     private Position head;
 
-    public Rectangle(Position position, float length, float width, boolean moving, Velocity velocity) {
-        this.position = position;
+    public Rectangle(Position center, double length, double width, Velocity velocity) {
+        this.center = center;
         this.width = width;
         this.length = length;
-        this.moving = moving;
+        this.moving = false;
         this.colliding = true;
-        this.Velocity = velocity;
-        this.direction = Direction.NONE;
-        this.head = new Position(position.getX() + length / 2, position.getY());
+        this.velocity = velocity;
+        this.head = new Position(this.center.getX() + length / 2, this.center.getY());
     }
 
     public double getLength() {
@@ -45,10 +43,10 @@ public class Rectangle implements Shape {
     @Override
     public List<Position> getApex() {
         List<Position> apex = new ArrayList<>();
-        apex.add(new Position(this.position.getX() - length / 2, this.position.getY() - this.width / 2));
-        apex.add(new Position(this.position.getX() - length / 2, this.position.getY() + this.width / 2));
-        apex.add(new Position(this.position.getX() + length / 2, this.position.getY() - this.width / 2));
-        apex.add(new Position(this.position.getX() - length / 2, this.position.getY() + this.width / 2));
+        apex.add(new Position(this.center.getX() - length / 2, this.center.getY() - this.width / 2));
+        apex.add(new Position(this.center.getX() - length / 2, this.center.getY() + this.width / 2));
+        apex.add(new Position(this.center.getX() + length / 2, this.center.getY() - this.width / 2));
+        apex.add(new Position(this.center.getX() - length / 2, this.center.getY() + this.width / 2));
         return apex;
     }
 
@@ -58,28 +56,38 @@ public class Rectangle implements Shape {
     }
 
     @Override
+    public Position getCenter() {
+        return this.center;
+    }
+
+    @Override
+    public Velocity getVelocity() {
+        return this.velocity;
+    }
+
+    @Override
+    public void setMoving(boolean isMoving) {
+        this.moving = isMoving;
+    }
+
+    @Override
     public void setHead(Position position) {
         this.head = position;
     }
 
     @Override
-    public Position getPosition() {
-        return this.position;
+    public void setCenter(Position point) {
+        this.center = point;
     }
 
     @Override
-    public void setPosition(Position point) {
-        this.position = point;
+    public void setColliding(boolean isColliding) {
+        this.colliding = isColliding;
     }
 
     @Override
-    public double getX() {
-        return this.position.getX();
-    }
-
-    @Override
-    public double getY() {
-        return this.position.getY();
+    public void setVelocity(Velocity velocity) {
+        this.velocity = velocity;
     }
 
     @Override
@@ -88,37 +96,7 @@ public class Rectangle implements Shape {
     }
 
     @Override
-    public void setMoving(boolean moving) {
-        this.moving = moving;
-    }
-
-    @Override
     public boolean isColliding() {
         return this.colliding;
-    }
-
-    @Override
-    public void setColliding(boolean colliding) {
-        this.colliding = colliding;
-    }
-
-    @Override
-    public Velocity getVelocity() {
-        return this.Velocity;
-    }
-
-    @Override
-    public void setVelocity(Velocity velocity) {
-        this.Velocity = velocity;
-    }
-
-    @Override
-    public Direction getDirection() {
-        return this.direction;
-    }
-
-    @Override
-    public void setDirection(Direction direction) {
-        this.direction = direction;
     }
 }

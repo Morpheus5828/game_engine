@@ -7,17 +7,13 @@ import engine.model.physicalEngine.movement.*;
 public interface Shape {
     List<Position> getApex();
 
+    Position getCenter();
+
     Position getHead();
 
+    void setCenter(Position position);
+
     void setHead(Position position);
-
-    Position getPosition();
-
-    void setPosition(Position point);
-
-    double getX();
-
-    double getY();
 
     boolean isMoving();
 
@@ -31,7 +27,7 @@ public interface Shape {
 
     void setVelocity(Velocity velocity);
 
-    Direction getDirection();
+    //Direction getDirection();
 
-    void setDirection(Direction direction);
+    //void setDirection(Direction direction);
 }
