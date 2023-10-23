@@ -3,7 +3,6 @@ package engine.model.physicalEngine.environment;
 
 import engine.model.physicalEngine.movement.Position;
 import engine.model.physicalEngine.movement.Velocity;
-import engine.model.physicalEngine.shape.Circle;
 import engine.model.physicalEngine.shape.Rectangle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,17 +11,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MapTest {
     private Map map;
-    private Circle circle;
+    private Rectangle rectangle;
 
     @BeforeEach
     void setUp() {
         Position position = new Position(0, 0);
-        float radius = 10;
+        float length = 10;
         boolean moving = true;
         Velocity velocity = new Velocity(0, 0);
-        circle = new Circle(position, radius, moving, velocity);
+        // rectangle = new Rectangle(position, length, moving, velocity);
         map = new Map(100,100);
-        map.getShapeList().add(circle);
+        map.getShapeList().add(rectangle);
     }
 
     @Test
@@ -37,18 +36,18 @@ public class MapTest {
 
     @Test
     void TestIsInPlan(){
-        assertTrue(map.isInPlan(circle.getPosition()));
+        assertTrue(map.isInPlan(rectangle.getPosition()));
     }
 
     @Test
     void TestGetShapeList(){
-        assertThat(map.getShapeList().contains(circle));
+        assertThat(map.getShapeList().contains(rectangle));
     }
 
     @Test
     void TestShapeIsInShape(){
         Rectangle square = new Rectangle(new Position(101,101),10,10,true,new Velocity(0,0));
-        assertTrue(map.shapeIsInPlan(circle));
+        assertTrue(map.shapeIsInPlan(rectangle));
         assertFalse(map.shapeIsInPlan(square));
     }
 
@@ -66,9 +65,9 @@ public class MapTest {
 
     @Test
     void TestRemoveShape(){
-        assertTrue(map.getShapeList().contains(circle));
-        map.removeShape(circle);
-        assertFalse(map.getShapeList().contains(circle));
+        assertTrue(map.getShapeList().contains(rectangle));
+        map.removeShape(rectangle);
+        assertFalse(map.getShapeList().contains(rectangle));
     }
 
 

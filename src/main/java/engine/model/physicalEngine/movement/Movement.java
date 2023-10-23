@@ -1,7 +1,7 @@
 package engine.model.physicalEngine.movement;
 
 import engine.model.physicalEngine.environment.Map;
-import engine.model.physicalEngine.shape.Shape;
+import engine.model.physicalEngine.shape.Rectangle;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class Movement {
      */
 
 
-    public void updatePositonX(Direction direction, Shape shape, Map map) {
+    public void updatePositonX(Direction direction, Rectangle shape, Map map) {
         if(!isColliding(shape, map, direction)){
             if (direction == Direction.RIGHT) {
                 shape.setPosition(shape.getPosition().getX() + shape.getVelocity().getVelocityX(), shape.getPosition().getY());
@@ -29,7 +29,7 @@ public class Movement {
         }
     }
 
-    public void updatePositonY(Direction direction, Shape shape, Map map) {
+    public void updatePositonY(Direction direction, Rectangle shape, Map map) {
         if (!isColliding(shape, map, direction)) {
             if (direction == Direction.UP) {
                 shape.setPosition(shape.getPosition().getX(), shape.getPosition().getY() + shape.getVelocity().getVelocityY());
@@ -48,9 +48,9 @@ public class Movement {
         this.direction = direction;
     }
 
-    public boolean isColliding(Shape shape, Map map, Direction direction) {
+    public boolean isColliding(Rectangle shape, Map map, Direction direction) {
         List<Position> apex = shape.getApex();
-        for (Shape shape2 : map.getShapeList()) {
+        for (Rectangle shape2 : map.getShapeList()) {
             if (shape2 != shape) {
                 List<Position> apex2 = shape2.getApex();
                 for (int i = 0; i < apex.size(); i++) {

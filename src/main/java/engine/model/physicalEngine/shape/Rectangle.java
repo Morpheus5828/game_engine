@@ -5,7 +5,7 @@ import java.util.List;
 
 import engine.model.physicalEngine.movement.*;
 
-public class Rectangle implements Shape {
+public class Rectangle {
     private Position position;
     private double length;
     private double width;
@@ -42,7 +42,6 @@ public class Rectangle implements Shape {
         this.width = width;
     }
 
-    @Override
     public List<Position> getApex() {
         List<Position> apex = new ArrayList<>();
         apex.add(new Position(this.position.getX() - length / 2, this.position.getY() - this.width / 2));
@@ -52,77 +51,62 @@ public class Rectangle implements Shape {
         return apex;
     }
 
-    @Override
     public Position getHead() {
         return this.head;
     }
 
-    @Override
     public void setHead(Position position) {
         this.head = position;
     }
 
-    @Override
     public Position getPosition() {
         return this.position;
     }
 
-    @Override
     public void setPosition(Position point) {
         this.position = point;
     }
 
-    @Override
     public void setPosition(double x, double y) {
         this.position.setPosition(x, y);
     }
 
-    @Override
     public double getX() {
         return this.position.getX();
     }
 
-    @Override
     public double getY() {
         return this.position.getY();
     }
 
-    @Override
     public boolean isMoving() {
         return this.moving;
     }
 
-    @Override
     public void setMoving(boolean moving) {
         this.moving = moving;
     }
 
-    @Override
     public boolean isColliding() {
         return this.colliding;
     }
 
-    @Override
     public void setColliding(boolean colliding) {
         this.colliding = colliding;
     }
 
-    @Override
     public Velocity getVelocity() {
         return this.Velocity;
     }
 
-    @Override
     public void setVelocity(Velocity velocity) {
         this.Velocity = velocity;
     }
 
-    @Override
     public Direction getDirection() {
         return this.direction;
     }
 
-    @Override
     public void setDirection(Direction direction) {
         this.direction = direction;
     }

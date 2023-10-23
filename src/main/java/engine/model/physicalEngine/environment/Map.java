@@ -7,7 +7,7 @@ import engine.model.physicalEngine.movement.Position;
 import engine.model.physicalEngine.shape.*;
 
 public class Map {
-    private List<Shape> shapeList;
+    private List<Rectangle> shapeList;
     private double length;
     private double width;
 
@@ -22,7 +22,7 @@ public class Map {
                 && position.getY() >= -this.width / 2 && position.getY() <= this.width / 2;
     }
 
-    public boolean shapeIsInPlan(Shape shape) {
+    public boolean shapeIsInPlan(Rectangle shape) {
         List<Position> apex = shape.getApex();
         for (Position position : apex) {
             if (!isInPlan(position))
@@ -31,16 +31,16 @@ public class Map {
         return true;
     }
 
-    public void removeShape(Shape shape) {
+    public void removeShape(Rectangle shape) {
         this.shapeList.remove(shape);
     }
 
-    public void addShape(Shape shape) {
+    public void addShape(Rectangle shape) {
         if (shapeIsInPlan(shape))
             this.shapeList.add(shape);
     }
 
-    public List<Shape> getShapeList() {
+    public List<Rectangle> getShapeList() {
         return this.shapeList;
     }
 
