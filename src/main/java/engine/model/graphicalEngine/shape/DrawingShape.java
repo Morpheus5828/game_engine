@@ -1,4 +1,5 @@
 package engine.model.graphicalEngine.shape;
 
-public class DrawCircle extends FactoryShape{
+public interface DrawingShape {
+
 }
