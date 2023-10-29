@@ -15,7 +15,7 @@ public class Rectangle {
     private Direction direction;
     private Position head;
 
-    public Rectangle(Position position, float length, float width, boolean moving, Velocity velocity) {
+    public Rectangle(Position position, double length, double width, boolean moving, Velocity velocity) {
         this.position = position;
         this.width = width;
         this.length = length;
@@ -30,7 +30,7 @@ public class Rectangle {
         return this.length;
     }
 
-    public void setLength(float length) {
+    public void setLength(double length) {
         this.length = length;
     }
 
@@ -38,7 +38,7 @@ public class Rectangle {
         return this.width;
     }
 
-    public void setWidth(float width) {
+    public void setWidth(double width) {
         this.width = width;
     }
 
