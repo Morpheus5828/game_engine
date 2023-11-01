@@ -1,37 +1,37 @@
 package engine.model.physicalEngine.movement;
 
 public class Velocity {
-    private double speedValue;
-    private double step;
-    private double distance;
+    private double velocityX;
+    private double velocityY;
 
-    public Velocity(double step, double speedValue) {
-        this.speedValue = speedValue;
-        this.step = step;
+    public Velocity(double velocityX, double velocityY) {
+        this.velocityX = velocityX;
+        this.velocityY = velocityY;
     }
 
-
-    public double getSpeedValue() {
-        return speedValue;
+    public double getVelocityX() {
+        return velocityX;
     }
 
-    public void setSpeedValue(float speedValue) {
-        this.speedValue = speedValue;
+    public double getVelocityY() {
+        return velocityY;
     }
 
-    public double getStep() {
-        return step;
+    public void setVelocityX(double velocityX) {
+        this.velocityX = velocityX;
     }
 
-    public void setStep(float step) {
-        this.step = step;
+    public void setVelocityY(double velocityY) {
+        this.velocityY = velocityY;
     }
 
-    public double getDistance() {
-        return distance;
+    public void setVelocity(float velocityX, float velocityY) {
+        setVelocityX(velocityX);
+        setVelocityY(velocityY);
     }
 
-    public void setDistance(float distance) {
-        this.distance = distance;
+    public void addVelocity(double bonusX, double bonusY) {
+        setVelocityX(getVelocityX() + bonusX);
+        setVelocityY(getVelocityY() + bonusY);
     }
 }
