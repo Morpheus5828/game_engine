@@ -5,30 +5,32 @@ import java.util.List;
 
 import engine.model.physicalEngine.movement.*;
 
-public class Rectangle implements Shape {
-    private Position center;
+public class Rectangle {
+    private Position position;
     private double length;
     private double width;
     private boolean moving;
     private boolean colliding;
-    private Velocity velocity;
+    private Velocity Velocity;
+    private Direction direction;
     private Position head;
 
-    public Rectangle(Position center, double length, double width, Velocity velocity) {
-        this.center = center;
+    public Rectangle(Position position, double length, double width, boolean moving, Velocity velocity) {
+        this.position = position;
         this.width = width;
         this.length = length;
-        this.moving = false;
+        this.moving = moving;
         this.colliding = true;
-        this.velocity = velocity;
-        this.head = new Position(this.center.getX() + length / 2, this.center.getY());
+        this.Velocity = velocity;
+        this.direction = Direction.NONE;
+        this.head = new Position(position.getX() + length / 2, position.getY());
     }
 
     public double getLength() {
         return this.length;
     }
 
-    public void setLength(float length) {
+    public void setLength(double length) {
         this.length = length;
     }
 
@@ -36,67 +38,76 @@ public class Rectangle implements Shape {
         return this.width;
     }
 
-    public void setWidth(float width) {
+    public void setWidth(double width) {
         this.width = width;
     }
 
-    @Override
     public List<Position> getApex() {
         List<Position> apex = new ArrayList<>();
-        apex.add(new Position(this.center.getX() - length / 2, this.center.getY() - this.width / 2));
-        apex.add(new Position(this.center.getX() - length / 2, this.center.getY() + this.width / 2));
-        apex.add(new Position(this.center.getX() + length / 2, this.center.getY() - this.width / 2));
-        apex.add(new Position(this.center.getX() - length / 2, this.center.getY() + this.width / 2));
+        apex.add(new Position(this.position.getX() - length / 2, this.position.getY() - this.width / 2));
+        apex.add(new Position(this.position.getX() - length / 2, this.position.getY() + this.width / 2));
+        apex.add(new Position(this.position.getX() + length / 2, this.position.getY() - this.width / 2));
+        apex.add(new Position(this.position.getX() - length / 2, this.position.getY() + this.width / 2));
         return apex;
     }
 
-    @Override
     public Position getHead() {
         return this.head;
     }
 
-    @Override
-    public Position getCenter() {
-        return this.center;
-    }
-
-    @Override
-    public Velocity getVelocity() {
-        return this.velocity;
-    }
-
-    @Override
-    public void setMoving(boolean isMoving) {
-        this.moving = isMoving;
-    }
-
-    @Override
     public void setHead(Position position) {
         this.head = position;
     }
 
-    @Override
-    public void setCenter(Position point) {
-        this.center = point;
+    public Position getPosition() {
+        return this.position;
     }
 
-    @Override
-    public void setColliding(boolean isColliding) {
-        this.colliding = isColliding;
+    public void setPosition(Position point) {
+        this.position = point;
     }
 
-    @Override
-    public void setVelocity(Velocity velocity) {
-        this.velocity = velocity;
+    public void setPosition(double x, double y) {
+        this.position.setPosition(x, y);
     }
 
-    @Override
+    public double getX() {
+        return this.position.getX();
+    }
+
+    public double getY() {
+        return this.position.getY();
+    }
+
     public boolean isMoving() {
         return this.moving;
     }
 
-    @Override
+    public void setMoving(boolean moving) {
+        this.moving = moving;
+    }
+
     public boolean isColliding() {
         return this.colliding;
+    }
+
+    public void setColliding(boolean colliding) {
+        this.colliding = colliding;
+    }
+
+    public Velocity getVelocity() {
+        return this.Velocity;
+    }
+
+    public void setVelocity(Velocity velocity) {
+        this.Velocity = velocity;
+    }
+
+    public Direction getDirection() {
+        return this.direction;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 }
