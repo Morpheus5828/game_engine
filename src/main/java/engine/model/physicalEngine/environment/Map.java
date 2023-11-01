@@ -1,74 +1,56 @@
 package engine.model.physicalEngine.environment;
 
-import engine.model.physicalEngine.shape.Circle;
-import engine.model.physicalEngine.shape.Rectangle;
-import engine.model.physicalEngine.shape.Shape;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
+import engine.model.physicalEngine.movement.Position;
+import engine.model.physicalEngine.shape.*;
 
 public class Map {
-    private Set<Shape> shapeList;
+    private List<Rectangle> shapeList;
+    private double length;
     private double width;
-    private double height;
 
-    public Map(double length, double height) {
-        this.width = length;
-        this.height = height;
-        this.shapeList = new HashSet<>();
+    public Map(double length, double width) {
+        this.length = length;
+        this.width = width;
+        this.shapeList = new ArrayList<>();
     }
 
-    public boolean isInPlan(float x, float y) {
-        return x >= 0 && y >= 0 && x <= this.width && y <= this.height;
+    public boolean isInPlan(Position position) {
+        return position.getX() >= -this.length / 2 && position.getX() <= this.length / 2
+                && position.getY() >= -this.width / 2 && position.getY() <= this.width / 2;
     }
 
-    public boolean isShapeInPlan(Shape shape) {
-        var x = shape.getCenter().getX();
-        var y = shape.getCenter().getY();
-        if(shape instanceof Circle) {
-            var radius = ((Circle) shape).getRadius();
-            if(
-                (x + radius > this.width) ||
-                (y + radius > this.height) ||
-                (x - radius < 0) ||
-                (y - radius < 0)
-            )
-                return false;
-
-        } else if (shape instanceof Rectangle) {
-            var shapeLength = ((Rectangle) shape).getLength();
-            var shapeWidth = ((Rectangle) shape).getWidth();
-
-            if(
-                (x + shapeWidth > this.width) ||
-                (y + shapeLength > this.height) ||
-                (x - shapeWidth < 0) ||
-                (y - shapeLength < 0)
-            )
+    public boolean shapeIsInPlan(Rectangle shape) {
+        List<Position> apex = shape.getApex();
+        for (Position position : apex) {
+            if (!isInPlan(position))
                 return false;
         }
-
         return true;
     }
 
-    public void removeShape(Shape shape) {
+    public void removeShape(Rectangle shape) {
         this.shapeList.remove(shape);
     }
 
-    public void addShape(Shape shape) {
-        if(isShapeInPlan(shape))
+    public void addShape(Rectangle shape) {
+        if (shapeIsInPlan(shape))
             this.shapeList.add(shape);
     }
 
-    public Set<Shape> getShapeList() {
-        return shapeList;
+    public List<Rectangle> getShapeList() {
+        return this.shapeList;
+    }
+
+    public double getLength() {
+        return this.length;
     }
 
     public double getWidth() {
-        return width;
+        return this.width;
     }
 
-    public double getHeight() {
-        return height;
-    }
 
 }

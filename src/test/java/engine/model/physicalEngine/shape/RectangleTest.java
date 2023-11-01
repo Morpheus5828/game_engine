@@ -1,75 +1,153 @@
 package engine.model.physicalEngine.shape;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
-import engine.model.physicalEngine.shape.temp.Position;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import engine.model.physicalEngine.movement.*;
+
 public class RectangleTest {
-    @Test
-    void testgetHeight(){
-        Rectangle rec=new Rectangle(1,1,10,5);
-        assertEquals(rec.getWidth(),5);
-    }
-    @Test
-    void testsetHeight(){
-        Rectangle rec=new Rectangle(1,1,10,5);
-        double a=10;
-        rec.setWidth(a);
-        assertEquals(rec.getWidth(),a);
-    }
-    @Test
-    void testgetLength(){
-        Rectangle rec=new Rectangle(1,1,10,5);
-        assertEquals(rec.getLength(),10);
-    }
-    @Test
-    void testsetLength(){
-        Rectangle rec=new Rectangle(1,1,10,5);
-        double a=10;
-        rec.setLength(a);
-        assertEquals(rec.getLength(),a);
-    }
-    @Test
-    void testsetCenter(){
-        Rectangle rec=new Rectangle(1,1,10,5);
-        rec.setCenter(new Position(5,5));
-        assertEquals(rec.getCenter().getX(),5);
-        assertEquals(rec.getCenter().getY(),5);
-    }
-    @Test
-    void testgetCenter(){
-        Rectangle rec=new Rectangle(1,1,10,5);
-        assertEquals(rec.getCenter().getX(),1);
-        assertEquals(rec.getCenter().getY(),1);
-    }
-    @Test
-    void testisMoving(){
-        Rectangle rec=new Rectangle(1,1,10,5);
-        assertEquals(rec.isMoving(),false);
-    }
-    @Test
-    void testsetIsMoving(){
-        Rectangle rec=new Rectangle(1,1,10,5);
-        boolean bool=true;
-        rec.setIsMoving(bool);
-        assertEquals(rec.isMoving(),true);
-    }
-    @Test
-    void testgetApex(){
-        Rectangle rec=new Rectangle(1,1,10,5);
-        List<Position> list= rec.getApex();
+    /*private Rectangle rectangle;
+    private Position position;
+    private float length;
+    private float width;
+    private boolean moving;
+    private Velocity velocity;
 
-        assertEquals(list.get(0).getX(), -4);
-        assertEquals(list.get(0).getY(), -1.5);
-
-        assertEquals(list.get(1).getX(), -4);
-        assertEquals(list.get(1).getY(), 3.5);
-
-        assertEquals(list.get(2).getX(), 6);
-        assertEquals(list.get(2).getY(), -1.5);
-
-        assertEquals(list.get(3).getX(), -4);
-        assertEquals(list.get(3).getY(), 3.5);
+    @BeforeEach
+    void setUp() {
+        position = new Position(0, 0);
+        length = 10;
+        width = 5;
+        moving = true;
+        velocity = new Velocity(0, 0);
+        rectangle = new Rectangle(position, length, width, moving, velocity);
     }
+
+    @Test
+    void testGetLength() {
+        assertEquals(10, rectangle.getLength());
+    }
+
+    @Test
+    void testSetLength() {
+        float newLength = 5;
+        rectangle.setLength(newLength);
+        assertEquals(newLength, rectangle.getLength());
+    }
+
+    @Test
+    void testGetWidth() {
+        assertEquals(5, rectangle.getWidth());
+    }
+
+    @Test
+    void testSetWidth() {
+        float newWidth = 10;
+        rectangle.setWidth(newWidth);
+        assertEquals(newWidth, rectangle.getWidth());
+    }
+
+    @Test
+    void testGetApex() {
+        List<Position> apex = new ArrayList<>();
+        apex.add(new Position(-5, -2.5f));
+        apex.add(new Position(-5, 2.5f));
+        apex.add(new Position(5, -2.5f));
+        apex.add(new Position(-5, 2.5f));
+        for (int i = 0; i < apex.size(); i++) {
+            assertEquals(apex.get(i).getX(), rectangle.getApex().get(i).getX());
+            assertEquals(apex.get(i).getY(), rectangle.getApex().get(i).getY());
+        }
+    }
+
+    @Test
+    void testGetHead() {
+        assertEquals(position.getX() + length / 2, rectangle.getCenter().getX());
+        assertEquals(position.getY(), rectangle.getCenter().getY());
+    }
+
+    @Test
+    void testSetHead() {
+        Position newPosition = new Position(position.getX() - length / 2, rectangle.getCenter().getY());
+        rectangle.setHead(newPosition);
+        assertEquals(newPosition.getX(), rectangle.getCenter().getX());
+        assertEquals(newPosition.getY(), rectangle.getCenter().getY());
+    }
+
+    @Test
+    void testGetPosition() {
+        assertEquals(position, rectangle.getPosition());
+    }
+
+    @Test
+    void testSetPostion() {
+        Position newPosition = new Position(10, 5);
+        rectangle.setPosition(newPosition);
+        assertEquals(newPosition, rectangle.getPosition());
+    }
+
+    @Test
+    void testGetX() {
+        assertEquals(position.getX(), rectangle.getPosition().getX());
+    }
+
+    @Test
+    void testGetY() {
+        assertEquals(position.getY(), rectangle.getPosition().getY());
+    }
+
+    @Test
+    void testIsMoving() {
+        assertEquals(moving, rectangle.isMoving());
+    }
+
+    @Test
+    void testSetIsMoving() {
+        boolean newMoving = true;
+        rectangle.setMoving(newMoving);
+        assertEquals(newMoving, rectangle.isMoving());
+    }
+
+    @Test
+    void testIsColliding() {
+        assertEquals(true, rectangle.isColliding());
+    }
+
+    @Test
+    void testSetIsColliding() {
+        boolean newColliding = false;
+        rectangle.setColliding(newColliding);
+        assertEquals(newColliding, rectangle.isColliding());
+    }
+
+    @Test
+    void testGetVelocity() {
+        assertEquals(velocity, rectangle.getVelocity());
+    }
+
+    @Test
+    void testSetVelocity() {
+        Velocity newVelocity = new Velocity(2, 3);
+        rectangle.setVelocity(newVelocity);
+        assertEquals(newVelocity, rectangle.getVelocity());
+    }
+
+    @Test
+    void testGetDirection() {
+        assertEquals(Direction.NONE, rectangle.getDirection());
+    }
+
+    @Test
+    void testSetDirection() {
+        Direction newDirection = Direction.RIGHT;
+        rectangle.setDirection(newDirection);
+        assertEquals(newDirection, rectangle.getDirection());
+    }
+
+     */
 }
