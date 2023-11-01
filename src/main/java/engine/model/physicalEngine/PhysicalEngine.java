@@ -6,16 +6,17 @@ import engine.model.physicalEngine.movement.*;
 
 public class PhysicalEngine {
     private Map map;
-    private Rectangle rectangle;
 
-    public PhysicalEngine() {
-        this.map = new Map(100, 100);
-        this.rectangle = new Rectangle(new Position(0, 0), 10, 10, true, new Velocity(0.0, 0.0));
+    public PhysicalEngine(double lengthMap, double widthMap) {
+        this.map = new Map(lengthMap, widthMap);
     }
 
-    public void move(Direction direction) {
-        Movement movement = new Movement(direction);
-        movement.updatePositonX(direction, rectangle, map);
-        movement.updatePositonY(direction, rectangle, map);
+    public void addEntity() {
+        Rectangle entity = new Rectangle(new Position(0, 0), 50, 50, true, new Velocity(0, 0));
+        map.addShape(entity);
+    }
+
+    public Map getMap() {
+        return this.map;
     }
 }
