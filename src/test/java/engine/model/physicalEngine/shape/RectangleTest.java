@@ -1,6 +1,7 @@
 package engine.model.physicalEngine.shape;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,7 @@ import java.util.List;
 import engine.model.physicalEngine.movement.*;
 
 public class RectangleTest {
-    /*private Rectangle rectangle;
+    private Rectangle rectangle;
     private Position position;
     private float length;
     private float width;
@@ -67,16 +68,16 @@ public class RectangleTest {
 
     @Test
     void testGetHead() {
-        assertEquals(position.getX() + length / 2, rectangle.getCenter().getX());
-        assertEquals(position.getY(), rectangle.getCenter().getY());
+        assertEquals(position.getX() + length / 2, rectangle.getHead().getX());
+        assertEquals(position.getY(), rectangle.getHead().getY());
     }
 
     @Test
     void testSetHead() {
-        Position newPosition = new Position(position.getX() - length / 2, rectangle.getCenter().getY());
+        Position newPosition = new Position(position.getX() - length / 2, rectangle.getHead().getY());
         rectangle.setHead(newPosition);
-        assertEquals(newPosition.getX(), rectangle.getCenter().getX());
-        assertEquals(newPosition.getY(), rectangle.getCenter().getY());
+        assertEquals(newPosition.getX(), rectangle.getHead().getX());
+        assertEquals(newPosition.getY(), rectangle.getHead().getY());
     }
 
     @Test
@@ -115,7 +116,7 @@ public class RectangleTest {
 
     @Test
     void testIsColliding() {
-        assertEquals(true, rectangle.isColliding());
+        assertTrue(rectangle.isColliding());
     }
 
     @Test
@@ -148,6 +149,4 @@ public class RectangleTest {
         rectangle.setDirection(newDirection);
         assertEquals(newDirection, rectangle.getDirection());
     }
-
-     */
 }

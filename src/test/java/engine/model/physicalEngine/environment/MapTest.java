@@ -12,20 +12,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MapTest {
     private Map map;
     private Rectangle rectangle;
+    private Position position;
+    private Velocity velocity;
+    private float length = 10;
+    private float width = 4;
+    private boolean moving = true;
 
     @BeforeEach
     void setUp() {
-        Position position = new Position(0, 0);
-        float length = 10;
-        boolean moving = true;
-        Velocity velocity = new Velocity(0, 0);
-        // rectangle = new Rectangle(position, length, moving, velocity);
+        position = new Position(0, 0);
+        velocity = new Velocity(0, 0);
+        rectangle = new Rectangle(position, length, width, moving, velocity);
         map = new Map(100,100);
         map.getShapeList().add(rectangle);
     }
 
     @Test
-    void TestGetLenght(){
+    void TestGetLength(){
         assertEquals(map.getLength(),100.00);
     }
 
@@ -41,7 +44,7 @@ public class MapTest {
 
     @Test
     void TestGetShapeList(){
-        assertThat(map.getShapeList().contains(rectangle));
+        assertTrue(map.getShapeList().contains(rectangle));
     }
 
     @Test
@@ -50,7 +53,6 @@ public class MapTest {
         assertTrue(map.shapeIsInPlan(rectangle));
         assertFalse(map.shapeIsInPlan(square));
     }
-
 
     @Test
     void TestAddShape(){

@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class VelocityTest {
 
-    /*@Test
+    @Test
     void getVelocityX() {
         Velocity velocity = new Velocity(1, 2);
         assertEquals(1, velocity.getVelocityX());
@@ -47,6 +47,4 @@ class VelocityTest {
         assertEquals(4, velocity.getVelocityX());
         assertEquals(6, velocity.getVelocityY());
     }
-
-     */
 }

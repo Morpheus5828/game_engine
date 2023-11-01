@@ -6,17 +6,16 @@ import engine.model.physicalEngine.shape.Rectangle;
 import java.util.List;
 
 public class Movement {
+    /**
+         Shape has to create a movement which be call for moving.
+     **/
+
+
     private Direction direction;
 
     public Movement(Direction direction) {
         this.direction = direction;
     }
-
-    /*
-    un mouvement est un objet qui va etre appeler par une shape pour se deplacer, donc la postion et la velocite est recupere
-     dans la shape et le mouvement va juste se deplacer en fonction de la direction et de la velocite.
-     */
-
 
     public void updatePositonX(Direction direction, Rectangle shape, Map map) {
         if(!isColliding(shape, map, direction)){

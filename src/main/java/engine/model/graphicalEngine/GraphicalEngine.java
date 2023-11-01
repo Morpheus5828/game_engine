@@ -1,4 +1,4 @@
-package engine.model.graphicalEngineAnis;
+package engine.model.graphicalEngine;
 
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
