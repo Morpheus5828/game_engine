@@ -25,14 +25,12 @@ public class MovementTest {
         rectangle2 = new Rectangle(new Position(2,2), radius, radius, moving, velocity);
         map = new Map(100,100);
         map.addShape(rectangle);
-        map.addShape(rectangle2);
     }
 
     @Test
     public void testUpdatePositionX() {
         movement = new Movement(Direction.RIGHT);
         movement.updatePositonX(Direction.RIGHT, rectangle, map);
-        System.out.println(rectangle.getX());
         assertEquals(rectangle.getX(), 2);
     }
 
@@ -45,6 +43,7 @@ public class MovementTest {
 
     @Test
     public void testIsColliding() {
+        map.addShape(rectangle2);
         movement = new Movement(Direction.RIGHT);
         assertTrue(movement.isColliding(rectangle, map, Direction.RIGHT));
         movement = new Movement(Direction.UP);

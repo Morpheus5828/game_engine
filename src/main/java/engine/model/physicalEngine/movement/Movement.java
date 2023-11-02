@@ -6,6 +6,7 @@ import engine.model.physicalEngine.shape.Rectangle;
 import java.util.List;
 
 public class Movement {
+
     /**
          Shape has to create a movement which be call for moving.
      **/
