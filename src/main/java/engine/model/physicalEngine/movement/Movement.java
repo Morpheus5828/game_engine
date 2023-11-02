@@ -20,10 +20,10 @@ public class Movement {
     public void updatePositonX(Direction direction, Rectangle shape, Map map) {
         if(!isColliding(shape, map, direction)){
             if (direction == Direction.RIGHT) {
-                shape.setPosition(shape.getPosition().getX() + shape.getVelocity().getVelocityX(), shape.getPosition().getY());
+                shape.setPosition(shape.getX() + shape.getVelocity().getVelocityX(), shape.getY());
             }
             else if (direction == Direction.LEFT) {
-                shape.setPosition(shape.getPosition().getX() - shape.getVelocity().getVelocityX(), shape.getPosition().getY());
+                shape.setPosition(shape.getX() - shape.getVelocity().getVelocityX(), shape.getY());
             }
         }
     }
