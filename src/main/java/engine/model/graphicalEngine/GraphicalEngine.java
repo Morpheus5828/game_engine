@@ -35,7 +35,7 @@ public class GraphicalEngine {
         drawing.draw(this.graphicsContext);
     }
 
-    public void clear() {
-        this.graphicsContext.clearRect(0, 0, this.canvas.getWidth(), this.canvas.getHeight());
+    public void clear(double x, double y, double width, double height) {
+        this.graphicsContext.clearRect(x, y, width, height);
     }
 }

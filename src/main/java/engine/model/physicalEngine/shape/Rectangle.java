@@ -14,8 +14,10 @@ public class Rectangle {
     private Velocity Velocity;
     private Direction direction;
     private Position head;
+    private Type id;
 
-    public Rectangle(Position position, double length, double width, boolean moving, Velocity velocity) {
+    public Rectangle(Type id, Position position, double length, double width, boolean moving, Velocity velocity) {
+        this.id = id;
         this.position = position;
         this.width = width;
         this.length = length;
@@ -53,6 +55,10 @@ public class Rectangle {
 
     public Position getHead() {
         return this.head;
+    }
+
+    public Type getId() {
+        return id;
     }
 
     public void setHead(Position position) {

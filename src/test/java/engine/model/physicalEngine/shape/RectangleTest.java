@@ -26,7 +26,7 @@ public class RectangleTest {
         width = 5;
         moving = true;
         velocity = new Velocity(0, 0);
-        rectangle = new Rectangle(position, length, width, moving, velocity);
+        rectangle = new Rectangle(Type.PACMAN, position, length, width, moving, velocity);
     }
 
     @Test

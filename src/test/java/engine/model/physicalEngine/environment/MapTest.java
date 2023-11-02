@@ -4,6 +4,7 @@ package engine.model.physicalEngine.environment;
 import engine.model.physicalEngine.movement.Position;
 import engine.model.physicalEngine.movement.Velocity;
 import engine.model.physicalEngine.shape.Rectangle;
+import engine.model.physicalEngine.shape.Type;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,7 +23,7 @@ public class MapTest {
     void setUp() {
         position = new Position(0, 0);
         velocity = new Velocity(0, 0);
-        rectangle = new Rectangle(position, length, width, moving, velocity);
+        rectangle = new Rectangle(Type.PACMAN, position, length, width, moving, velocity);
         map = new Map(100,100);
         map.getShapeList().add(rectangle);
     }
@@ -49,15 +50,15 @@ public class MapTest {
 
     @Test
     void TestShapeIsInShape(){
-        Rectangle square = new Rectangle(new Position(101,101),10,10,true,new Velocity(0,0));
+        Rectangle square = new Rectangle(Type.PACMAN, new Position(101,101),10,10,true,new Velocity(0,0));
         assertTrue(map.shapeIsInPlan(rectangle));
         assertFalse(map.shapeIsInPlan(square));
     }
 
     @Test
     void TestAddShape(){
-        Rectangle square = new Rectangle(new Position(101,101),10,10,true,new Velocity(0,0));
-        Rectangle rectangle = new Rectangle(new Position(10,10),15,10,true,new Velocity(0,0));
+        Rectangle square = new Rectangle(Type.PACMAN, new Position(101,101),10,10,true,new Velocity(0,0));
+        Rectangle rectangle = new Rectangle(Type.PACMAN, new Position(10,10),15,10,true,new Velocity(0,0));
         map.addShape(square);
         map.addShape(rectangle);
 

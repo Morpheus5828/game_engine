@@ -38,9 +38,31 @@ public class RectangleDrawing implements Drawing {
         return color;
     }
 
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public void setLength(double length) {
+        this.length = length;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
     @Override
     public void draw(GraphicsContext context) {
         context.setFill(this.color);
         context.fillRect(this.x, this.y, this.width, this.length);
     }
+
+
 }
