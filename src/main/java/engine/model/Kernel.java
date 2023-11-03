@@ -18,10 +18,10 @@ public class Kernel {
     private double width = 800;
     private double length = 800;
 
+
     public Kernel() {
         this.physicalEngine = new PhysicalEngine(length, width);
         this.graphicalEngine = new GraphicalEngine(length, width);
-
     }
 
     public void addMovement() throws InterruptedException {
@@ -45,6 +45,24 @@ public class Kernel {
                 );
                 this.graphicalEngine.draw(rectangleDrawing);
             } else if (rectangle.getId() == Type.GHOST) {
+                RectangleDrawing rectangleDrawing = new RectangleDrawing(
+                        rectangle.getX(),
+                        rectangle.getY(),
+                        rectangle.getWidth(),
+                        rectangle.getLength(),
+                        Color.BLUEVIOLET
+                );
+                this.graphicalEngine.draw(rectangleDrawing);
+            } else if (rectangle.getId() == Type.FOOD) {
+                RectangleDrawing rectangleDrawing = new RectangleDrawing(
+                        rectangle.getX(),
+                        rectangle.getY(),
+                        rectangle.getWidth(),
+                        rectangle.getLength(),
+                        Color.ORANGE
+                );
+                this.graphicalEngine.draw(rectangleDrawing);
+            } else if (rectangle.getId() == Type.STATIC) {
                 RectangleDrawing rectangleDrawing = new RectangleDrawing(
                         rectangle.getX(),
                         rectangle.getY(),

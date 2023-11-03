@@ -7,14 +7,16 @@ import engine.model.physicalEngine.movement.Position;
 import engine.model.physicalEngine.shape.*;
 
 public class Map {
-    private List<Rectangle> shapeList;
     private double length;
     private double width;
+    private List<Rectangle> movingRectList;
+    private List<Rectangle> staticRectList;
 
     public Map(double length, double width) {
         this.length = length;
         this.width = width;
-        this.shapeList = new ArrayList<>();
+        this.movingRectList = new ArrayList<>();
+        this.staticRectList = new ArrayList<>();
     }
 
     public boolean isInPlan(Position position) {
@@ -32,16 +34,24 @@ public class Map {
     }
 
     public void removeShape(Rectangle shape) {
-        this.shapeList.remove(shape);
+        if(shape.getId() == Type.STATIC)
+            this.staticRectList.remove(shape);
+        else
+            this.movingRectList.remove(shape);
     }
 
     public void addShape(Rectangle shape) {
-        if (shapeIsInPlan(shape))
-            this.shapeList.add(shape);
+        if (shapeIsInPlan(shape)) {
+            if(shape.getId() == Type.STATIC)
+                this.staticRectList.add(shape);
+            else
+                this.movingRectList.add(shape);
+        }
+
     }
 
     public List<Rectangle> getShapeList() {
-        return this.shapeList;
+        return this.movingRectList;
     }
 
     public double getLength() {
