@@ -15,11 +15,16 @@ public class PhysicalEngine {
     public void addEntity(Position position, Color color, boolean isMoving, Velocity velocity) {
         Rectangle entity = new Rectangle(position, 50, 50, color, true, velocity);
         if (!this.map.addShape(entity))
-            throw new IllegalArgumentException("One of the entities is not in map.");
-        
+            throw new IllegalArgumentException("One of the entities is not in the map.");
     }
 
     public Map getMap() {
         return this.map;
+    }
+
+    public void moveEntity(Rectangle shape, Direction direction) {
+        Movement movement = new Movement(direction);
+        movement.updatePositonX(direction, shape, this.map);
+        movement.updatePositonY(direction, shape, this.map);
     }
 }

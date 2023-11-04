@@ -32,10 +32,10 @@ public class Movement {
         if (!isColliding(shape, map, direction)) {
             if (direction == Direction.UP) {
                 shape.setPosition(shape.getPosition().getX(),
-                        shape.getPosition().getY() + shape.getVelocity().getVelocityY());
+                        shape.getPosition().getY() - shape.getVelocity().getVelocityY());
             } else if (direction == Direction.DOWN) {
                 shape.setPosition(shape.getPosition().getX(),
-                        shape.getPosition().getY() - shape.getVelocity().getVelocityY());
+                        shape.getPosition().getY() + shape.getVelocity().getVelocityY());
             }
         }
     }
@@ -54,23 +54,31 @@ public class Movement {
             if (shape2 != shape) {
                 List<Position> apex2 = shape2.getApex();
                 for (int i = 0; i < apex.size(); i++) {
-                    switch (direction){
-                        case UP -> {
-                            if (apex.get(i).getY() < apex2.get(i).getY() && apex.get(i).getY() + shape.getVelocity().getVelocityY() >= apex2.get(i).getY())
-                                return true;
-                        }
-                        case DOWN -> {
-                            if (apex.get(i).getY() > apex2.get(i).getY() && apex.get(i).getY() - shape.getVelocity().getVelocityY() <= apex2.get(i).getY())
-                                return true;
-                        }
-                        case RIGHT -> {
-                            if (apex.get(i).getX() < apex2.get(i).getX() && apex.get(i).getX() + shape.getVelocity().getVelocityX() >= apex2.get(i).getX())
-                                return true;
-                        }
-                        case LEFT -> {
-                            if (apex.get(i).getX() > apex2.get(i).getX() && apex.get(i).getX() - shape.getVelocity().getVelocityX() <= apex2.get(i).getX())
-                                return true;
-                        }
+                    switch (direction) {
+                    case UP -> {
+                        if ((apex.get(i).getY() > apex2.get(i).getY()
+                                && apex.get(i).getY() + shape.getVelocity().getVelocityY() <= apex2.get(i).getY())
+                                || (apex.get(i).getY() < 0))
+                            return true;
+                    }
+                    case DOWN -> {
+                        if ((apex.get(i).getY() < apex2.get(i).getY()
+                                && apex.get(i).getY() - shape.getVelocity().getVelocityY() >= apex2.get(i).getY())
+                                || (apex.get(i).getY() > map.getHeight()))
+                            return true;
+                    }
+                    case RIGHT -> {
+                        if ((apex.get(i).getX() < apex2.get(i).getX()
+                                && apex.get(i).getX() + shape.getVelocity().getVelocityX() >= apex2.get(i).getX())
+                                || (apex.get(i).getX() > map.getWidth()))
+                            return true;
+                    }
+                    case LEFT -> {
+                        if ((apex.get(i).getX() > apex2.get(i).getX()
+                                && apex.get(i).getX() - shape.getVelocity().getVelocityX() <= apex2.get(i).getX())
+                                || (apex.get(i).getX() < 0))
+                            return true;
+                    }
                     default -> {
                         break;
                     }

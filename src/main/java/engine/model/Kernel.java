@@ -9,6 +9,7 @@ import engine.model.graphicalEngine.drawing.*;
 import engine.model.inputOutputEngine.*;
 import engine.model.physicalEngine.*;
 import engine.model.physicalEngine.movement.*;
+import engine.model.physicalEngine.movement.Direction;
 import engine.model.physicalEngine.shape.*;
 
 public class Kernel {
@@ -16,9 +17,9 @@ public class Kernel {
     private GraphicalEngine graphicalEngine;
     private EventListener eventListener;
 
-    public Kernel(double width, double height) {
+    public Kernel(double width, double height, Color color) {
         this.physicalEngine = new PhysicalEngine(height, width);
-        this.graphicalEngine = new GraphicalEngine(height, width);
+        this.graphicalEngine = new GraphicalEngine(height, width, color);
         this.eventListener = new EventListener();
         this.graphicalEngine.addEventListener(this.eventListener);
         drawStaticEntities();
@@ -44,22 +45,22 @@ public class Kernel {
             switch (this.eventListener.getCurrentDirection()) {
             case UP -> {
                 clearShapesMoving();
-                shape.setPosition(shape.getX(), shape.getY() - 10);
+                physicalEngine.moveEntity(shape, Direction.UP);
                 drawMovingEntities();
             }
             case DOWN -> {
                 clearShapesMoving();
-                shape.setPosition(shape.getX(), shape.getY() + 10);
+                physicalEngine.moveEntity(shape, Direction.DOWN);
                 drawMovingEntities();
             }
             case RIGHT -> {
                 clearShapesMoving();
-                shape.setPosition(shape.getX() + 10, shape.getY());
+                physicalEngine.moveEntity(shape, Direction.RIGHT);
                 drawMovingEntities();
             }
             case LEFT -> {
                 clearShapesMoving();
-                shape.setPosition(shape.getX() - 10, shape.getY());
+                physicalEngine.moveEntity(shape, Direction.LEFT);
                 drawMovingEntities();
             }
             default -> {

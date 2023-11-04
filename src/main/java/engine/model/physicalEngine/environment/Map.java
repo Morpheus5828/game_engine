@@ -70,7 +70,7 @@ public class Map {
         return this.width;
     }
 
-    public double getheight() {
+    public double getHeight() {
         return this.height;
     }
 }

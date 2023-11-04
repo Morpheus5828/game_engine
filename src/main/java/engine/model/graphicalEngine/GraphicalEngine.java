@@ -9,17 +9,22 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class GraphicalEngine {
+    private GraphicsContext playGroundGraphicsContext;
     private GraphicsContext graphicsContext;
     private Group playGround;
+    private Canvas playGroundCanvas;
     private Canvas canvas;
     private boolean keyIsPressed = false;
 
-    public GraphicalEngine(double width, double height) {
+    public GraphicalEngine(double width, double height, Color color) {
         this.playGround = new Group();
+        this.playGroundCanvas = new Canvas(width, height);
         this.canvas = new Canvas(width, height);
+        this.playGroundGraphicsContext = playGroundCanvas.getGraphicsContext2D();
         this.graphicsContext = canvas.getGraphicsContext2D();
+        this.playGround.getChildren().add(playGroundCanvas);
         this.playGround.getChildren().add(canvas);
-        drawPlayGround(width, height, Color.BLACK);
+        drawPlayGround(width, height, color);
     }
 
     public void addEventListener(EventListener movementController) {
@@ -44,7 +49,7 @@ public class GraphicalEngine {
 
     public void drawPlayGround(double width, double height, Color color) {
         MapDrawing mapDrawing = new MapDrawing(width, height, color);
-        draw(mapDrawing);
+        mapDrawing.draw(playGroundGraphicsContext);
     }
 
     public void draw(Drawing drawing) {

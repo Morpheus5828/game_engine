@@ -15,12 +15,11 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         double width = 600;
         double height = 600;
-        Kernel kernel = new Kernel(width, height);
+        Kernel kernel = new Kernel(width, height, Color.BLACK);
         kernel.addEntity(50, 50, Color.YELLOW, true, 10, 10);
         kernel.drawMovingEntities();
 
         Scene scene = new Scene(kernel.getPlayGround(), width, height);
-        scene.setFill(Color.BLACK);
         stage.setScene(scene);
         stage.show();
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
