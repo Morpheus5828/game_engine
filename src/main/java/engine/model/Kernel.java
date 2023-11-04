@@ -6,6 +6,7 @@ import java.util.List;
 
 import engine.model.graphicalEngine.GraphicalEngine;
 import engine.model.graphicalEngine.RectangleDrawing;
+import engine.model.inputOutputEngine.EventListener;
 import engine.model.physicalEngine.*;
 import engine.model.physicalEngine.shape.Rectangle;
 import engine.model.physicalEngine.shape.Type;
@@ -15,6 +16,7 @@ import javafx.scene.paint.Color;
 public class Kernel {
     private PhysicalEngine physicalEngine;
     private GraphicalEngine graphicalEngine;
+    private EventListener eventListener;
     private double width = 800;
     private double length = 800;
 
@@ -22,18 +24,40 @@ public class Kernel {
     public Kernel() {
         this.physicalEngine = new PhysicalEngine(length, width);
         this.graphicalEngine = new GraphicalEngine(length, width);
+        this.eventListener = new EventListener();
+        this.graphicalEngine.addEventListener(this.eventListener);
     }
 
     public void addMovement() throws InterruptedException {
-        for(var i = 0; ; i++) {
-            this.physicalEngine.getMap().getShapeList().get(0).setPosition(i, i);
-            update();
-            Thread.sleep(10);
+        if(this.graphicalEngine.isPressed()) {
+            var rect = this.physicalEngine.getMap().getMovingRectList().get(0);
+            switch (this.eventListener.getCurrentDirection()) {
+                case UP -> {
+                    clear();
+                    this.physicalEngine.getMap().getMovingRectList().get(0).setPosition(rect.getX(), rect.getY() - 10);
+                    drawEntity();
+                }
+                case DOWN -> {
+                    clear();
+                    this.physicalEngine.getMap().getMovingRectList().get(0).setPosition(rect.getX(), rect.getY() + 10);
+                    drawEntity();
+                }
+                case RIGHT -> {
+                    clear();
+                    this.physicalEngine.getMap().getMovingRectList().get(0).setPosition(rect.getX() + 10, rect.getY());
+                    drawEntity();
+                }
+                case LEFT -> {
+                    clear();
+                    this.physicalEngine.getMap().getMovingRectList().get(0).setPosition(rect.getX() - 10, rect.getY());
+                    drawEntity();
+                }
+            }
         }
     }
 
     public void drawEntity() {
-        List<Rectangle> shapeList = this.physicalEngine.getMap().getShapeList();
+        List<Rectangle> shapeList = this.physicalEngine.getMap().getMovingRectList();
         for (Rectangle rectangle : shapeList) {
             if(rectangle.getId() == Type.PACMAN) {
                 RectangleDrawing rectangleDrawing = new RectangleDrawing(
@@ -75,14 +99,11 @@ public class Kernel {
         }
     }
 
-    public void update() {
-        clear();
-        drawEntity();
-    }
 
     public void clear() {
-        for(Rectangle rectangle : this.physicalEngine.getMap().getShapeList())
+        for(Rectangle rectangle : this.physicalEngine.getMap().getMovingRectList())
             this.graphicalEngine.clear(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getLength());
+
     }
 
     public Group getPlayGround() {

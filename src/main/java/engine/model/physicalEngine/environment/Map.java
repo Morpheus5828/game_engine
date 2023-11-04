@@ -34,24 +34,27 @@ public class Map {
     }
 
     public void removeShape(Rectangle shape) {
-        if(shape.getId() == Type.STATIC)
-            this.staticRectList.remove(shape);
-        else
+        if(shape.isMoving())
             this.movingRectList.remove(shape);
+        else
+            this.staticRectList.remove(shape);
     }
 
     public void addShape(Rectangle shape) {
         if (shapeIsInPlan(shape)) {
-            if(shape.getId() == Type.STATIC)
-                this.staticRectList.add(shape);
-            else
+            if(shape.isMoving())
                 this.movingRectList.add(shape);
+            else
+                this.staticRectList.add(shape);
         }
-
     }
 
-    public List<Rectangle> getShapeList() {
-        return this.movingRectList;
+    public List<Rectangle> getMovingRectList() {
+        return movingRectList;
+    }
+
+    public List<Rectangle> getStaticRectList() {
+        return staticRectList;
     }
 
     public double getLength() {

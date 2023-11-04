@@ -49,7 +49,7 @@ public class Movement {
 
     public boolean isColliding(Rectangle shape, Map map, Direction direction) {
         List<Position> apex = shape.getApex();
-        for (Rectangle shape2 : map.getShapeList()) {
+        for (Rectangle shape2 : map.getMovingRectList()) {
             if (shape2 != shape) {
                 List<Position> apex2 = shape2.getApex();
                 for (int i = 0; i < apex.size(); i++) {
@@ -74,6 +74,7 @@ public class Movement {
                 }
             }
         }
+        //TODO faire une deuxieme boucle avec les objets static
         return false;
     }
 }

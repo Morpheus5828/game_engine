@@ -19,16 +19,20 @@ public class Application extends javafx.application.Application {
             @Override
             public void run(){
                 try {
-                    kernel.addMovement();
+                    while(true) {
+                        kernel.addMovement();
+                        Thread.sleep(100);
+                    }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             }
         });
-        monThread.start();
+
         Scene scene = new Scene(kernel.getPlayGround(), 1000, 700);
         scene.setFill(Color.BLACK);
         stage.setScene(scene);
+        monThread.start();
         stage.show();
     }
 
