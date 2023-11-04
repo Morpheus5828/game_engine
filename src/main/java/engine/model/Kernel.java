@@ -1,109 +1,96 @@
 package engine.model;
 
-import java.util.ArrayList;
 import java.util.List;
-
-
-import engine.model.graphicalEngine.GraphicalEngine;
-import engine.model.graphicalEngine.RectangleDrawing;
-import engine.model.inputOutputEngine.EventListener;
-import engine.model.physicalEngine.*;
-import engine.model.physicalEngine.shape.Rectangle;
-import engine.model.physicalEngine.shape.Type;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
+
+import engine.model.graphicalEngine.*;
+import engine.model.graphicalEngine.drawing.*;
+import engine.model.inputOutputEngine.*;
+import engine.model.physicalEngine.*;
+import engine.model.physicalEngine.movement.*;
+import engine.model.physicalEngine.shape.*;
 
 public class Kernel {
     private PhysicalEngine physicalEngine;
     private GraphicalEngine graphicalEngine;
     private EventListener eventListener;
-    private double width = 800;
-    private double height = 800;
 
-
-    public Kernel() {
+    public Kernel(double width, double height) {
         this.physicalEngine = new PhysicalEngine(height, width);
         this.graphicalEngine = new GraphicalEngine(height, width);
         this.eventListener = new EventListener();
         this.graphicalEngine.addEventListener(this.eventListener);
+        drawStaticEntities();
+        startKeyListener();
     }
 
-    public void addMovement() throws InterruptedException {
-        if(this.graphicalEngine.isPressed()) {
-            var rect = this.physicalEngine.getMap().getMovingRectList().get(0);
+    private void startKeyListener() {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    moveMainShape();
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
+    }
+
+    private void moveMainShape() throws InterruptedException {
+        if (this.graphicalEngine.isKeyIsPressed()) {
+            Rectangle shape = this.physicalEngine.getMap().getShapesMoving().get(0);
             switch (this.eventListener.getCurrentDirection()) {
-                case UP -> {
-                    clear();
-                    this.physicalEngine.getMap().getMovingRectList().get(0).setPosition(rect.getX(), rect.getY() - 10);
-                    drawEntity();
-                }
-                case DOWN -> {
-                    clear();
-                    this.physicalEngine.getMap().getMovingRectList().get(0).setPosition(rect.getX(), rect.getY() + 10);
-                    drawEntity();
-                }
-                case RIGHT -> {
-                    clear();
-                    this.physicalEngine.getMap().getMovingRectList().get(0).setPosition(rect.getX() + 10, rect.getY());
-                    drawEntity();
-                }
-                case LEFT -> {
-                    clear();
-                    this.physicalEngine.getMap().getMovingRectList().get(0).setPosition(rect.getX() - 10, rect.getY());
-                    drawEntity();
-                }
+            case UP -> {
+                clearShapesMoving();
+                shape.setPosition(shape.getX(), shape.getY() - 10);
+                drawMovingEntities();
+            }
+            case DOWN -> {
+                clearShapesMoving();
+                shape.setPosition(shape.getX(), shape.getY() + 10);
+                drawMovingEntities();
+            }
+            case RIGHT -> {
+                clearShapesMoving();
+                shape.setPosition(shape.getX() + 10, shape.getY());
+                drawMovingEntities();
+            }
+            case LEFT -> {
+                clearShapesMoving();
+                shape.setPosition(shape.getX() - 10, shape.getY());
+                drawMovingEntities();
+            }
+            default -> {
+                break;
+            }
             }
         }
     }
 
-    public void drawEntity() {
-        List<Rectangle> shapeList = this.physicalEngine.getMap().getMovingRectList();
-        for (Rectangle rectangle : shapeList) {
-            if(rectangle.getId() == Type.PACMAN) {
-                RectangleDrawing rectangleDrawing = new RectangleDrawing(
-                        rectangle.getX(),
-                        rectangle.getY(),
-                        rectangle.getWidth(),
-                        rectangle.getHeight(),
-                        Color.YELLOW
-                );
-                this.graphicalEngine.draw(rectangleDrawing);
-            } else if (rectangle.getId() == Type.GHOST) {
-                RectangleDrawing rectangleDrawing = new RectangleDrawing(
-                        rectangle.getX(),
-                        rectangle.getY(),
-                        rectangle.getWidth(),
-                        rectangle.getHeight(),
-                        Color.BLUEVIOLET
-                );
-                this.graphicalEngine.draw(rectangleDrawing);
-            } else if (rectangle.getId() == Type.FOOD) {
-                RectangleDrawing rectangleDrawing = new RectangleDrawing(
-                        rectangle.getX(),
-                        rectangle.getY(),
-                        rectangle.getWidth(),
-                        rectangle.getHeight(),
-                        Color.ORANGE
-                );
-                this.graphicalEngine.draw(rectangleDrawing);
-            } else if (rectangle.isMoving()) {
-                RectangleDrawing rectangleDrawing = new RectangleDrawing(
-                        rectangle.getX(),
-                        rectangle.getY(),
-                        rectangle.getWidth(),
-                        rectangle.getHeight(),
-                        Color.BLUE
-                );
-                this.graphicalEngine.draw(rectangleDrawing);
-            }
+    public void drawMovingEntities() {
+        List<Rectangle> shapesMoving = this.physicalEngine.getMap().getShapesMoving();
+        for (Rectangle shape : shapesMoving) {
+            RectangleDrawing rectangleDrawing = new RectangleDrawing(shape.getX(), shape.getY(), shape.getWidth(),
+                    shape.getHeight(), shape.getColor());
+            this.graphicalEngine.draw(rectangleDrawing);
         }
     }
 
+    public void drawStaticEntities() {
+        List<Rectangle> shapesMoving = this.physicalEngine.getMap().getShapesStatic();
+        for (Rectangle shape : shapesMoving) {
+            RectangleDrawing rectangleDrawing = new RectangleDrawing(shape.getX(), shape.getY(), shape.getWidth(),
+                    shape.getHeight(), shape.getColor());
+            this.graphicalEngine.draw(rectangleDrawing);
+        }
+    }
 
-    public void clear() {
-        for(Rectangle rectangle : this.physicalEngine.getMap().getMovingRectList())
-            this.graphicalEngine.clear(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
-
+    public void clearShapesMoving() {
+        for (Rectangle rectangle : this.physicalEngine.getMap().getShapesMoving())
+            this.graphicalEngine.clearShape(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
+                    rectangle.getHeight());
     }
 
     public Group getPlayGround() {
@@ -112,5 +99,11 @@ public class Kernel {
 
     public PhysicalEngine getPhysicalEngine() {
         return physicalEngine;
+    }
+
+    public void addEntity(double x, double y, Color color, boolean isMoving, double velocityX, double velocityY) {
+        Position position = new Position(x, y);
+        Velocity velocity = new Velocity(velocityX, velocityY);
+        this.physicalEngine.addEntity(position, color, isMoving, velocity);
     }
 }

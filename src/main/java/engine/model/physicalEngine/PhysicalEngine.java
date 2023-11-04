@@ -12,9 +12,11 @@ public class PhysicalEngine {
         this.map = new Map(heightMap, widthMap);
     }
 
-    public void addEntity(Color color) {
-        Rectangle entity = new Rectangle(new Position(0, 0), 50, 50, color, true, new Velocity(0, 0));
-        map.addShape(entity);
+    public void addEntity(Position position, Color color, boolean isMoving, Velocity velocity) {
+        Rectangle entity = new Rectangle(position, 50, 50, color, true, velocity);
+        if (!this.map.addShape(entity))
+            throw new IllegalArgumentException("One of the entities is not in map.");
+        
     }
 
     public Map getMap() {

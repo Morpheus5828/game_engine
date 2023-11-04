@@ -1,18 +1,24 @@
-package engine.model.graphicalEngine;
+package engine.model.graphicalEngine.drawing;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class RectangleDrawing implements Drawing {
+    /**
+     * The x coordinate of the rectangle's top-left corner.
+     */
     private double x;
+    /**
+     * The y coordinate of the rectangle's top-left corner.
+     */
     private double y;
     private double width;
     private double height;
     private Color color;
 
     public RectangleDrawing(double x, double y, double width, double height, Color color) {
-        this.x = x;
-        this.y = y;
+        this.x = x - width / 2;
+        this.y = y - height / 2;
         this.width = width;
         this.height = height;
         this.color = color;
@@ -63,8 +69,4 @@ public class RectangleDrawing implements Drawing {
         context.setFill(this.color);
         context.fillRect(this.x, this.y, this.width, this.height);
     }
-
-
-
-
 }

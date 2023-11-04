@@ -1,19 +1,19 @@
 package engine.model;
 
-import engine.Application;
+import engine.App;
 import engine.model.physicalEngine.shape.Type;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class KernelTest extends Application {
+public class KernelTest extends App {
     @Override
     public void start(Stage stage) {
         Kernel kernel = new Kernel();
 
-        kernel.drawEntity();
+        kernel.drawMovingEntities();
         kernel.getPhysicalEngine().addEntity(Type.PACMAN);
-        kernel.drawEntity();
+        kernel.drawMovingEntities();
 
 
         Scene scene = new Scene(kernel.getPlayGround(), 1000, 700);

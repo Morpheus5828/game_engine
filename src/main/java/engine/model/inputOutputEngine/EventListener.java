@@ -1,4 +1,5 @@
 package engine.model.inputOutputEngine;
+
 import java.awt.event.KeyEvent;
 
 public class EventListener {
@@ -14,18 +15,18 @@ public class EventListener {
 
     public void keyPressed(int keyCode) {
         switch (keyCode) {
-            case KeyEvent.VK_UP:
-                currentDirection = Direction.UP;
-                break;
-            case KeyEvent.VK_DOWN:
-                currentDirection = Direction.DOWN;
-                break;
-            case KeyEvent.VK_LEFT:
-                currentDirection = Direction.LEFT;
-                break;
-            case KeyEvent.VK_RIGHT:
-                currentDirection = Direction.RIGHT;
-                break;
+        case KeyEvent.VK_UP:
+            currentDirection = Direction.UP;
+            break;
+        case KeyEvent.VK_DOWN:
+            currentDirection = Direction.DOWN;
+            break;
+        case KeyEvent.VK_LEFT:
+            currentDirection = Direction.LEFT;
+            break;
+        case KeyEvent.VK_RIGHT:
+            currentDirection = Direction.RIGHT;
+            break;
         }
     }
 

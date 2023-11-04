@@ -7,9 +7,8 @@ import java.util.List;
 
 public class Movement {
     /**
-         Shape has to create a movement which be call for moving.
+     * Shape has to create a movement which be call for moving.
      **/
-
 
     private Direction direction;
 
@@ -18,12 +17,13 @@ public class Movement {
     }
 
     public void updatePositonX(Direction direction, Rectangle shape, Map map) {
-        if(!isColliding(shape, map, direction)){
+        if (!isColliding(shape, map, direction)) {
             if (direction == Direction.RIGHT) {
-                shape.setPosition(shape.getPosition().getX() + shape.getVelocity().getVelocityX(), shape.getPosition().getY());
-            }
-            else if (direction == Direction.LEFT) {
-                shape.setPosition(shape.getPosition().getX() - shape.getVelocity().getVelocityX(), shape.getPosition().getY());
+                shape.setPosition(shape.getPosition().getX() + shape.getVelocity().getVelocityX(),
+                        shape.getPosition().getY());
+            } else if (direction == Direction.LEFT) {
+                shape.setPosition(shape.getPosition().getX() - shape.getVelocity().getVelocityX(),
+                        shape.getPosition().getY());
             }
         }
     }
@@ -31,10 +31,11 @@ public class Movement {
     public void updatePositonY(Direction direction, Rectangle shape, Map map) {
         if (!isColliding(shape, map, direction)) {
             if (direction == Direction.UP) {
-                shape.setPosition(shape.getPosition().getX(), shape.getPosition().getY() + shape.getVelocity().getVelocityY());
-            }
-            else if (direction == Direction.DOWN) {
-                shape.setPosition(shape.getPosition().getX(), shape.getPosition().getY() - shape.getVelocity().getVelocityY());
+                shape.setPosition(shape.getPosition().getX(),
+                        shape.getPosition().getY() + shape.getVelocity().getVelocityY());
+            } else if (direction == Direction.DOWN) {
+                shape.setPosition(shape.getPosition().getX(),
+                        shape.getPosition().getY() - shape.getVelocity().getVelocityY());
             }
         }
     }
@@ -49,7 +50,7 @@ public class Movement {
 
     public boolean isColliding(Rectangle shape, Map map, Direction direction) {
         List<Position> apex = shape.getApex();
-        for (Rectangle shape2 : map.getMovingRectList()) {
+        for (Rectangle shape2 : map.getShapes()) {
             if (shape2 != shape) {
                 List<Position> apex2 = shape2.getApex();
                 for (int i = 0; i < apex.size(); i++) {
@@ -70,11 +71,13 @@ public class Movement {
                             if (apex.get(i).getX() > apex2.get(i).getX() && apex.get(i).getX() - shape.getVelocity().getVelocityX() <= apex2.get(i).getX())
                                 return true;
                         }
+                    default -> {
+                        break;
+                    }
                     }
                 }
             }
         }
-        //TODO faire une deuxieme boucle avec les objets static
         return false;
     }
 }

@@ -9,20 +9,20 @@ import engine.model.physicalEngine.shape.*;
 public class Map {
     private double width;
     private double height;
-    private List<Rectangle> movingRectList;
-    private List<Rectangle> staticRectList;
+    private List<Rectangle> shapesMoving;
+    private List<Rectangle> shapesStatic;
 
     public Map(double width, double height) {
         this.width = width;
         this.height = height;
-        this.movingRectList = new ArrayList<>();
-        this.staticRectList = new ArrayList<>();
+        this.shapesMoving = new ArrayList<>();
+        this.shapesStatic = new ArrayList<>();
     }
 
     public boolean isInPlan(Position position) {
-        return position.getX() >= -this.height / 2 && position.getX() <= this.height / 2
-                && position.getY() >= -this.width / 2 && position.getY() <= this.width / 2;
-    } //TODO : pos (0,0) ?
+        return position.getX() >= 0 && position.getX() <= this.width
+                && position.getY() >= 0 && position.getY() <= this.height;
+    }
 
     public boolean shapeIsInPlan(Rectangle shape) {
         List<Position> apex = shape.getApex();
@@ -35,26 +35,35 @@ public class Map {
 
     public void removeShape(Rectangle shape) {
         if (shape.isMoving())
-            this.movingRectList.remove(shape);
+            this.shapesMoving.remove(shape);
         else
-            this.staticRectList.remove(shape);
+            this.shapesStatic.remove(shape);
     }
 
-    public void addShape(Rectangle shape) {
+    public boolean addShape(Rectangle shape) {
         if (shapeIsInPlan(shape)) {
             if (shape.isMoving())
-                this.movingRectList.add(shape);
+                this.shapesMoving.add(shape);
             else
-                this.staticRectList.add(shape);
+                this.shapesStatic.add(shape);
+            return true;
         }
+        return false;
     }
 
-    public List<Rectangle> getMovingRectList() {
-        return movingRectList;
+    public List<Rectangle> getShapesMoving() {
+        return shapesMoving;
     }
 
-    public List<Rectangle> getStaticRectList() {
-        return staticRectList;
+    public List<Rectangle> getShapesStatic() {
+        return shapesStatic;
+    }
+
+    public List<Rectangle> getShapes() {
+        List<Rectangle> shapes = new ArrayList<>();
+        shapes.addAll(this.shapesMoving);
+        shapes.addAll(this.shapesStatic);
+        return shapes;
     }
 
     public double getWidth() {
