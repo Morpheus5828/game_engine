@@ -4,36 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 import engine.model.physicalEngine.movement.*;
+import javafx.scene.paint.Color;
 
 public class Rectangle {
     private Position position;
-    private double length;
     private double width;
+    private double height;
     private boolean moving;
     private boolean colliding;
     private Velocity Velocity;
     private Direction direction;
     private Position head;
-    private Type id;
+    private Color color;
 
-    public Rectangle(Type id, Position position, double length, double width, boolean moving, Velocity velocity) {
-        this.id = id;
+    public Rectangle(Position position, double width, double height, Color color, boolean moving, Velocity velocity) {
         this.position = position;
         this.width = width;
-        this.length = length;
+        this.height = height;
+        this.color = color;
         this.moving = moving;
         this.colliding = true;
         this.Velocity = velocity;
         this.direction = Direction.NONE;
-        this.head = new Position(position.getX() + length / 2, position.getY());
-    }
-
-    public double getLength() {
-        return this.length;
-    }
-
-    public void setLength(double length) {
-        this.length = length;
+        this.head = new Position(position.getX() + height / 2, position.getY());
     }
 
     public double getWidth() {
@@ -44,21 +37,29 @@ public class Rectangle {
         this.width = width;
     }
 
+    public double getHeight() {
+        return this.height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
     public List<Position> getApex() {
         List<Position> apex = new ArrayList<>();
-        apex.add(new Position(this.position.getX() - length / 2, this.position.getY() - this.width / 2));
-        apex.add(new Position(this.position.getX() - length / 2, this.position.getY() + this.width / 2));
-        apex.add(new Position(this.position.getX() + length / 2, this.position.getY() - this.width / 2));
-        apex.add(new Position(this.position.getX() - length / 2, this.position.getY() + this.width / 2));
+        apex.add(new Position(this.position.getX() - height / 2, this.position.getY() - this.width / 2));
+        apex.add(new Position(this.position.getX() - height / 2, this.position.getY() + this.width / 2));
+        apex.add(new Position(this.position.getX() + height / 2, this.position.getY() - this.width / 2));
+        apex.add(new Position(this.position.getX() - height / 2, this.position.getY() + this.width / 2));
         return apex;
     }
 
     public Position getHead() {
         return this.head;
-    }
-
-    public Type getId() {
-        return id;
     }
 
     public void setHead(Position position) {

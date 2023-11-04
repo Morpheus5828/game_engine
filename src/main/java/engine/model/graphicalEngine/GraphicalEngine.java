@@ -12,12 +12,12 @@ public class GraphicalEngine {
     private Canvas canvas;
     private boolean isPressed = false;
 
-    public GraphicalEngine(double width, double length) {
+    public GraphicalEngine(double width, double height) {
         this.playGround = new Group();
-        this.canvas = new Canvas(width, length);
+        this.canvas = new Canvas(width, height);
         this.graphicsContext = canvas.getGraphicsContext2D();
         this.playGround.getChildren().add(canvas);
-        drawMap(width, length, Color.BLACK);
+        drawMap(width, height, Color.BLACK);
     }
 
     public void addEventListener(EventListener movementController) {
@@ -44,8 +44,8 @@ public class GraphicalEngine {
         return this.playGround;
     }
 
-    public void drawMap(double width, double length, Color color) {
-        MapDrawing mapDrawing = new MapDrawing(width, length, color);
+    public void drawMap(double width, double height, Color color) {
+        MapDrawing mapDrawing = new MapDrawing(width, height, color);
         draw(mapDrawing);
     }
 

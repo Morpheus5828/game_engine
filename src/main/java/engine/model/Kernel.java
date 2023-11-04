@@ -18,12 +18,12 @@ public class Kernel {
     private GraphicalEngine graphicalEngine;
     private EventListener eventListener;
     private double width = 800;
-    private double length = 800;
+    private double height = 800;
 
 
     public Kernel() {
-        this.physicalEngine = new PhysicalEngine(length, width);
-        this.graphicalEngine = new GraphicalEngine(length, width);
+        this.physicalEngine = new PhysicalEngine(height, width);
+        this.graphicalEngine = new GraphicalEngine(height, width);
         this.eventListener = new EventListener();
         this.graphicalEngine.addEventListener(this.eventListener);
     }
@@ -64,7 +64,7 @@ public class Kernel {
                         rectangle.getX(),
                         rectangle.getY(),
                         rectangle.getWidth(),
-                        rectangle.getLength(),
+                        rectangle.getHeight(),
                         Color.YELLOW
                 );
                 this.graphicalEngine.draw(rectangleDrawing);
@@ -73,7 +73,7 @@ public class Kernel {
                         rectangle.getX(),
                         rectangle.getY(),
                         rectangle.getWidth(),
-                        rectangle.getLength(),
+                        rectangle.getHeight(),
                         Color.BLUEVIOLET
                 );
                 this.graphicalEngine.draw(rectangleDrawing);
@@ -82,16 +82,16 @@ public class Kernel {
                         rectangle.getX(),
                         rectangle.getY(),
                         rectangle.getWidth(),
-                        rectangle.getLength(),
+                        rectangle.getHeight(),
                         Color.ORANGE
                 );
                 this.graphicalEngine.draw(rectangleDrawing);
-            } else if (rectangle.getId() == Type.STATIC) {
+            } else if (rectangle.isMoving()) {
                 RectangleDrawing rectangleDrawing = new RectangleDrawing(
                         rectangle.getX(),
                         rectangle.getY(),
                         rectangle.getWidth(),
-                        rectangle.getLength(),
+                        rectangle.getHeight(),
                         Color.BLUE
                 );
                 this.graphicalEngine.draw(rectangleDrawing);
@@ -102,7 +102,7 @@ public class Kernel {
 
     public void clear() {
         for(Rectangle rectangle : this.physicalEngine.getMap().getMovingRectList())
-            this.graphicalEngine.clear(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getLength());
+            this.graphicalEngine.clear(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
 
     }
 

@@ -31,14 +31,14 @@ public class RectangleTest {
 
     @Test
     void testGetLength() {
-        assertEquals(10, rectangle.getLength());
+        assertEquals(10, rectangle.getHeight());
     }
 
     @Test
     void testSetLength() {
         float newLength = 5;
-        rectangle.setLength(newLength);
-        assertEquals(newLength, rectangle.getLength());
+        rectangle.setHeight(newLength);
+        assertEquals(newLength, rectangle.getHeight());
     }
 
     @Test

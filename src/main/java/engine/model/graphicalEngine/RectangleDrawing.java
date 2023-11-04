@@ -7,14 +7,14 @@ public class RectangleDrawing implements Drawing {
     private double x;
     private double y;
     private double width;
-    private double length;
+    private double height;
     private Color color;
 
-    public RectangleDrawing(double x, double y, double width, double length, Color color) {
+    public RectangleDrawing(double x, double y, double width, double height, Color color) {
         this.x = x;
         this.y = y;
         this.width = width;
-        this.length = length;
+        this.height = height;
         this.color = color;
     }
 
@@ -30,8 +30,8 @@ public class RectangleDrawing implements Drawing {
         return width;
     }
 
-    public double getLength() {
-        return length;
+    public double getheight() {
+        return height;
     }
 
     public Color getColor() {
@@ -50,8 +50,8 @@ public class RectangleDrawing implements Drawing {
         this.width = width;
     }
 
-    public void setLength(double length) {
-        this.length = length;
+    public void setheight(double height) {
+        this.height = height;
     }
 
     public void setColor(Color color) {
@@ -61,7 +61,7 @@ public class RectangleDrawing implements Drawing {
     @Override
     public void draw(GraphicsContext context) {
         context.setFill(this.color);
-        context.fillRect(this.x, this.y, this.width, this.length);
+        context.fillRect(this.x, this.y, this.width, this.height);
     }
 
 

@@ -5,12 +5,12 @@ import javafx.scene.paint.Color;
 
 public class MapDrawing implements Drawing {
     private double width;
-    private double length;
+    private double height;
     private Color color;
 
-    public MapDrawing(double width, double length, Color color) {
+    public MapDrawing(double width, double height, Color color) {
         this.width = width;
-        this.length = length;
+        this.height = height;
         this.color = color;
     }
 
@@ -18,8 +18,8 @@ public class MapDrawing implements Drawing {
         return width;
     }
 
-    public double getLength() {
-        return length;
+    public double getheight() {
+        return height;
     }
 
     public Color getColor() {
@@ -29,6 +29,6 @@ public class MapDrawing implements Drawing {
     @Override
     public void draw(GraphicsContext context) {
         context.setFill(this.color);
-        context.fillRect(0, 0, this.width, this.length);
+        context.fillRect(0, 0, this.width, this.height);
     }
 }

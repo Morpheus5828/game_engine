@@ -1,7 +1,6 @@
 package engine;
 
 import engine.model.Kernel;
-import engine.model.physicalEngine.shape.Type;
 import javafx.scene.Scene;
 
 import javafx.scene.paint.Color;
@@ -13,7 +12,7 @@ public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws InterruptedException {
         Kernel kernel = new Kernel();
-        kernel.getPhysicalEngine().addEntity(Type.PACMAN);
+        kernel.getPhysicalEngine().addEntity(Color.YELLOW);
         kernel.drawEntity();
         Thread monThread = new Thread(new Runnable() {
             @Override
