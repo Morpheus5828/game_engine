@@ -1,7 +1,6 @@
 package engine.model;
 
 import engine.App;
-import engine.model.physicalEngine.shape.Type;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -9,17 +8,17 @@ import javafx.stage.Stage;
 public class KernelTest extends App {
     @Override
     public void start(Stage stage) {
-        Kernel kernel = new Kernel();
+        // Kernel kernel = new Kernel();
 
-        kernel.drawMovingEntities();
-        kernel.getPhysicalEngine().addEntity(Type.PACMAN);
-        kernel.drawMovingEntities();
+        // kernel.drawMovingEntities();
+        // kernel.getPhysicalEngine().addEntity(Type.PACMAN);
+        // kernel.drawMovingEntities();
 
 
-        Scene scene = new Scene(kernel.getPlayGround(), 1000, 700);
-        scene.setFill(Color.BLACK);
-        stage.setScene(scene);
-        stage.show();
+        // Scene scene = new Scene(kernel.getPlayGround(), 1000, 700);
+        // scene.setFill(Color.BLACK);
+        // stage.setScene(scene);
+        // stage.show();
     }
 
 

@@ -10,56 +10,64 @@ import java.util.ArrayList;
 import java.util.List;
 
 import engine.model.physicalEngine.movement.*;
+import javafx.scene.paint.Color;
 
 public class RectangleTest {
     private Rectangle rectangle;
     private Position position;
-    private float length;
-    private float width;
+    private double height;
+    private double width;
+    private Color color;
     private boolean moving;
     private Velocity velocity;
 
     @BeforeEach
     void setUp() {
-        position = new Position(0, 0);
-        length = 10;
-        width = 5;
+        position = new Position(10, 10);
+        height = 10;
+        width = 10;
+        color = Color.YELLOW;
         moving = true;
-        velocity = new Velocity(0, 0);
-        rectangle = new Rectangle(Type.PACMAN, position, length, width, moving, velocity);
-    }
-
-    @Test
-    void testGetLength() {
-        assertEquals(10, rectangle.getHeight());
-    }
-
-    @Test
-    void testSetLength() {
-        float newLength = 5;
-        rectangle.setHeight(newLength);
-        assertEquals(newLength, rectangle.getHeight());
+        velocity = new Velocity(10, 10);
+        rectangle = new Rectangle(position, height, width, color, moving, velocity);
     }
 
     @Test
     void testGetWidth() {
-        assertEquals(5, rectangle.getWidth());
+        assertEquals(10, rectangle.getWidth());
     }
 
     @Test
     void testSetWidth() {
-        float newWidth = 10;
+        double newWidth = 15;
         rectangle.setWidth(newWidth);
         assertEquals(newWidth, rectangle.getWidth());
     }
 
     @Test
+    void testGetHeight() {
+        assertEquals(10, rectangle.getHeight());
+    }
+
+    @Test
+    void testSetHeight() {
+        double newHeight = 15;
+        rectangle.setHeight(newHeight);
+        assertEquals(newHeight, rectangle.getHeight());
+    }
+
+    @Test
+    void testGetColor() {
+        assertEquals(color, rectangle.getColor());
+    }
+
+    @Test
     void testGetApex() {
         List<Position> apex = new ArrayList<>();
-        apex.add(new Position(-5, -2.5f));
-        apex.add(new Position(-5, 2.5f));
-        apex.add(new Position(5, -2.5f));
-        apex.add(new Position(-5, 2.5f));
+        apex.add(new Position(5, 5));
+        apex.add(new Position(5, 15));
+        apex.add(new Position(15, 5));
+        apex.add(new Position(15, 15));
         for (int i = 0; i < apex.size(); i++) {
             assertEquals(apex.get(i).getX(), rectangle.getApex().get(i).getX());
             assertEquals(apex.get(i).getY(), rectangle.getApex().get(i).getY());
@@ -68,13 +76,13 @@ public class RectangleTest {
 
     @Test
     void testGetHead() {
-        assertEquals(position.getX() + length / 2, rectangle.getHead().getX());
+        assertEquals(position.getX() + height / 2, rectangle.getHead().getX());
         assertEquals(position.getY(), rectangle.getHead().getY());
     }
 
     @Test
     void testSetHead() {
-        Position newPosition = new Position(position.getX() - length / 2, rectangle.getHead().getY());
+        Position newPosition = new Position(position.getX() - height / 2, rectangle.getHead().getY());
         rectangle.setHead(newPosition);
         assertEquals(newPosition.getX(), rectangle.getHead().getX());
         assertEquals(newPosition.getY(), rectangle.getHead().getY());
@@ -87,7 +95,7 @@ public class RectangleTest {
 
     @Test
     void testSetPostion() {
-        Position newPosition = new Position(10, 5);
+        Position newPosition = new Position(10, 15);
         rectangle.setPosition(newPosition);
         assertEquals(newPosition, rectangle.getPosition());
     }
