@@ -39,6 +39,10 @@ public class GraphicalEngine {
         return keyIsPressed;
     }
 
+    public void setKeyIsPressed(boolean keyIsPressed) {
+        this.keyIsPressed = keyIsPressed;
+    }
+
     public GraphicsContext getGraphicsContext() {
         return this.graphicsContext;
     }

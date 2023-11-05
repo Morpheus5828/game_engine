@@ -17,6 +17,8 @@ public class App extends Application {
         double height = 600;
         Kernel kernel = new Kernel(width, height, Color.BLACK);
         kernel.addEntity(50, 50, Color.YELLOW, true, 10, 10);
+        kernel.addEntity(200, 200, Color.RED, false, 0, 0);
+        kernel.drawStaticEntities();
         kernel.drawMovingEntities();
 
         Scene scene = new Scene(kernel.getPlayGround(), width, height);

@@ -22,9 +22,13 @@ public class PhysicalEngine {
         return this.map;
     }
 
-    public void moveEntity(Rectangle shape, Direction direction) {
+    public boolean moveEntity(Rectangle shape, Direction direction) {
+        boolean moved = true;
         Movement movement = new Movement(direction);
-        movement.updatePositonX(direction, shape, this.map);
-        movement.updatePositonY(direction, shape, this.map);
+        if (!movement.updatePositonX(direction, shape, this.map))
+            moved = false;
+        if (!movement.updatePositonY(direction, shape, this.map))
+            moved = false;
+        return moved;
     }
 }

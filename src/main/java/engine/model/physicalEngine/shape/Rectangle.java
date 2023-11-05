@@ -51,10 +51,10 @@ public class Rectangle {
 
     public List<Position> getApex() {
         List<Position> apex = new ArrayList<>();
-        apex.add(new Position(this.position.getX() - height / 2, this.position.getY() - this.width / 2));
-        apex.add(new Position(this.position.getX() - height / 2, this.position.getY() + this.width / 2));
-        apex.add(new Position(this.position.getX() + height / 2, this.position.getY() - this.width / 2));
-        apex.add(new Position(this.position.getX() - height / 2, this.position.getY() + this.width / 2));
+        apex.add(new Position(this.position.getX() - this.width / 2, this.position.getY() - this.height / 2));
+        apex.add(new Position(this.position.getX() - this.width / 2, this.position.getY() + this.height / 2));
+        apex.add(new Position(this.position.getX() + this.width / 2, this.position.getY() - this.height / 2));
+        apex.add(new Position(this.position.getX() + this.width / 2, this.position.getY() + this.height / 2));
         return apex;
     }
 

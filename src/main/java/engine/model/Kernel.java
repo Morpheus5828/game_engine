@@ -22,7 +22,6 @@ public class Kernel {
         this.graphicalEngine = new GraphicalEngine(height, width, color);
         this.eventListener = new EventListener();
         this.graphicalEngine.addEventListener(this.eventListener);
-        drawStaticEntities();
         startKeyListener();
     }
 

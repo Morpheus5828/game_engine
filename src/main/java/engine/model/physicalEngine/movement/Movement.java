@@ -16,7 +16,7 @@ public class Movement {
         this.direction = direction;
     }
 
-    public void updatePositonX(Direction direction, Rectangle shape, Map map) {
+    public boolean updatePositonX(Direction direction, Rectangle shape, Map map) {
         if (!isColliding(shape, map, direction)) {
             if (direction == Direction.RIGHT) {
                 shape.setPosition(shape.getPosition().getX() + shape.getVelocity().getVelocityX(),
@@ -25,10 +25,12 @@ public class Movement {
                 shape.setPosition(shape.getPosition().getX() - shape.getVelocity().getVelocityX(),
                         shape.getPosition().getY());
             }
+            return true;
         }
+        return false;
     }
 
-    public void updatePositonY(Direction direction, Rectangle shape, Map map) {
+    public boolean updatePositonY(Direction direction, Rectangle shape, Map map) {
         if (!isColliding(shape, map, direction)) {
             if (direction == Direction.UP) {
                 shape.setPosition(shape.getPosition().getX(),
@@ -37,7 +39,9 @@ public class Movement {
                 shape.setPosition(shape.getPosition().getX(),
                         shape.getPosition().getY() + shape.getVelocity().getVelocityY());
             }
+            return true;
         }
+        return false;
     }
 
     public Direction getDirection() {
@@ -56,28 +60,48 @@ public class Movement {
                 for (int i = 0; i < apex.size(); i++) {
                     switch (direction) {
                     case UP -> {
-                        if ((apex.get(i).getY() > apex2.get(i).getY()
-                                && apex.get(i).getY() + shape.getVelocity().getVelocityY() <= apex2.get(i).getY())
-                                || (apex.get(i).getY() < 0))
+                        if (apex.get(i).getY() - shape.getVelocity().getVelocityY() < 0)
                             return true;
+                        if (i == 0 || i == 2) {
+                            if (apex.get(i).getY() - shape.getVelocity().getVelocityY() >= apex2.get(0).getY()
+                                    && apex.get(i).getY() - shape.getVelocity().getVelocityY() <= apex2.get(1).getY()
+                                    && apex.get(i).getX() >= apex2.get(1).getX()
+                                    && apex.get(i).getX() <= apex2.get(3).getX())
+                                return true;
+                        }
                     }
                     case DOWN -> {
-                        if ((apex.get(i).getY() < apex2.get(i).getY()
-                                && apex.get(i).getY() - shape.getVelocity().getVelocityY() >= apex2.get(i).getY())
-                                || (apex.get(i).getY() > map.getHeight()))
+                        if (apex.get(i).getY() + shape.getVelocity().getVelocityY() > map.getHeight())
                             return true;
+                        if (i == 1 || i == 3) {
+                            if (apex.get(i).getY() + shape.getVelocity().getVelocityY() >= apex2.get(0).getY()
+                                    && apex.get(i).getY() + shape.getVelocity().getVelocityY() <= apex2.get(1).getY()
+                                    && apex.get(i).getX() >= apex2.get(0).getX()
+                                    && apex.get(i).getX() <= apex2.get(2).getX())
+                                return true;
+                        }
                     }
                     case RIGHT -> {
-                        if ((apex.get(i).getX() < apex2.get(i).getX()
-                                && apex.get(i).getX() + shape.getVelocity().getVelocityX() >= apex2.get(i).getX())
-                                || (apex.get(i).getX() > map.getWidth()))
+                        if (apex.get(i).getX() + shape.getVelocity().getVelocityX() > map.getWidth())
                             return true;
+                        if (i >= 2) {
+                            if (apex.get(i).getX() + shape.getVelocity().getVelocityX() >= apex2.get(0).getX()
+                                    && apex.get(i).getX() + shape.getVelocity().getVelocityX() <= apex2.get(2).getX()
+                                    && apex.get(i).getY() >= apex2.get(0).getY()
+                                    && apex.get(i).getY() <= apex2.get(1).getY())
+                                return true;
+                        }
                     }
                     case LEFT -> {
-                        if ((apex.get(i).getX() > apex2.get(i).getX()
-                                && apex.get(i).getX() - shape.getVelocity().getVelocityX() <= apex2.get(i).getX())
-                                || (apex.get(i).getX() < 0))
+                        if (apex.get(i).getX() - shape.getVelocity().getVelocityX() < 0)
                             return true;
+                        if (i < 2) {
+                            if (apex.get(i).getX() - shape.getVelocity().getVelocityX() <= apex2.get(2).getX()
+                                    && apex.get(i).getX() - shape.getVelocity().getVelocityX() >= apex2.get(0).getX()
+                                    && apex.get(i).getY() >= apex2.get(0).getY()
+                                    && apex.get(i).getY() <= apex2.get(1).getY())
+                                return true;
+                        }
                     }
                     default -> {
                         break;
