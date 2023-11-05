@@ -3,41 +3,32 @@ package engine.model.physicalEngine;
 import engine.model.physicalEngine.environment.Map;
 import engine.model.physicalEngine.shape.Rectangle;
 import engine.model.physicalEngine.movement.*;
+import javafx.scene.paint.Color;
 
 public class PhysicalEngine {
     private Map map;
 
-    /**
-     * Constructor of the PhysicalEngine.
-     * The PhysicalEngine is the engine that will manage the physics of the game.
-     * It will manage the entity, the collisions, the movements, the map, etc...
-     * By giving the length and the width of the map, the constructor will create a map.
-     *
-     * @param lengthMap
-     * @param widthMap
-     * @see Map
-     */
-    public PhysicalEngine(double lengthMap, double widthMap) {
-        this.map = new Map(lengthMap, widthMap);
+    public PhysicalEngine(double heightMap, double widthMap) {
+        this.map = new Map(heightMap, widthMap);
     }
 
-
-    /**
-     * This method will create a @Rectangle and add it to the map.
-     *
-     * @see Rectangle
-     * @see Map
-     */
-    public void addEntity() {
-        Rectangle entity = new Rectangle(new Position(0, 0), 50, 50, true, new Velocity(0, 0));
-        map.addShape(entity);
+    public void addEntity(Position position, Color color, boolean isMoving, Velocity velocity) {
+        Rectangle entity = new Rectangle(position, 50, 50, color, true, velocity);
+        if (!this.map.addShape(entity))
+            throw new IllegalArgumentException("One of the entities is not in the map.");
     }
 
-    /**
-     * This method will return the map of the Engine.
-     * @return the map.
-     */
     public Map getMap() {
         return this.map;
+    }
+
+    public boolean moveEntity(Rectangle shape, Direction direction) {
+        boolean moved = true;
+        Movement movement = new Movement(direction);
+        if (!movement.updatePositonX(direction, shape, this.map))
+            moved = false;
+        if (!movement.updatePositonY(direction, shape, this.map))
+            moved = false;
+        return moved;
     }
 }

@@ -7,55 +7,25 @@ import engine.model.physicalEngine.movement.Position;
 import engine.model.physicalEngine.shape.*;
 
 public class Map {
-    private List<Rectangle> shapeList;
-    private double length;
     private double width;
+    private double height;
+    private List<Rectangle> shapesMoving;
+    private List<Rectangle> shapesStatic;
 
-    /**
-     * Constructor of the Map class
-     * Create a map (a plan) with a length and a width.
-     * The center of the map is the @Position (0,0).
-     * This map contain a list of @Rectangle.
-     * The map has border and the rectangle can't go out of the map.
-     *
-     * @param length
-     * @param width
-     *
-     * @see Position
-     * @see Rectangle
-     */
-
-    public Map(double length, double width) {
-        this.length = length;
+    public Map(double width, double height) {
         this.width = width;
-        this.shapeList = new ArrayList<>();
+        this.height = height;
+        this.shapesMoving = new ArrayList<>();
+        this.shapesStatic = new ArrayList<>();
     }
-
-    /**
-     * Check if a @Position is in the map.
-     *
-     * @param position
-     * @return true if the position is in the map, false otherwise
-     *
-     * @see Position
-     */
 
     public boolean isInPlan(Position position) {
-        return position.getX() >= -this.length / 2 && position.getX() <= this.length / 2
-                && position.getY() >= -this.width / 2 && position.getY() <= this.width / 2;
+        return position.getX() >= 0 && position.getX() <= this.width
+                && position.getY() >= 0 && position.getY() <= this.height;
     }
 
-    /**
-     * Check if a @Rectangle is in the map.
-     *
-     * @param rectangle
-     * @return true if the rectangle is in the map, false otherwise
-     *
-     * @see Rectangle
-     */
-
-    public boolean shapeIsInPlan(Rectangle rectangle) {
-        List<Position> apex = rectangle.getApex();
+    public boolean shapeIsInPlan(Rectangle shape) {
+        List<Position> apex = shape.getApex();
         for (Position position : apex) {
             if (!isInPlan(position))
                 return false;
@@ -63,50 +33,44 @@ public class Map {
         return true;
     }
 
-    /**
-     * Remove a @Rectangle from the map list.
-     * @param shape
-     */
     public void removeShape(Rectangle shape) {
-        this.shapeList.remove(shape);
+        if (shape.isMoving())
+            this.shapesMoving.remove(shape);
+        else
+            this.shapesStatic.remove(shape);
     }
 
-    /**
-     * Add a @Rectangle to the map list.
-     * @param shape
-     */
-
-    public void addShape(Rectangle shape) {
-        if (shapeIsInPlan(shape))
-            this.shapeList.add(shape);
+    public boolean addShape(Rectangle shape) {
+        if (shapeIsInPlan(shape)) {
+            if (shape.isMoving())
+                this.shapesMoving.add(shape);
+            else
+                this.shapesStatic.add(shape);
+            return true;
+        }
+        return false;
     }
 
-    /**
-     * Return the list of @Rectangle in the map list.
-     * @return the list of @Rectangle in the map list
-     *
-     * @see Rectangle
-     */
-    public List<Rectangle> getShapeList() {
-        return this.shapeList;
+    public List<Rectangle> getShapesMoving() {
+        return shapesMoving;
     }
 
-    /**
-     * Return the length of the map.
-     * @return the length of the map
-     */
-
-    public double getLength() {
-        return this.length;
+    public List<Rectangle> getShapesStatic() {
+        return shapesStatic;
     }
 
-    /**
-     * Return the width of the map.
-     * @return the width of the map
-     */
+    public List<Rectangle> getShapes() {
+        List<Rectangle> shapes = new ArrayList<>();
+        shapes.addAll(this.shapesMoving);
+        shapes.addAll(this.shapesStatic);
+        return shapes;
+    }
+
     public double getWidth() {
         return this.width;
     }
 
-
+    public double getHeight() {
+        return this.height;
+    }
 }

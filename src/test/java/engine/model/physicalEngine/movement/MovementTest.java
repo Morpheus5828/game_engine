@@ -6,11 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import engine.model.physicalEngine.environment.Map;
 import engine.model.physicalEngine.shape.Rectangle;
+import javafx.scene.paint.Color;
 
 import static org.junit.Assert.*;
 
 public class MovementTest {
-
+    
     private Movement movement;
     private Map map;
     private Rectangle rectangle;
@@ -18,11 +19,13 @@ public class MovementTest {
 
     @BeforeEach
     public void setUp() {
-        double radius = 1;
+        double width = 10;
+        double height = 10;
+        Color color = Color.YELLOW;
         boolean moving = true;
-        Velocity velocity = new Velocity(2, 2);
-        rectangle = new Rectangle(new Position(0,0), radius, radius, moving, velocity);
-        rectangle2 = new Rectangle(new Position(2,2), radius, radius, moving, velocity);
+        Velocity velocity = new Velocity(10, 10);
+        rectangle = new Rectangle(new Position(10,10), width, height, color, moving, velocity);
+        rectangle2 = new Rectangle(new Position(20,20), width, height, color, moving, velocity);
         map = new Map(100,100);
         map.addShape(rectangle);
     }
@@ -31,14 +34,14 @@ public class MovementTest {
     public void testUpdatePositionX() {
         movement = new Movement(Direction.RIGHT);
         movement.updatePositonX(Direction.RIGHT, rectangle, map);
-        assertEquals(rectangle.getX(), 2);
+        assertEquals(20, rectangle.getX());
     }
 
     @Test
     public void testUpdatePositionY() {
         movement = new Movement(Direction.UP);
         movement.updatePositonY(Direction.UP, rectangle, map);
-        assertEquals(rectangle.getY(), 2);
+        assertEquals(0, rectangle.getY());
     }
 
     @Test
@@ -53,15 +56,13 @@ public class MovementTest {
     @Test
     public void getDirection() {
         movement = new Movement(Direction.RIGHT);
-        assertEquals(movement.getDirection(), Direction.RIGHT);
+        assertEquals(Direction.RIGHT, movement.getDirection());
     }
 
     @Test
     public void setDirection() {
         movement = new Movement(Direction.RIGHT);
         movement.setDirection(Direction.LEFT);
-        assertEquals(movement.getDirection(), Direction.LEFT);
+        assertEquals(Direction.LEFT, movement.getDirection());
     }
-
-
 }

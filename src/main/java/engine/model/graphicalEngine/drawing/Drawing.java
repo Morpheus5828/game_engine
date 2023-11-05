@@ -1,4 +1,4 @@
-package engine.model.graphicalEngine;
+package engine.model.graphicalEngine.drawing;
 
 import javafx.scene.canvas.GraphicsContext;
 
