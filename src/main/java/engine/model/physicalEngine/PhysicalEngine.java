@@ -22,8 +22,8 @@ public class PhysicalEngine {
         this.map = new Map(heightMap, widthMap);
     }
 
-    public void addEntity(Position position, Color color, boolean isMoving, Velocity velocity) {
-        Rectangle entity = new Rectangle(position, 50, 50, color, true, velocity);
+    public void addEntity(Position position, double width, double height, Color color, boolean isMoving, Velocity velocity) {
+        Rectangle entity = new Rectangle(position, width, height, color, isMoving, velocity);
         if (!this.map.addShape(entity))
             throw new IllegalArgumentException("One of the entities is not in the map.");
     }

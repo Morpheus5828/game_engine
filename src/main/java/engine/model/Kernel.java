@@ -18,8 +18,8 @@ public class Kernel {
     private EventListener eventListener;
 
     public Kernel(double width, double height, Color color) {
-        this.physicalEngine = new PhysicalEngine(height, width);
-        this.graphicalEngine = new GraphicalEngine(height, width, color);
+        this.physicalEngine = new PhysicalEngine(width, height);
+        this.graphicalEngine = new GraphicalEngine(width, height, color);
         this.eventListener = new EventListener();
         this.graphicalEngine.addEventListener(this.eventListener);
         startKeyListener();
@@ -101,9 +101,9 @@ public class Kernel {
         return physicalEngine;
     }
 
-    public void addEntity(double x, double y, Color color, boolean isMoving, double velocityX, double velocityY) {
+    public void addEntity(double x, double y, double width, double height, Color color, boolean isMoving, double velocityX, double velocityY) {
         Position position = new Position(x, y);
         Velocity velocity = new Velocity(velocityX, velocityY);
-        this.physicalEngine.addEntity(position, color, isMoving, velocity);
+        this.physicalEngine.addEntity(position, width, height, color, isMoving, velocity);
     }
 }
