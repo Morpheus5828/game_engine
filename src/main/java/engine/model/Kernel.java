@@ -101,9 +101,10 @@ public class Kernel {
         return physicalEngine;
     }
 
-    public void addEntity(double x, double y, double width, double height, Color color, boolean isMoving, double velocityX, double velocityY) {
+    public Rectangle addEntity(double x, double y, Color color, boolean isMoving, double velocityX, double velocityY) {
         Position position = new Position(x, y);
         Velocity velocity = new Velocity(velocityX, velocityY);
-        this.physicalEngine.addEntity(position, width, height, color, isMoving, velocity);
+        Rectangle entity = this.physicalEngine.addEntity(position, color, isMoving, velocity);
+        return entity;
     }
 }
