@@ -12,13 +12,10 @@ public class PacGum {
 
     public PacGum(double x, double y, double width, double height, Kernel kernel, Image image) {
         pacGum = kernel.addEntity(x,y , width, height, image, false, 0, 0);
-        pacGum.setColliding(false);
     }
 
     public PacGum(double x, double y, double width, double height, Kernel kernel) {
-        kernel.addEntity(x,y , width, height, Color.PINK, false, 0, 0);
-        pacGum.setColliding(false);
-    }
+        kernel.addEntity(x,y , width, height, Color.PINK, false, 0, 0);}
 
     public Rectangle getPacGum() {
         return pacGum;

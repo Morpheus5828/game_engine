@@ -46,29 +46,29 @@ public class Kernel {
     private void moveMainShape() throws InterruptedException {
         if (this.graphicalEngine.isKeyIsPressed()) {
             switch (this.eventListener.getCurrentDirection()) {
-            case UP -> {
-                clearShapesMoving();
-                mainShape.moveEntity(Direction.UP);
-                drawMovingEntities();
-            }
-            case DOWN -> {
-                clearShapesMoving();
-                mainShape.moveEntity(Direction.DOWN);
-                drawMovingEntities();
-            }
-            case RIGHT -> {
-                clearShapesMoving();
-                mainShape.moveEntity(Direction.RIGHT);
-                drawMovingEntities();
-            }
-            case LEFT -> {
-                clearShapesMoving();
-                mainShape.moveEntity(Direction.LEFT);
-                drawMovingEntities();
-            }
-            default -> {
-                break;
-            }
+                case UP -> {
+                    clearShapesMoving();
+                    mainShape.moveEntity(Direction.UP);
+                    drawMovingEntities();
+                }
+                case DOWN -> {
+                    clearShapesMoving();
+                    mainShape.moveEntity(Direction.DOWN);
+                    drawMovingEntities();
+                }
+                case RIGHT -> {
+                    clearShapesMoving();
+                    mainShape.moveEntity(Direction.RIGHT);
+                    drawMovingEntities();
+                }
+                case LEFT -> {
+                    clearShapesMoving();
+                    mainShape.moveEntity(Direction.LEFT);
+                    drawMovingEntities();
+                }
+                default -> {
+                    break;
+                }
             }
         }
     }
@@ -87,8 +87,10 @@ public class Kernel {
             if (shape.getRectangle().isMoving()) {
                 if (shape.getRectangleDrawing().getColor() == null)
                     this.graphicalEngine.drawImage(shape.getRectangleDrawing());
-                else
+                else {
                     this.graphicalEngine.drawColor(shape.getRectangleDrawing());
+                }
+
             }
         }
     }
@@ -105,10 +107,14 @@ public class Kernel {
         //     this.graphicalEngine.clearShape(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
         //             rectangle.getHeight());
         for (FinalShape shape : finalShapes) {
-            if (shape.getRectangle().isMoving())
-                this.graphicalEngine.clearShape(shape.getRectangleDrawing().getX(),
-                        shape.getRectangleDrawing().getY(), shape.getRectangleDrawing().getWidth(),
-                        shape.getRectangleDrawing().getHeight());
+            if (shape.getRectangle().isMoving()) {
+                this.graphicalEngine.clearShape(
+                        shape.getRectangleDrawing().getX(),
+                        shape.getRectangleDrawing().getY(),
+                        shape.getRectangleDrawing().getWidth(),
+                        shape.getRectangleDrawing().getHeight()
+                );
+            }
         }
     }
 

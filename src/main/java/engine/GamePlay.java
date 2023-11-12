@@ -29,8 +29,8 @@ public class GamePlay extends Application {
     public void initGame() throws Exception {
         kernel = new Kernel(width, height, Color.BLACK);
 
-        // new Pacman(32*12, 32*14, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/pacman.png")));
-        Pacman pacman = new Pacman(32*12, 32*14, 32, 32, kernel);
+        Pacman pacman=  new Pacman(32*12, 32*14, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/pacman.png")));
+       // Pacman pacman = new Pacman(32*12, 32*14+1, 30, 30, kernel);
         kernel.setMainShape(pacman.getPacman());
 
 
@@ -58,7 +58,6 @@ public class GamePlay extends Application {
         scoreField.setText(String.valueOf(HUD.getScore()));
         Text livesField = (Text) root.lookup("#livesField");
         livesField.setText(String.valueOf(HUD.getLives()));
-
         Scene scene = new Scene(root);
 
         stage.setTitle("Pacman");

@@ -30,16 +30,16 @@ public class RectangleDrawing implements Drawing {
      * @see Drawing
      */
     public RectangleDrawing(double x, double y, double width, double height, Color color) {
-        this.x = x - width / 2;
-        this.y = y - height / 2;
+        this.x = x;
+        this.y = y;
         this.width = width;
         this.height = height;
         this.color = color;
     }
 
     public RectangleDrawing(double x, double y, double width, double height, Image image) {
-        this.x = x - width / 2;
-        this.y = y - height / 2;
+        this.x = x;
+        this.y = y;
         this.width = width;
         this.height = height;
         this.image = image;

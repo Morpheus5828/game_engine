@@ -6,7 +6,6 @@ import engine.model.inputOutputEngine.EventListener;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class GraphicalEngine {
@@ -105,8 +104,6 @@ public class GraphicalEngine {
     }
 
     public void clearShape(double x, double y, double width, double height) {
-        x = x - width / 2;
-        y = y - height / 2;
         this.graphicsContext.clearRect(x, y, width, height);
     }
 }
