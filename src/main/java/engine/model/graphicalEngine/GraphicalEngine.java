@@ -86,7 +86,7 @@ public class GraphicalEngine {
 
     public void drawPlayGround(double width, double height, Color color) {
         MapDrawing mapDrawing = new MapDrawing(width, height, color);
-        mapDrawing.draw(playGroundGraphicsContext);
+        mapDrawing.drawColor(playGroundGraphicsContext);
     }
 
     /**
@@ -95,8 +95,12 @@ public class GraphicalEngine {
      *
      * @see Drawing
      */
-    public void draw(Drawing drawing) {
-        drawing.draw(this.graphicsContext);
+    public void drawColor(Drawing drawing) {
+        drawing.drawColor(this.graphicsContext);
+    }
+
+    public void drawImage(Drawing drawing) {
+        drawing.drawImage(this.graphicsContext);
     }
 
     public void clearShape(double x, double y, double width, double height) {

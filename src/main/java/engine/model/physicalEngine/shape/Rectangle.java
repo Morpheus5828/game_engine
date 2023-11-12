@@ -15,8 +15,6 @@ public class Rectangle {
     private Velocity Velocity;
     private Direction direction;
     private Position head;
-    private Color color;
-
     /**
      * Rectangle constructor.
      * Create an object rectangle which has a @Position, a length, a width, a @Velocity, this rectangle can be moving or not and if it can collide or not.
@@ -27,7 +25,6 @@ public class Rectangle {
      * @param position
      * @param width
      * @param height
-     * @param color
      * @param moving
      * @param velocity
      *
@@ -36,11 +33,10 @@ public class Rectangle {
      * @see Direction
      */
 
-    public Rectangle(Position position, double width, double height, Color color, boolean moving, Velocity velocity) {
+    public Rectangle(Position position, double width, double height, boolean moving, Velocity velocity) {
         this.position = position;
         this.width = width;
         this.height = height;
-        this.color = color;
         this.moving = moving;
         this.colliding = true;
         this.Velocity = velocity;
@@ -78,13 +74,6 @@ public class Rectangle {
      */
     public void setHeight(double height) {
         this.height = height;
-    }
-    /**
-     * Set the color of the rectangle.
-     * @return color
-     */
-    public Color getColor() {
-        return color;
     }
 
     /**

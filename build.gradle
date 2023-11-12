@@ -47,7 +47,7 @@ test {
 }
 
 application {
-    mainClass = 'engine.App'
+    mainClass = 'engine.GamePlay'
 }
 
 spotbugs {

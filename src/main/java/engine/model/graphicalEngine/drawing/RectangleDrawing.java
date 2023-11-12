@@ -1,6 +1,7 @@
 package engine.model.graphicalEngine.drawing;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class RectangleDrawing implements Drawing {
@@ -15,6 +16,7 @@ public class RectangleDrawing implements Drawing {
     private double width;
     private double height;
     private Color color;
+    private Image image;
     /**
      * Constructor of RectangleDrawing
      * Use to draw a rectangle on the canvas with and implementation of @Drawing
@@ -35,6 +37,13 @@ public class RectangleDrawing implements Drawing {
         this.color = color;
     }
 
+    public RectangleDrawing(double x, double y, double width, double height, Image image) {
+        this.x = x - width / 2;
+        this.y = y - height / 2;
+        this.width = width;
+        this.height = height;
+        this.image = image;
+    }
     /**
      * return the x of the rectangleDrawing
      *
@@ -108,8 +117,13 @@ public class RectangleDrawing implements Drawing {
      * @see GraphicsContext
      */
     @Override
-    public void draw(GraphicsContext context) {
+    public void drawColor(GraphicsContext context) {
         context.setFill(this.color);
         context.fillRect(this.x, this.y, this.width, this.height);
+    }
+
+    @Override
+    public void drawImage(GraphicsContext context) {
+        context.drawImage(this.image, this.x, this.y);
     }
 }

@@ -1,12 +1,17 @@
 package engine.model.graphicalEngine.drawing;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class MapDrawing implements Drawing {
     private double width;
     private double height;
     private Color color;
+    private Image image;
 
     /**
      * Constructor of MapDrawing
@@ -26,6 +31,11 @@ public class MapDrawing implements Drawing {
         this.color = color;
     }
 
+    public MapDrawing(double width, double height, Image image) {
+        this.width = width;
+        this.height = height;
+        this.image = image;
+    }
     /**
      * return the width of the map
      * @return width
@@ -55,8 +65,13 @@ public class MapDrawing implements Drawing {
      * @param context
      */
     @Override
-    public void draw(GraphicsContext context) {
+    public void drawColor(GraphicsContext context) {
         context.setFill(this.color);
         context.fillRect(0, 0, this.width, this.height);
+    }
+
+    @Override
+    public void drawImage(GraphicsContext context) {
+        context.drawImage(image, 0, 0);
     }
 }

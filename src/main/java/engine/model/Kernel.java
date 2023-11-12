@@ -1,11 +1,13 @@
 package engine.model;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import javafx.scene.Group;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 import engine.model.graphicalEngine.*;
-import engine.model.graphicalEngine.drawing.*;
 import engine.model.inputOutputEngine.*;
 import engine.model.physicalEngine.*;
 import engine.model.physicalEngine.movement.*;
@@ -16,12 +18,14 @@ public class Kernel {
     private PhysicalEngine physicalEngine;
     private GraphicalEngine graphicalEngine;
     private EventListener eventListener;
+    private List<FinalShape> finalShapes;
 
     public Kernel(double width, double height, Color color) {
         this.physicalEngine = new PhysicalEngine(width, height);
         this.graphicalEngine = new GraphicalEngine(width, height, color);
         this.eventListener = new EventListener();
         this.graphicalEngine.addEventListener(this.eventListener);
+        this.finalShapes = new ArrayList<>();
         startKeyListener();
     }
 
@@ -70,20 +74,22 @@ public class Kernel {
     }
 
     public void drawMovingEntities() {
-        List<Rectangle> shapesMoving = this.physicalEngine.getMap().getShapesMoving();
-        for (Rectangle shape : shapesMoving) {
-            RectangleDrawing rectangleDrawing = new RectangleDrawing(shape.getX(), shape.getY(), shape.getWidth(),
-                    shape.getHeight(), shape.getColor());
-            this.graphicalEngine.draw(rectangleDrawing);
+        for (FinalShape shape : finalShapes) {
+            if (shape.getRectangle().isMoving()) {
+                if(shape.getRectangleDrawing().getColor() == null)
+                    this.graphicalEngine.drawImage(shape.getRectangleDrawing());
+                else
+                    this.graphicalEngine.drawColor(shape.getRectangleDrawing());
+            }
+                this.graphicalEngine.drawImage(shape.getRectangleDrawing());
+
         }
     }
 
     public void drawStaticEntities() {
-        List<Rectangle> shapesMoving = this.physicalEngine.getMap().getShapesStatic();
-        for (Rectangle shape : shapesMoving) {
-            RectangleDrawing rectangleDrawing = new RectangleDrawing(shape.getX(), shape.getY(), shape.getWidth(),
-                    shape.getHeight(), shape.getColor());
-            this.graphicalEngine.draw(rectangleDrawing);
+        for (FinalShape shape : finalShapes) {
+            if (!shape.getRectangle().isMoving())
+                this.graphicalEngine.drawImage(shape.getRectangleDrawing());
         }
     }
 
@@ -102,8 +108,22 @@ public class Kernel {
     }
 
     public void addEntity(double x, double y, double width, double height, Color color, boolean isMoving, double velocityX, double velocityY) {
-        Position position = new Position(x, y);
         Velocity velocity = new Velocity(velocityX, velocityY);
-        this.physicalEngine.addEntity(position, width, height, color, isMoving, velocity);
+        FinalShape finalShape = new FinalShape(x, y, color, width, height, isMoving, velocity);
+        finalShape.addEntity(this.physicalEngine);
+        this.finalShapes.add(finalShape);
     }
+
+
+    public void addEntity(double x, double y, double width, double height, Image image, boolean isMoving, double velocityX, double velocityY) {
+        Velocity velocity = new Velocity(velocityX, velocityY);
+        FinalShape finalShape = new FinalShape(x, y, image, width, height, isMoving, velocity);
+        finalShape.addEntity(this.physicalEngine);
+        this.finalShapes.add(finalShape);
+    }
+
 }
+
+
+
+
