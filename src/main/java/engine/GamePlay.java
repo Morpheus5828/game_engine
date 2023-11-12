@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -42,13 +43,16 @@ public class GamePlay extends Application {
         initGame();
 
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("engine/engine.fxml"));
+        root.getStylesheets().add(getClass().getClassLoader().getResource("engine/engine.css").toExternalForm());
         VBox mainVBox = (VBox) root.lookup("#mainVBox");
         mainVBox.prefWidth(width);
         mainVBox.prefHeight(height);
         AnchorPane playGround = (AnchorPane) root.lookup("#playGround");
         playGround.getChildren().add(kernel.getPlayGround());
-        VBox hudDisplay = (VBox) root.lookup("#hudDisplay");
-        hudDisplay.getChildren().add(HUD.getScene());
+        Text scoreField = (Text) root.lookup("#scoreField");
+        scoreField.setText(String.valueOf(HUD.getScore()));
+        Text livesField = (Text) root.lookup("#livesField");
+        livesField.setText(String.valueOf(HUD.getLives()));
 
         Scene scene = new Scene(root);
 
