@@ -1,5 +1,6 @@
 package engine.gamePlay.drawingMap;
 
+import engine.gamePlay.PacGum;
 import engine.model.Kernel;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -30,7 +31,7 @@ public class DrawMap {
         for(int i = 0; i < this.xmlReader.getWidth(); i++) {
             for(int j = 0; j < this.xmlReader.getHeight(); j++) {
                 switch (this.data[i][j]) {
-                    case 3 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/horizontal.png")), false, 0, 0);
+                    /*case 3 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/horizontal.png")), false, 0, 0);
                     case 12 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/vertical.png")), false, 0, 0);
                     case 1 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/vertical_end_up.png")), false, 0, 0);
                     case 23 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/vertical_end_down.png")), false, 0, 0);
@@ -44,11 +45,9 @@ public class DrawMap {
                     case 16 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/mix_up.png")), false, 0, 0);
                     case 15 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/mix_left.png")), false, 0, 0);
                     case 27 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/mix_right.png")), false, 0, 0);
-                    case 69 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/mini_pacgum.png")), false, 10, 10);
-                    case 68 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/big_pacgum.png")), false, 10, 10);
+                    case 69 -> new PacGum(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mini_pacgum.png")));
+                    case 68 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/big_pacgum.png")), false, 10, 10);*/
                 }
-
-
 
             }
         }

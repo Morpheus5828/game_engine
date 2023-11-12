@@ -96,6 +96,7 @@ public class Kernel {
         for (Rectangle rectangle : this.physicalEngine.getMap().getShapesMoving())
             this.graphicalEngine.clearShape(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
                     rectangle.getHeight());
+
     }
 
     public Group getPlayGround() {
@@ -106,20 +107,20 @@ public class Kernel {
         return physicalEngine;
     }
 
-    public void addEntity(double x, double y, double width, double height, Color color, boolean isMoving,
+    public Rectangle addEntity(double x, double y, double width, double height, Color color, boolean isMoving,
             double velocityX, double velocityY) {
         Velocity velocity = new Velocity(velocityX, velocityY);
-        FinalShape finalShape = new FinalShape(x, y, color, width, height, isMoving, velocity);
-        finalShape.addEntity(this.physicalEngine);
+        FinalShape finalShape = new FinalShape(x, y, color, width, height, isMoving, velocity, this.physicalEngine);
         this.finalShapes.add(finalShape);
+        return finalShape.getRectangle();
     }
 
-    public void addEntity(double x, double y, double width, double height, Image image, boolean isMoving,
+    public Rectangle addEntity(double x, double y, double width, double height, Image image, boolean isMoving,
             double velocityX, double velocityY) {
         Velocity velocity = new Velocity(velocityX, velocityY);
-        FinalShape finalShape = new FinalShape(x, y, image, width, height, isMoving, velocity);
-        finalShape.addEntity(this.physicalEngine);
+        FinalShape finalShape = new FinalShape(x, y, image, width, height, isMoving, velocity, this.physicalEngine);
         this.finalShapes.add(finalShape);
+        return finalShape.getRectangle();
     }
 
 }

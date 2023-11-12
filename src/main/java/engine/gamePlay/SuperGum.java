@@ -11,7 +11,7 @@ public class SuperGum {
     private final Category type = Category.PACGUM;
 
     public SuperGum(double x, double y, double width, double height, Kernel kernel) {
-        this.superGum = kernel.addEntity(x, y, width, height, Color.PINK, false, 10, 10);
+        kernel.addEntity(x, y, width, height, Color.PINK, false, 10, 10);
         superGum.setColliding(false);
     }
 
