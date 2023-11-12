@@ -85,10 +85,15 @@ public class Kernel {
     public void drawMovingEntities() {
         for (FinalShape shape : finalShapes) {
             if (shape.getRectangle().isMoving()) {
-                if (shape.getRectangleDrawing().getColor() == null)
+                if (shape.getRectangleDrawing().getColor() == null) {
+                    System.out.println(shape.getRectangle().getX() + " " + shape.getRectangle().getY());
+                    System.out.println(shape.getRectangleDrawing().getX() + " " + shape.getRectangleDrawing().getY());
                     this.graphicalEngine.drawImage(shape.getRectangleDrawing());
-                else
+                } else {
+                    System.out.println(shape.getRectangle().getX() + " " + shape.getRectangle().getY());
+                    System.out.println(shape.getRectangleDrawing().getX() + " " + shape.getRectangleDrawing().getY());
                     this.graphicalEngine.drawColor(shape.getRectangleDrawing());
+                }
             }
         }
     }
@@ -101,14 +106,10 @@ public class Kernel {
     }
 
     public void clearShapesMoving() {
-        // for (Rectangle rectangle : this.physicalEngine.getMap().getShapesMoving())
-        //     this.graphicalEngine.clearShape(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
-        //             rectangle.getHeight());
         for (FinalShape shape : finalShapes) {
             if (shape.getRectangle().isMoving())
-                this.graphicalEngine.clearShape(shape.getRectangleDrawing().getX(),
-                        shape.getRectangleDrawing().getY(), shape.getRectangleDrawing().getWidth(),
-                        shape.getRectangleDrawing().getHeight());
+                this.graphicalEngine.clearShape(shape.getRectangleDrawing().getX(), shape.getRectangleDrawing().getY(),
+                        shape.getRectangleDrawing().getWidth(), shape.getRectangleDrawing().getHeight());
         }
     }
 
@@ -125,6 +126,7 @@ public class Kernel {
         Velocity velocity = new Velocity(velocityX, velocityY);
         FinalShape finalShape = new FinalShape(x, y, color, width, height, isMoving, velocity, this.physicalEngine);
         this.finalShapes.add(finalShape);
+        // System.out.println(finalShape.getRectangle().getX() + " " + finalShape.getRectangle().getY());
         return finalShape.getRectangle();
     }
 
@@ -133,6 +135,7 @@ public class Kernel {
         Velocity velocity = new Velocity(velocityX, velocityY);
         FinalShape finalShape = new FinalShape(x, y, image, width, height, isMoving, velocity, this.physicalEngine);
         this.finalShapes.add(finalShape);
+        // System.out.println(finalShape.getRectangle().getX() + " " + finalShape.getRectangle().getY());
         return finalShape.getRectangle();
     }
 

@@ -17,16 +17,14 @@ public class FinalShape {
     public FinalShape(double x, double y, Image image, double width, double height, boolean moving, Velocity velocity,
             PhysicalEngine physicalEngine) {
         this.rectangle = physicalEngine.addEntity(new Position(x, y), width, height, moving, velocity);
-        this.rectangleDrawing = new RectangleDrawing(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
-                rectangle.getHeight(), image);
+        this.rectangleDrawing = new RectangleDrawing(x, y, width, height, image);
         this.physicalEngine = physicalEngine;
     }
 
     public FinalShape(double x, double y, Color color, double width, double height, boolean moving, Velocity velocity,
             PhysicalEngine physicalEngine) {
         this.rectangle = physicalEngine.addEntity(new Position(x, y), width, height, moving, velocity);
-        this.rectangleDrawing = new RectangleDrawing(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
-                rectangle.getHeight(), color);
+        this.rectangleDrawing = new RectangleDrawing(x, y, width, height, color);
         this.physicalEngine = physicalEngine;
     }
 

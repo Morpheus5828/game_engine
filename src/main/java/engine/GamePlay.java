@@ -29,13 +29,14 @@ public class GamePlay extends Application {
     public void initGame() throws Exception {
         kernel = new Kernel(width, height, Color.BLACK);
 
-        // new Pacman(32*12, 32*14, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/pacman.png")));
-        Pacman pacman = new Pacman(32*12, 32*14, 32, 32, kernel);
+        // Pacman pacman = new Pacman(100, 100, 32, 32, kernel, new Image(new
+        // FileInputStream("src/main/resources/engine/images/pacman.png")));
+        Pacman pacman = new Pacman(100, 100, 32, 32, kernel);
         kernel.setMainShape(pacman.getPacman());
 
+        // new Pacman(100, 150, 32, 32, kernel);
 
         new DrawMap(new XmlReader(new File("src/main/resources/engine/map/levelOne.tmx"), 23, 23), kernel);
-
 
         kernel.drawStaticEntities();
         kernel.drawMovingEntities();
