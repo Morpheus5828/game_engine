@@ -3,8 +3,8 @@ package engine.gamePlay;
 import engine.model.Kernel;
 import engine.model.physicalEngine.movement.Position;
 import engine.model.physicalEngine.shape.Rectangle;
+import javafx.scene.paint.Color;
 
-import java.awt.*;
 
 public abstract class Ghost {
     private final Category type = Category.GHOST;
