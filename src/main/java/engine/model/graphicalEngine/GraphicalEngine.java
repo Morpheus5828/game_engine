@@ -107,8 +107,6 @@ public class GraphicalEngine {
     public void clearShape(double x, double y, double width, double height) {
         x = x - width / 2;
         y = y - height / 2;
-        this.graphicsContext.getCanvas().resizeRelocate(x, y, width, height);
         this.graphicsContext.clearRect(x, y, width, height);
-        //drawImage(drawing);
     }
 }

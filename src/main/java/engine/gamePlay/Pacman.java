@@ -10,13 +10,13 @@ public class Pacman {
     private Rectangle pacman;
     private final Category type = Category.PACMAN;
 
-   public Pacman(double x, double y, double width, double height, Kernel kernel, Image image) {
-        pacman = kernel.addEntity(x,y , width, height, image, true, 10, 10);
+    public Pacman(double x, double y, double width, double height, Kernel kernel, Image image) {
+        pacman = kernel.addEntity(x, y, width, height, image, true, 10, 10);
         pacman.setColliding(false);
     }
 
     public Pacman(double x, double y, double width, double height, Kernel kernel) {
-        kernel.addEntity(x,y , width, height, Color.YELLOW, true, 10, 10);
+        pacman = kernel.addEntity(x, y, width, height, Color.YELLOW, true, 10, 10);
         pacman.setColliding(false);
     }
 

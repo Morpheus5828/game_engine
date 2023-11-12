@@ -19,6 +19,7 @@ public class Kernel {
     private GraphicalEngine graphicalEngine;
     private EventListener eventListener;
     private List<FinalShape> finalShapes;
+    private FinalShape mainShape;
 
     public Kernel(double width, double height, Color color) {
         this.physicalEngine = new PhysicalEngine(width, height);
@@ -44,31 +45,39 @@ public class Kernel {
 
     private void moveMainShape() throws InterruptedException {
         if (this.graphicalEngine.isKeyIsPressed()) {
-            Rectangle shape = this.physicalEngine.getMap().getShapesMoving().get(0);
             switch (this.eventListener.getCurrentDirection()) {
             case UP -> {
                 clearShapesMoving();
-                physicalEngine.moveEntity(shape, Direction.UP);
+                mainShape.moveEntity(Direction.UP);
                 drawMovingEntities();
             }
             case DOWN -> {
                 clearShapesMoving();
-                physicalEngine.moveEntity(shape, Direction.DOWN);
+                mainShape.moveEntity(Direction.DOWN);
                 drawMovingEntities();
             }
             case RIGHT -> {
                 clearShapesMoving();
-                physicalEngine.moveEntity(shape, Direction.RIGHT);
+                mainShape.moveEntity(Direction.RIGHT);
                 drawMovingEntities();
             }
             case LEFT -> {
                 clearShapesMoving();
-                physicalEngine.moveEntity(shape, Direction.LEFT);
+                mainShape.moveEntity(Direction.LEFT);
                 drawMovingEntities();
             }
             default -> {
                 break;
             }
+            }
+        }
+    }
+
+    public void setMainShape(Rectangle shape) {
+        for (FinalShape finalShape : finalShapes) {
+            if (finalShape.getRectangle() == shape) {
+                this.mainShape = finalShape;
+                return;
             }
         }
     }
@@ -81,7 +90,6 @@ public class Kernel {
                 else
                     this.graphicalEngine.drawColor(shape.getRectangleDrawing());
             }
-            this.graphicalEngine.drawImage(shape.getRectangleDrawing());
         }
     }
 
@@ -93,10 +101,15 @@ public class Kernel {
     }
 
     public void clearShapesMoving() {
-        for (Rectangle rectangle : this.physicalEngine.getMap().getShapesMoving())
-            this.graphicalEngine.clearShape(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
-                    rectangle.getHeight());
-
+        // for (Rectangle rectangle : this.physicalEngine.getMap().getShapesMoving())
+        //     this.graphicalEngine.clearShape(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
+        //             rectangle.getHeight());
+        for (FinalShape shape : finalShapes) {
+            if (shape.getRectangle().isMoving())
+                this.graphicalEngine.clearShape(shape.getRectangleDrawing().getX(),
+                        shape.getRectangleDrawing().getY(), shape.getRectangleDrawing().getWidth(),
+                        shape.getRectangleDrawing().getHeight());
+        }
     }
 
     public Group getPlayGround() {
