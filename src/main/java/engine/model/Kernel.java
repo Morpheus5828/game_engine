@@ -76,13 +76,12 @@ public class Kernel {
     public void drawMovingEntities() {
         for (FinalShape shape : finalShapes) {
             if (shape.getRectangle().isMoving()) {
-                if(shape.getRectangleDrawing().getColor() == null)
+                if (shape.getRectangleDrawing().getColor() == null)
                     this.graphicalEngine.drawImage(shape.getRectangleDrawing());
                 else
                     this.graphicalEngine.drawColor(shape.getRectangleDrawing());
             }
-                this.graphicalEngine.drawImage(shape.getRectangleDrawing());
-
+            this.graphicalEngine.drawImage(shape.getRectangleDrawing());
         }
     }
 
@@ -107,15 +106,16 @@ public class Kernel {
         return physicalEngine;
     }
 
-    public void addEntity(double x, double y, double width, double height, Color color, boolean isMoving, double velocityX, double velocityY) {
+    public void addEntity(double x, double y, double width, double height, Color color, boolean isMoving,
+            double velocityX, double velocityY) {
         Velocity velocity = new Velocity(velocityX, velocityY);
         FinalShape finalShape = new FinalShape(x, y, color, width, height, isMoving, velocity);
         finalShape.addEntity(this.physicalEngine);
         this.finalShapes.add(finalShape);
     }
 
-
-    public void addEntity(double x, double y, double width, double height, Image image, boolean isMoving, double velocityX, double velocityY) {
+    public void addEntity(double x, double y, double width, double height, Image image, boolean isMoving,
+            double velocityX, double velocityY) {
         Velocity velocity = new Velocity(velocityX, velocityY);
         FinalShape finalShape = new FinalShape(x, y, image, width, height, isMoving, velocity);
         finalShape.addEntity(this.physicalEngine);
@@ -123,7 +123,3 @@ public class Kernel {
     }
 
 }
-
-
-
-

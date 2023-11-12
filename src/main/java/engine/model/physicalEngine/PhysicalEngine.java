@@ -3,7 +3,6 @@ package engine.model.physicalEngine;
 import engine.model.physicalEngine.environment.Map;
 import engine.model.physicalEngine.shape.Rectangle;
 import engine.model.physicalEngine.movement.*;
-import javafx.scene.paint.Color;
 
 public class PhysicalEngine {
     private Map map;

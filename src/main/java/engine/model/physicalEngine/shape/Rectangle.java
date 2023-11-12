@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import engine.model.physicalEngine.movement.*;
-import javafx.scene.paint.Color;
 
 public class Rectangle {
     private Position position;
@@ -15,6 +14,7 @@ public class Rectangle {
     private Velocity Velocity;
     private Direction direction;
     private Position head;
+    
     /**
      * Rectangle constructor.
      * Create an object rectangle which has a @Position, a length, a width, a @Velocity, this rectangle can be moving or not and if it can collide or not.
