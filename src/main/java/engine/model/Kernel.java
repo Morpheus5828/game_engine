@@ -90,7 +90,6 @@ public class Kernel {
                 else {
                     this.graphicalEngine.drawColor(shape.getRectangleDrawing());
                 }
-
             }
         }
     }
@@ -103,9 +102,6 @@ public class Kernel {
     }
 
     public void clearShapesMoving() {
-        // for (Rectangle rectangle : this.physicalEngine.getMap().getShapesMoving())
-        //     this.graphicalEngine.clearShape(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
-        //             rectangle.getHeight());
         for (FinalShape shape : finalShapes) {
             if (shape.getRectangle().isMoving()) {
                 this.graphicalEngine.clearShape(

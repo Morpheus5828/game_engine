@@ -1,6 +1,8 @@
 package engine.gamePlay.drawingMap;
 
 import engine.gamePlay.PacGum;
+import engine.gamePlay.SuperGum;
+import engine.gamePlay.Wall;
 import engine.model.Kernel;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -31,22 +33,22 @@ public class DrawMap {
         for(int i = 0; i < this.xmlReader.getWidth(); i++) {
             for(int j = 0; j < this.xmlReader.getHeight(); j++) {
                 switch (this.data[i][j]) {
-                    case 3 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/horizontal.png")), false, 0, 0);
-                    case 12 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/vertical.png")), false, 0, 0);
-                    case 1 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/vertical_end_up.png")), false, 0, 0);
-                    case 23 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/vertical_end_down.png")), false, 0, 0);
-                    case 2 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/horizontal_end_left.png")), false, 0, 0);
-                    case 4 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/horizontal_end_right.png")), false, 0, 0);
-                    case 13 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/corner_left_up.png")), false, 0, 0);
-                    case 24 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/corner_left_down.png")), false, 0, 0);
-                    case 14 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/corner_right_up.png")), false, 0, 0);
-                    case 25 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/corner_right_down.png")), false, 0, 0);
-                    case 26 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/mix_down.png")), false, 0, 0);
-                    case 16 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/mix_up.png")), false, 0, 0);
-                    case 15 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/mix_left.png")), false, 0, 0);
-                    case 27 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/mix_right.png")), false, 0, 0);
-                    case 69 -> new PacGum(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mini_pacgum.png")));
-                    case 68 -> kernel.addEntity(32+j*32, 32+i*32, 32, 32, new Image(new FileInputStream("src/main/resources/engine/images/big_pacgum.png")), false, 0, 0);
+                    case 3 ->  new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/horizontal.png")));
+                    case 12 ->  new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/vertical.png")));
+                    case 1 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/vertical_end_up.png")));
+                    case 23 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/vertical_end_down.png")));
+                    case 2 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/horizontal_end_left.png")));
+                    case 4 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/horizontal_end_right.png")));
+                    case 13 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/corner_left_up.png")));
+                    case 24 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/corner_left_down.png")));
+                    case 14 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/corner_right_up.png")));
+                    case 25 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/corner_right_down.png")));
+                    case 26 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mix_down.png")));
+                    case 16 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mix_up.png")));
+                    case 15 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mix_left.png")));
+                    case 27 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mix_right.png")));
+                    case 69 -> new SuperGum(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/big_pacgum.png")));
+                    case 68 -> new PacGum(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mini_pacgum.png")));
                 }
 
             }
