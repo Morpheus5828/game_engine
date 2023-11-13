@@ -23,8 +23,8 @@ public class PhysicalEngine {
 
     public Rectangle addEntity(Position position, double width, double height, boolean isMoving, Velocity velocity) {
         Rectangle entity = new Rectangle(position, width, height, isMoving, velocity);
-        if (!this.map.addShape(entity))
-            throw new IllegalArgumentException("One of the entities is not in the map.");
+        //if (!this.map.addShape(entity))
+            //throw new IllegalArgumentException("One of the entities is not in the map.");
         return entity;
     }
 

@@ -35,7 +35,7 @@ public class Kernel {
             while (true) {
                 try {
                     moveMainShape();
-                    Thread.sleep(1000);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
