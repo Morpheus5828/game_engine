@@ -42,6 +42,11 @@ public class Movement {
             }
             return true;
         }
+        /*double initveloX=shape.getVelocity().getVelocityX();
+        double initveloY=shape.getVelocity().getVelocityY();
+        shape.setVelocity(shape2.getX()-shape.getX()-1,shape2.getY()-shape.getY()-1);
+        updatePostion;
+        shape.setVelocity(new Velocity(initveloX,initveloY));*/
         return false;
     }
 
@@ -94,8 +99,10 @@ public class Movement {
      */
     public boolean isColliding(Rectangle shape, Map map, Direction direction) {
         List<Position> apex = shape.getApex();
+
         for (Rectangle shape2 : map.getShapes()) {
             if (shape2 != shape) {
+
                 if (shape2.isColliding()) {
                     List<Position> apex2 = shape2.getApex();
                     for (int i = 0; i < apex.size(); i++) {
@@ -123,14 +130,21 @@ public class Movement {
                                 }
                             }
                             case RIGHT -> {
-                                if (apex.get(i).getX() + shape.getVelocity().getVelocityX() > map.getWidth())
+                                if (apex.get(i).getX() + shape.getVelocity().getVelocityX() > map.getWidth()) {
                                     return true;
+                                }
+
                                 if (i >= 2) {
-                                    if (apex.get(i).getX() + shape.getVelocity().getVelocityX() >= apex2.get(0).getX()
+                                    if (
+                                            apex.get(i).getX() + shape.getVelocity().getVelocityX() >= apex2.get(0).getX()
                                             && apex.get(i).getX() + shape.getVelocity().getVelocityX() <= apex2.get(2).getX()
                                             && apex.get(i).getY() >= apex2.get(0).getY()
-                                            && apex.get(i).getY() <= apex2.get(1).getY())
+                                            && apex.get(i).getY() <= apex2.get(1).getY()
+                                    )
+                                        {
                                         return true;
+                                    }
+
                                 }
                             }
                             case LEFT -> {
@@ -139,8 +153,9 @@ public class Movement {
                                 if (i < 2) {
                                     if (apex.get(i).getX() - shape.getVelocity().getVelocityX() <= apex2.get(2).getX()
                                             && apex.get(i).getX() - shape.getVelocity().getVelocityX() >= apex2.get(0).getX()
-                                            && apex.get(i).getY() >= apex2.get(0).getY()
-                                            && apex.get(i).getY() <= apex2.get(1).getY())
+                                           // && apex.get(i).getY() >= apex2.get(0).getY()
+                                           // && apex.get(i).getY() <= apex2.get(1).getY()
+                                    )
                                         return true;
                                 }
                             }
@@ -152,6 +167,7 @@ public class Movement {
                 }
             }
         }
+
         return false;
     }
 }
