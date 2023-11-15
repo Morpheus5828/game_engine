@@ -3,7 +3,7 @@ package engine.gamePlay.drawingMap;
 import engine.gamePlay.PacGum;
 import engine.gamePlay.SuperGum;
 import engine.gamePlay.Wall;
-import engine.gamePlay.aiEngine.Graphe;
+import engine.gamePlay.aiEngine.Graph;
 import engine.model.Kernel;
 import engine.model.physicalEngine.movement.Position;
 import javafx.scene.image.Image;
@@ -19,7 +19,7 @@ public class DrawMap {
     private XmlReader xmlReader;
     private int[][] data;
     private Kernel kernel;
-    private Graphe graphe;
+    private Graph graphe;
     private Map<Integer, Position> entities;
     private int[] wallValue = {3, 12, 1, 23, 2, 4, 13, 24, 14, 25, 26, 16, 15, 27};
 
@@ -66,7 +66,7 @@ public class DrawMap {
     }
 
     public void createGraph() {
-        this.graphe = new Graphe(this.entities.keySet().size());
+        this.graphe = new Graph(this.entities.keySet().size());
         for(Integer source : this.entities.keySet()) {
             for(Integer destination : this.entities.keySet()) {
                 if(!Objects.equals(source, destination)) {
