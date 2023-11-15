@@ -15,7 +15,7 @@ public class Pacman {
     }
 
     public Pacman(double x, double y, double width, double height, Kernel kernel) {
-        pacman = kernel.addEntity(x, y, width, height, Color.YELLOW, true, 1, 1);
+        pacman = kernel.addEntity(x, y, width, height, Color.YELLOW, true, 10, 10);
     }
 
     public Rectangle getPacman() {
