@@ -3,6 +3,7 @@ package engine.gamePlay.drawingMap;
 import engine.gamePlay.PacGum;
 import engine.gamePlay.SuperGum;
 import engine.gamePlay.Wall;
+import engine.gamePlay.aiEngine.Graphe;
 import engine.model.Kernel;
 import engine.model.physicalEngine.movement.Position;
 import javafx.scene.image.Image;
@@ -12,16 +13,14 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DrawMap {
     private XmlReader xmlReader;
     private int[][] data;
     private Kernel kernel;
-    private Map<Position, List<Position>> graph;
+    private Graphe graphe;
+    private Map<Integer, Position> entities;
     private int[] wallValue = {3, 12, 1, 23, 2, 4, 13, 24, 14, 25, 26, 16, 15, 27};
 
     public DrawMap(XmlReader xmlReader, Kernel kernel) throws ParserConfigurationException, IOException, SAXException {
@@ -29,12 +28,12 @@ public class DrawMap {
         this.xmlReader.convertStringToTab();
         this.data = this.xmlReader.getData();
         this.kernel = kernel;
-        this.graph = new HashMap<>();
+        this.entities = new HashMap<>();
         createInstance();
     }
 
     public void createInstance() throws FileNotFoundException {
-
+        var counter = 0;
         for(int i = 0; i < this.xmlReader.getWidth(); i++) {
             for(int j = 0; j < this.xmlReader.getHeight(); j++) {
                 switch (this.data[i][j]) {
@@ -54,11 +53,11 @@ public class DrawMap {
                     case 27 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mix_right.png")));
                     case 68 -> {
                         new SuperGum(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/big_pacgum.png")));
-                        this.graph.put(new Position(i, j), new ArrayList<>());
+                        this.entities.put(counter, new Position(i, j));
                     }
                     case 69 -> {
                         new PacGum(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mini_pacgum.png")));
-                        this.graph.put(new Position(i, j), new ArrayList<>());
+                        this.entities.put(counter, new Position(i, j));
                     }
                 }
 
@@ -67,65 +66,38 @@ public class DrawMap {
     }
 
     public void createGraph() {
-        for(Position position : this.graph.keySet()) {
-            try {
-                var x = (int)position.getX();
-                var y = (int)position.getY();
-                for(int index : this.wallValue) {
-                    if(x + 1 < this.xmlReader.getWidth()) {
-                        if(this.data[x + 1][y] != index) {
-                            if(!isAlreadyInGraph(position, x+1, y)) {
-                                this.graph.get(position).add(new Position(x+1, y));
-                            }
-                        }
-                    } if(x - 1 >= 0) {
-                        if(this.data[x-1][y] != index) {
-                            if(!isAlreadyInGraph(position, x-1, y)) {
-                                this.graph.get(position).add(new Position(x-1, y));
-                            }
-                        }
-                    } if(y + 1 < this.xmlReader.getHeight()) {
-                        if(this.data[x][y+1] != index) {
-                            if(!isAlreadyInGraph(position, x, y+1)) {
-                                this.graph.get(position).add(new Position(x, y+1));
-                            }
-                        }
-                    } if(y - 1 >= 0) {
-                        if(this.data[x][y-1] != index) {
-                            if(!isAlreadyInGraph(position, x, y-1)) {
-                                this.graph.get(position).add(new Position(x, y-1));
-                            }
-                        }
+        this.graphe = new Graphe(this.entities.keySet().size());
+        for(Integer source : this.entities.keySet()) {
+            for(Integer destination : this.entities.keySet()) {
+                if(!Objects.equals(source, destination)) {
+                    if(isNeighbor(source, destination)) {
+                        this.graphe.addEdge(source, destination, 1);
                     }
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }
 
-    public boolean isAlreadyInGraph(Position key, double c, double d) {
-        Position neighbor = new Position(c, d);
-        for(int index = 0; index < this.graph.get(key).size(); index++) {
-            if(this.graph.get(key).get(index).getX() == neighbor.getX() && this.graph.get(key).get(index).getY() == neighbor.getY())
-                return true;
-        }
-    return false;
+    public boolean isNeighbor(Integer source, Integer destination) {
+        var x_source = this.entities.get(source).getX();
+        var y_source = this.entities.get(source).getY();
+        var x_dest = this.entities.get(destination).getX();
+        var y_dest = this.entities.get(destination).getY();
+
+        if (x_source + 1 == x_dest && y_source == y_dest)
+            return true;
+        else if (x_source - 1 == x_dest && y_source == y_dest)
+            return true;
+        else if (x_source == x_dest && y_source + 1 == y_dest)
+            return true;
+        else if (x_source == x_dest && y_source - 1 == y_dest)
+            return true;
+        else return false;
+
     }
 
-    public Map<Position, List<Position>> getGraph() {
-        return graph;
-    }
-
-    public void displayGraph() {
-        for(Position position : this.graph.keySet()) {
-            String neighborDisplay = "";
-            for(Position neighbor : this.graph.get(position)) {
-                neighborDisplay += "[" + neighbor.getX() + " ; " + neighbor.getY() + "] ";
-            }
+    
 
 
-            System.out.println("Node: [" + position.getX() + " ; " + position.getY() + "] -->" + neighborDisplay );
-        }
-    }
+
 }

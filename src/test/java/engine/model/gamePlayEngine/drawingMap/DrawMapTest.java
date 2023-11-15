@@ -30,6 +30,10 @@ public class DrawMapTest {
     @Test
     public void testCreateGraph() {
         this.drawMap.createGraph();
-        this.drawMap.displayGraph();
+    }
+
+    @Test
+    public void testDijkstra() {
+
     }
 }
