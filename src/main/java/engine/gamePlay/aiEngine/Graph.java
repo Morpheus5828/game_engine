@@ -7,7 +7,7 @@ public class Graph{
     private int matrix[][];
     private Map<Integer, List<Integer>> shortestPaths;
 
-    public Graphe(int vertex) {
+    public Graph(int vertex) {
         this.vertices = vertex;
         this.matrix = new int[vertex][vertex];
         this.shortestPaths = new HashMap<>();
