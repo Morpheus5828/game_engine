@@ -2,6 +2,7 @@ package engine;
 
 import engine.gamePlay.HUD;
 import engine.gamePlay.Pacman;
+import engine.gamePlay.Wall;
 import engine.gamePlay.drawingMap.DrawMap;
 import engine.gamePlay.drawingMap.XmlReader;
 import engine.model.Kernel;
@@ -27,36 +28,13 @@ public class GamePlay extends Application {
     private HUD HUD;
 
     public void initGame() throws Exception {
-        kernel = new Kernel(width, height, Color.BLACK);
+        kernel = new Kernel(width, height, Color.WHITE);
 
-        Pacman pacman = new Pacman(10,10 , 20, 20, kernel);
 
-        // Pacman pacman = new Pacman(32*12, 32*14+1, 30, 30, kernel);
-        kernel.setMainShape(pacman.getPacman());
+        //Pacman pacman = new Pacman(32*12, 32*14, 32, 32, kernel);
+        //kernel.setMainShape(pacman.getPacman());
 
-        new Pacman(400, 425, 20, 20, kernel);
-        new Pacman(400, 375, 20, 20, kernel);
-        new Pacman(375, 375, 20, 20, kernel);
-        new Pacman(375, 425, 20, 20, kernel);
-        new Pacman(350, 425, 20, 20, kernel);
-        new Pacman(325, 425, 20, 20, kernel);
-        new Pacman(325, 400, 20, 20, kernel);
-        new Pacman(325, 375, 20, 20, kernel);
-        new Pacman(325, 350, 20, 20, kernel);
-        new Pacman(325, 325, 20, 20, kernel);
-        new Pacman(350, 325, 20, 20, kernel);
-        new Pacman(375, 325, 20, 20, kernel);
-        new Pacman(400, 325, 20, 20, kernel);
-        new Pacman(425, 325, 20, 20, kernel);
-        new Pacman(450, 325, 20, 20, kernel);
-        new Pacman(450, 350, 20, 20, kernel);
-        new Pacman(450, 375, 20, 20, kernel);
-        new Pacman(450, 400, 20, 20, kernel);
-        new Pacman(450, 425, 20, 20, kernel);
-        new Pacman(425, 425, 20, 20, kernel);
-
-        // new DrawMap(new XmlReader(new File("src/main/resources/engine/map/levelOne.tmx"), 23, 23),
-        // kernel);
+        new DrawMap(new XmlReader(new File("src/main/resources/engine/map/levelOne.tmx"), 23, 23), kernel);
 
         kernel.drawStaticEntities();
         kernel.drawMovingEntities();

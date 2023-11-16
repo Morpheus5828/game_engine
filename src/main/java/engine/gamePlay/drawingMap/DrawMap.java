@@ -1,6 +1,7 @@
 package engine.gamePlay.drawingMap;
 
 import engine.gamePlay.PacGum;
+import engine.gamePlay.Pacman;
 import engine.gamePlay.SuperGum;
 import engine.gamePlay.Wall;
 import engine.gamePlay.aiEngine.Graph;
@@ -51,13 +52,16 @@ public class DrawMap {
                     case 16 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mix_up.png")));
                     case 15 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mix_left.png")));
                     case 27 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mix_right.png")));
-                    case 68 -> {
+                    /*case 68 -> {
                         new SuperGum(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/big_pacgum.png")));
                         this.entities.put(counter, new Position(i, j));
                     }
                     case 69 -> {
                         new PacGum(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mini_pacgum.png")));
                         this.entities.put(counter, new Position(i, j));
+                    }*/ case 70 -> {
+                        Pacman pacman = new Pacman(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/pacman.png")));
+                        kernel.setMainShape(pacman.getPacman());
                     }
                 }
 

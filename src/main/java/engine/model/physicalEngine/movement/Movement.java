@@ -6,6 +6,11 @@ import engine.model.physicalEngine.shape.Rectangle;
 import java.util.List;
 
 public class Movement {
+    private static boolean shapeIsNearLeftWall = false;
+    private static boolean shapeIsNearRightWall = false;
+    private static boolean shapeIsNearUpWall = false;
+    private static boolean shapeIsNearDownWall = false;
+
     /**
      * Shape has to create a movement which be call for moving.
      **/
@@ -32,7 +37,7 @@ public class Movement {
      * @param shape
      * @param map
      */
-    public boolean updatePositonX(Direction direction, Rectangle shape, Map map) {
+    /*public boolean updatePositonX(Direction direction, Rectangle shape, Map map) {
         if (!isColliding(shape, map, direction)) {
             if (direction == Direction.RIGHT) {
                 shape.setPosition(shape.getPosition().getX() + shape.getVelocity().getVelocityX(),
@@ -43,14 +48,8 @@ public class Movement {
             }
             return true;
         }
-        /*
-         * double initveloX=shape.getVelocity().getVelocityX(); double
-         * initveloY=shape.getVelocity().getVelocityY();
-         * shape.setVelocity(shape2.getX()-shape.getX()-1,shape2.getY()-shape.getY()-1); updatePostion;
-         * shape.setVelocity(new Velocity(initveloX,initveloY));
-         */
         return false;
-    }
+    }*/
 
     /**
      * Update the Y position of the @Rectangle in the @Map after checking if there is nothing to collide
@@ -60,19 +59,6 @@ public class Movement {
      * @param shape
      * @param map
      */
-    public boolean updatePositonY(Direction direction, Rectangle shape, Map map) {
-        if (!isColliding(shape, map, direction)) {
-            if (direction == Direction.UP) {
-                shape.setPosition(shape.getPosition().getX(),
-                        shape.getPosition().getY() - shape.getVelocity().getVelocityY());
-            } else if (direction == Direction.DOWN) {
-                shape.setPosition(shape.getPosition().getX(),
-                        shape.getPosition().getY() + shape.getVelocity().getVelocityY());
-            }
-            return true;
-        }
-        return false;
-    }
 
     /**
      * get the direction of the movement
@@ -95,74 +81,140 @@ public class Movement {
     /**
      * Check if the @Rectangle is colliding with another @Rectangle in the @Map
      *
-     * @param shape
+     * @param currentShape
      * @param map
      * @param direction
      * @return true if the @Rectangle is colliding with another @Rectangle in the @Map
      */
-    public boolean isColliding(Rectangle shape, Map map, Direction direction) {
-        List<Position> apex = shape.getApex();
 
-        for (Rectangle shape2 : map.getShapes()) {
-            if (shape2 != shape) {
-
-                if (shape2.isColliding()) {
-                    List<Position> apex2 = shape2.getApex();
-                    for (int i = 0; i < apex.size(); i++) {
-                        switch (direction) {
-                        case UP -> {
-                            if (apex.get(i).getY() - shape.getVelocity().getVelocityY() < 0)
-                                return true;
-                            if (i == 0 || i == 2) {
-                                if (apex.get(i).getY() - shape.getVelocity().getVelocityY() >= apex2.get(0).getY()
-                                        && apex.get(i).getY() - shape.getVelocity().getVelocityY() <= apex2.get(1).getY()
-                                        && apex.get(i).getX() >= apex2.get(1).getX()
-                                        && apex.get(i).getX() <= apex2.get(3).getX())
-                                    return true;
-                            }
-                        }
-                        case DOWN -> {
-                            if (apex.get(i).getY() + shape.getVelocity().getVelocityY() > map.getHeight())
-                                return true;
-                            if (i == 1 || i == 3) {
-                                if (apex.get(i).getY() + shape.getVelocity().getVelocityY() >= apex2.get(0).getY()
-                                        && apex.get(i).getY() + shape.getVelocity().getVelocityY() <= apex2.get(1).getY()
-                                        && apex.get(i).getX() >= apex2.get(0).getX()
-                                        && apex.get(i).getX() <= apex2.get(2).getX())
-                                    return true;
-                            }
-                        }
+    public boolean updatePositonX(Direction direction, Rectangle currentShape, Map map) {
+        if(!shapeIsNearLeftWall) {
+            List<Position> currentApex = currentShape.getApex();
+            for (Rectangle shape : map.getShapes()) {
+                if (shape != currentShape) {
+                    List<Position> apex = shape.getApex();
+                    switch (direction) {
                         case RIGHT -> {
-                            if (apex.get(i).getX() + shape.getVelocity().getVelocityX() > map.getWidth())
+                            if (
+                                currentApex.get(3).getY() == apex.get(1).getY() && currentApex.get(2).getY() == apex.get(0).getY() &&
+                                currentApex.get(2).getX() + currentShape.getVelocity().getVelocityX() <= apex.get(0).getX() &&
+                                currentApex.get(3).getX() + currentShape.getVelocity().getVelocityX() <= apex.get(1).getX()
+                            ) {
+                                currentShape.setPosition(
+                                        currentShape.getPosition().getX() + currentShape.getVelocity().getVelocityX(),
+                                        currentShape.getPosition().getY()
+                                );
+
                                 return true;
-                            if (i > 1) {
-                                if (apex.get(i).getX() + shape.getVelocity().getVelocityX() >= apex2.get(0).getX()
-                                        && apex.get(i).getX() + shape.getVelocity().getVelocityX() <= apex2.get(2).getX()
-                                        && apex.get(i).getY() >= apex2.get(0).getY()
-                                        && apex.get(i).getY() <= apex2.get(1).getY())
-                                    return true;
+                            } if (
+                                    currentApex.get(3).getY() == apex.get(1).getY() && currentApex.get(2).getY() == apex.get(0).getY() &&
+                                    currentApex.get(2).getX() + currentShape.getVelocity().getVelocityX() > apex.get(0).getX() &&
+                                    currentApex.get(3).getX() + currentShape.getVelocity().getVelocityX() > apex.get(1).getX() &&
+                                    currentApex.get(2).getX() < apex.get(0).getX()
+                            ) {
+                                currentShape.setPosition(apex.get(0).getX()-currentShape.getWidth()/2, currentShape.getPosition().getY());
+                                shapeIsNearLeftWall = true;
+                                return true;
                             }
                         }
                         case LEFT -> {
-                            if (apex.get(i).getX() - shape.getVelocity().getVelocityX() < 0)
+                            if (
+                                currentApex.get(3).getY() == apex.get(1).getY() && currentApex.get(2).getY() == apex.get(0).getY() &&
+                                currentApex.get(0).getX() - currentShape.getVelocity().getVelocityX() > apex.get(2).getX() &&
+                                currentApex.get(1).getX() - currentShape.getVelocity().getVelocityX() > apex.get(3).getX()
+                            ) {
+                                currentShape.setPosition(
+                             currentShape.getPosition().getX() - currentShape.getVelocity().getVelocityX(),
+                                currentShape.getPosition().getY()
+                                );
+
                                 return true;
-                            if (i < 2) {
-                                if (apex.get(i).getX() - shape.getVelocity().getVelocityX() <= apex2.get(2).getX()
-                                        && apex.get(i).getX() - shape.getVelocity().getVelocityX() >= apex2.get(0).getX()
-                                        && apex.get(i).getY() >= apex2.get(2).getY()
-                                        && apex.get(i).getY() <= apex2.get(3).getY())
-                                    return true;
+                            } if (
+                                    currentApex.get(3).getY() == apex.get(1).getY() && currentApex.get(2).getY() == apex.get(0).getY() &&
+                                    currentApex.get(0).getX() - currentShape.getVelocity().getVelocityX() <= apex.get(2).getX() &&
+                                    currentApex.get(1).getX() - currentShape.getVelocity().getVelocityX() <= apex.get(3).getX() &&
+                                    currentApex.get(0).getX() >= apex.get(2).getX()
+                            ) {
+                                currentShape.setPosition(apex.get(2).getX()+currentShape.getWidth()/2, currentShape.getPosition().getY());
+                                shapeIsNearLeftWall = true;
+                                return true;
                             }
-                        }
-                        default -> {
-                            break;
-                        }
                         }
                     }
                 }
             }
+        } else {
+            currentShape.setPosition(currentShape.getPosition().getX(), currentShape.getPosition().getY());
         }
-
         return false;
     }
+
+    public boolean updatePositonY(Direction direction, Rectangle currentShape, Map map) {
+        if(!shapeIsNearUpWall) {
+            List<Position> currentApex = currentShape.getApex();
+            for (Rectangle shape : map.getShapes()) {
+                if (shape != currentShape) {
+                    List<Position> apex = shape.getApex();
+                    switch (direction) {
+                        case UP -> {
+                            if (
+                                currentApex.get(1).getX() == apex.get(0).getX() && currentApex.get(3).getX() == apex.get(2).getX() &&
+                                currentApex.get(0).getY() - currentShape.getVelocity().getVelocityY() <= apex.get(1).getY() &&
+                                currentApex.get(2).getY() - currentShape.getVelocity().getVelocityY() <= apex.get(3).getY()
+                            ) {
+                                //System.out.println("cc");
+                                currentShape.setPosition(
+                                currentShape.getPosition().getX(),
+                                currentShape.getPosition().getY() - currentShape.getVelocity().getVelocityY()
+                                );
+
+                                return true;
+                            } if (
+                                    currentApex.get(1).getX() == apex.get(0).getX() && currentApex.get(3).getX() == apex.get(2).getX() &&
+                                    currentApex.get(2).getY() - currentShape.getVelocity().getVelocityY() < apex.get(0).getY() &&
+                                    currentApex.get(3).getY() - currentShape.getVelocity().getVelocityY() < apex.get(1).getY() &&
+                                    currentApex.get(2).getY() >= apex.get(0).getY()
+                            ) {
+                                System.out.println("cc");
+                                currentShape.setPosition(apex.get(0).getX(), currentShape.getPosition().getY() + currentShape.getHeight()/2);
+                                shapeIsNearLeftWall = true;
+                                return true;
+                            }
+                        }
+
+                        case DOWN -> {
+                            if (
+                                    currentApex.get(1).getX() == apex.get(0).getX() && currentApex.get(3).getX() == apex.get(2).getX() &&
+                                    currentApex.get(0).getY() + currentShape.getVelocity().getVelocityY() <= apex.get(1).getY() &&
+                                    currentApex.get(2).getY() + currentShape.getVelocity().getVelocityY() <= apex.get(3).getY()
+                            ) {
+                                //System.out.println("cc");
+                                currentShape.setPosition(
+                                        currentShape.getPosition().getX(),
+                                        currentShape.getPosition().getY() + currentShape.getVelocity().getVelocityY()
+                                );
+
+                                return true;
+                            } if (
+                                    currentApex.get(1).getX() == apex.get(0).getX() && currentApex.get(3).getX() == apex.get(2).getX() &&
+                                    currentApex.get(2).getY() + currentShape.getVelocity().getVelocityY() > apex.get(0).getY() &&
+                                    currentApex.get(3).getY() + currentShape.getVelocity().getVelocityY() > apex.get(1).getY() &&
+                                    currentApex.get(2).getY() < apex.get(0).getY()
+                            ) {
+                                System.out.println("cc");
+                                currentShape.setPosition(apex.get(0).getX(), currentShape.getPosition().getY() + currentShape.getHeight()/2);
+                                shapeIsNearLeftWall = true;
+                                return true;
+                            }
+                        }
+
+                    }
+                }
+            }
+        } else {
+            currentShape.setPosition(currentShape.getPosition().getX(), currentShape.getPosition().getY());
+        }
+        return false;
+    }
+
 }
