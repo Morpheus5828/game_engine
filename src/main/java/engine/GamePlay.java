@@ -28,12 +28,9 @@ public class GamePlay extends Application {
     private HUD HUD;
 
     public void initGame() throws Exception {
-        kernel = new Kernel(width, height, Color.WHITE);
-
-
-        //Pacman pacman = new Pacman(32*12, 32*14, 32, 32, kernel);
-        //kernel.setMainShape(pacman.getPacman());
-
+        kernel = new Kernel(width, height, Color.BLACK);
+        Pacman pacman = new Pacman(32*9, 32*9, 32, 32, kernel);
+        kernel.setMainShape(pacman.getPacman());
         new DrawMap(new XmlReader(new File("src/main/resources/engine/map/levelOne.tmx"), 23, 23), kernel);
 
         kernel.drawStaticEntities();

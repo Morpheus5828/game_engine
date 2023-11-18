@@ -15,7 +15,7 @@ public class Wall {
     }
 
     public Wall(double x, double y, double width, double height, Kernel kernel) {
-        this.wall = kernel.addEntity(x, y, width, height, Color.YELLOW, true, 1, 1);
+        this.wall = kernel.addEntity(x, y, width, height, Color.BLUE, true, 1, 1);
     }
 
     public Rectangle getPacman() {

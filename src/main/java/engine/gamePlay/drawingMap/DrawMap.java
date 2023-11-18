@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
+import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -60,7 +61,8 @@ public class DrawMap {
                         new PacGum(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mini_pacgum.png")));
                         this.entities.put(counter, new Position(i, j));
                     }*/ case 70 -> {
-                        Pacman pacman = new Pacman(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/pacman.png")));
+                        Pacman pacman = new Pacman(32+j*32, 32+i*32, 32, 32, kernel);
+                        //Pacman pacman = new Pacman(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/pacman.png")));
                         kernel.setMainShape(pacman.getPacman());
                     }
                 }
