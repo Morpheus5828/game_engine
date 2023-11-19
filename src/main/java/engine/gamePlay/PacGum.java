@@ -11,11 +11,11 @@ public class PacGum {
     private final Category type = Category.PACGUM;
 
     public PacGum(double x, double y, double width, double height, Kernel kernel, Image image) {
-        pacGum = kernel.addEntity(x,y , width, height, image, false, 0, 0);
+        pacGum = kernel.addEntity(x,y , width, height, image, false, 0, 0, false);
     }
 
     public PacGum(double x, double y, double width, double height, Kernel kernel) {
-        kernel.addEntity(x,y , width, height, Color.PINK, false, 0, 0);}
+        kernel.addEntity(x,y , width, height, Color.PINK, false, 0, 0, false);}
 
     public Rectangle getPacGum() {
         return pacGum;

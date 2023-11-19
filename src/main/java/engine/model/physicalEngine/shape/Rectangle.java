@@ -33,12 +33,12 @@ public class Rectangle {
      * @see Direction
      */
 
-    public Rectangle(Position position, double width, double height, boolean moving, Velocity velocity) {
+    public Rectangle(Position position, double width, double height, boolean moving, Velocity velocity, boolean colliding) {
         this.position = position;
         this.width = width;
         this.height = height;
         this.moving = moving;
-        this.colliding = true;
+        this.colliding = colliding;
         this.Velocity = velocity;
         this.direction = Direction.NONE;
         this.head = new Position(position.getX() + height / 2, position.getY());

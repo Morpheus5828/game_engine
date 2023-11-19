@@ -11,6 +11,8 @@ public class Movement {
      **/
 
     private Direction direction;
+    private boolean mur;
+    private Rectangle nearest;
 
     /**
      * Create a new movement that will be called by a @Rectangle to move in the @Map
@@ -42,6 +44,13 @@ public class Movement {
             }
             return true;
         }
+        if (direction == Direction.RIGHT) {
+            shape.setPosition(nearest.getX() - nearest.getWidth() /2 - shape.getWidth() /2,
+                    shape.getPosition().getY());
+        } else if (direction == Direction.LEFT) {
+            shape.setPosition(nearest.getX() + nearest.getWidth() /2 + shape.getWidth() /2,
+                    shape.getPosition().getY());
+        }
         return false;
     }
 
@@ -62,6 +71,11 @@ public class Movement {
                         shape.getPosition().getY() + shape.getVelocity().getVelocityY());
             }
             return true;
+        }
+        if (direction == Direction.DOWN) {
+            shape.setPosition(shape.getPosition().getX(), nearest.getY() - nearest.getHeight() /2 - shape.getHeight() /2);
+        } else if (direction == Direction.UP) {
+            shape.setPosition(shape.getPosition().getX(), nearest.getY() + nearest.getHeight() /2 + shape.getHeight() /2);
         }
         return false;
     }
@@ -98,60 +112,56 @@ public class Movement {
             if (shape2 != shape) {
                 if (shape2.isColliding()) {
                     List<Position> apex2 = shape2.getApex();
-                    for (int i = 0; i < apex.size(); i++) {
-                        switch (direction) {
-                            case UP -> {
-                                if (apex.get(i).getY() - shape.getVelocity().getVelocityY() < 0)
-                                    return true;
-                                if (i == 0 || i == 2) {
-                                    if (apex.get(i).getY() - shape.getVelocity().getVelocityY() >= apex2.get(0).getY()
-                                            && apex.get(i).getY() - shape.getVelocity().getVelocityY() <= apex2.get(1).getY()
-                                            && apex.get(i).getX() >= apex2.get(1).getX()
-                                            && apex.get(i).getX() <= apex2.get(3).getX())
-                                        return true;
-                                }
+                    switch (direction) {
+                        case UP -> {
+                            if (apex.get(2).getY() - shape.getVelocity().getVelocityY() <= 0)
+                                return true;
+                            if (apex.get(2).getY() - shape.getVelocity().getVelocityY() <= apex2.get(1).getY()
+                                    && apex.get(2).getX() > apex2.get(1).getX()
+                                    && apex.get(0).getX() < apex2.get(3).getX()
+                                    && apex.get(2).getY() >= apex2.get(1).getY()) {
+                                nearest = shape2;
+                                return true;
                             }
-                            case DOWN -> {
-                                if (apex.get(i).getY() + shape.getVelocity().getVelocityY() > map.getHeight())
-                                    return true;
-                                if (i == 1 || i == 3) {
-                                    if (apex.get(i).getY() + shape.getVelocity().getVelocityY() >= apex2.get(0).getY()
-                                            && apex.get(i).getY() + shape.getVelocity().getVelocityY() <= apex2.get(1).getY()
-                                            && apex.get(i).getX() >= apex2.get(0).getX()
-                                            && apex.get(i).getX() <= apex2.get(2).getX())
-                                        return true;
-                                }
+                        }
+                        case DOWN -> {
+                            if (apex.get(1).getY() + shape.getVelocity().getVelocityY() >= map.getHeight())
+                                return true;
+                            if (apex.get(1).getY() + shape.getVelocity().getVelocityY() >= apex2.get(0).getY()
+                                    && apex.get(3).getX() > apex2.get(0).getX()
+                                    && apex.get(1).getX() < apex2.get(2).getX()
+                                    && apex.get(1).getY() <= apex2.get(0).getY()) {
+                                nearest = shape2;
+                                return true;
                             }
-                            case RIGHT -> {
-                                if (apex.get(i).getX() + shape.getVelocity().getVelocityX() > map.getWidth())
-                                    return true;
-                                if (i >= 2) {
-                                    if (apex.get(i).getX() + shape.getVelocity().getVelocityX() >= apex2.get(0).getX()
-                                            && apex.get(i).getX() + shape.getVelocity().getVelocityX() <= apex2.get(2).getX()
-                                            && apex.get(i).getY() >= apex2.get(0).getY()
-                                            && apex.get(i).getY() <= apex2.get(1).getY())
-                                        return true;
-                                }
+                        }
+                        case RIGHT -> {
+                            if (apex.get(2).getX() + shape.getVelocity().getVelocityX() >= map.getWidth())
+                                return true;
+                            if (apex.get(2).getX() + shape.getVelocity().getVelocityX() >= apex2.get(0).getX()
+                                    && apex.get(3).getY() > apex2.get(0).getY()
+                                    && apex.get(2).getY() < apex2.get(1).getY()
+                                    && apex.get(2).getX() <= apex2.get(0).getX()){
+                                nearest = shape2;
+                                return true;
                             }
-                            case LEFT -> {
-                                if (apex.get(i).getX() - shape.getVelocity().getVelocityX() < 0)
-                                    return true;
-                                if (i < 2) {
-                                    if (apex.get(i).getX() - shape.getVelocity().getVelocityX() <= apex2.get(2).getX()
-                                            && apex.get(i).getX() - shape.getVelocity().getVelocityX() >= apex2.get(0).getX()
-                                            && apex.get(i).getY() >= apex2.get(0).getY()
-                                            && apex.get(i).getY() <= apex2.get(1).getY())
-                                        return true;
-                                }
-                            }
-                            default -> {
-                                break;
+                        }
+                        case LEFT -> {
+                            if (apex.get(1).getX() - shape.getVelocity().getVelocityX() <= 0)
+                                return true;
+                            if (apex.get(1).getX() - shape.getVelocity().getVelocityX() <= apex2.get(2).getX()
+                                    && apex.get(1).getY() > apex2.get(0).getY()
+                                    && apex.get(0).getY() < apex2.get(1).getY()
+                                    && apex.get(1).getX() >= apex2.get(2).getX()){
+                                nearest = shape2;
+                                return true;
                             }
                         }
                     }
                 }
             }
         }
+        System.out.println("ok");
         return false;
     }
 }
