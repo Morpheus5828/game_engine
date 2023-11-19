@@ -39,9 +39,10 @@ public class FinalShape {
         return rectangle;
     }
 
-    public void moveEntity(Direction Direction) {
-        physicalEngine.moveEntity(this.rectangle, Direction);
+    public boolean moveEntity(Direction Direction) {
+        boolean result = physicalEngine.moveEntity(this.rectangle, Direction);
         this.rectangleDrawing.setX(this.rectangle.getX());
         this.rectangleDrawing.setY(this.rectangle.getY());
+        return result;
     }
 }

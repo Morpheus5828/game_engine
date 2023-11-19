@@ -38,20 +38,23 @@ public class Movement {
             if (direction == Direction.RIGHT) {
                 shape.setPosition(shape.getPosition().getX() + shape.getVelocity().getVelocityX(),
                         shape.getPosition().getY());
+                return false;
             } else if (direction == Direction.LEFT) {
                 shape.setPosition(shape.getPosition().getX() - shape.getVelocity().getVelocityX(),
                         shape.getPosition().getY());
+                return false;
             }
-            return true;
         }
         if (direction == Direction.RIGHT) {
             shape.setPosition(nearest.getX() - nearest.getWidth() /2 - shape.getWidth() /2,
                     shape.getPosition().getY());
+            return true;
         } else if (direction == Direction.LEFT) {
             shape.setPosition(nearest.getX() + nearest.getWidth() /2 + shape.getWidth() /2,
                     shape.getPosition().getY());
+            return true;
         }
-        return false;
+        return true;
     }
 
     /**
@@ -66,16 +69,19 @@ public class Movement {
             if (direction == Direction.UP) {
                 shape.setPosition(shape.getPosition().getX(),
                         shape.getPosition().getY() - shape.getVelocity().getVelocityY());
+                return false;
             } else if (direction == Direction.DOWN) {
                 shape.setPosition(shape.getPosition().getX(),
                         shape.getPosition().getY() + shape.getVelocity().getVelocityY());
             }
-            return true;
+            return false;
         }
         if (direction == Direction.DOWN) {
             shape.setPosition(shape.getPosition().getX(), nearest.getY() - nearest.getHeight() /2 - shape.getHeight() /2);
+            return true;
         } else if (direction == Direction.UP) {
             shape.setPosition(shape.getPosition().getX(), nearest.getY() + nearest.getHeight() /2 + shape.getHeight() /2);
+            return true;
         }
         return false;
     }
@@ -117,8 +123,8 @@ public class Movement {
                             if (apex.get(2).getY() - shape.getVelocity().getVelocityY() <= 0)
                                 return true;
                             if (apex.get(2).getY() - shape.getVelocity().getVelocityY() <= apex2.get(1).getY()
-                                    && apex.get(2).getX() > apex2.get(1).getX()
-                                    && apex.get(0).getX() < apex2.get(3).getX()
+                                    && apex.get(2).getX() - 15 > apex2.get(1).getX()
+                                    && apex.get(0).getX() + 15 < apex2.get(3).getX()
                                     && apex.get(2).getY() >= apex2.get(1).getY()) {
                                 nearest = shape2;
                                 return true;
@@ -128,8 +134,8 @@ public class Movement {
                             if (apex.get(1).getY() + shape.getVelocity().getVelocityY() >= map.getHeight())
                                 return true;
                             if (apex.get(1).getY() + shape.getVelocity().getVelocityY() >= apex2.get(0).getY()
-                                    && apex.get(3).getX() > apex2.get(0).getX()
-                                    && apex.get(1).getX() < apex2.get(2).getX()
+                                    && apex.get(3).getX() - 15 > apex2.get(0).getX()
+                                    && apex.get(1).getX() + 15 < apex2.get(2).getX()
                                     && apex.get(1).getY() <= apex2.get(0).getY()) {
                                 nearest = shape2;
                                 return true;
@@ -139,8 +145,8 @@ public class Movement {
                             if (apex.get(2).getX() + shape.getVelocity().getVelocityX() >= map.getWidth())
                                 return true;
                             if (apex.get(2).getX() + shape.getVelocity().getVelocityX() >= apex2.get(0).getX()
-                                    && apex.get(3).getY() > apex2.get(0).getY()
-                                    && apex.get(2).getY() < apex2.get(1).getY()
+                                    && apex.get(3).getY() - 15 > apex2.get(0).getY()
+                                    && apex.get(2).getY() + 15 < apex2.get(1).getY()
                                     && apex.get(2).getX() <= apex2.get(0).getX()){
                                 nearest = shape2;
                                 return true;
@@ -150,8 +156,8 @@ public class Movement {
                             if (apex.get(1).getX() - shape.getVelocity().getVelocityX() <= 0)
                                 return true;
                             if (apex.get(1).getX() - shape.getVelocity().getVelocityX() <= apex2.get(2).getX()
-                                    && apex.get(1).getY() > apex2.get(0).getY()
-                                    && apex.get(0).getY() < apex2.get(1).getY()
+                                    && apex.get(1).getY() - 15 > apex2.get(0).getY()
+                                    && apex.get(0).getY() + 15 < apex2.get(1).getY()
                                     && apex.get(1).getX() >= apex2.get(2).getX()){
                                 nearest = shape2;
                                 return true;
@@ -161,7 +167,6 @@ public class Movement {
                 }
             }
         }
-        System.out.println("ok");
         return false;
     }
 }

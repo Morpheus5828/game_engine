@@ -42,10 +42,11 @@ public class PhysicalEngine {
     public boolean moveEntity(Rectangle shape, Direction direction) {
         boolean moved = true;
         Movement movement = new Movement(direction);
-        if (!movement.updatePositonX(direction, shape, this.map))
-            moved = false;
-        if (!movement.updatePositonY(direction, shape, this.map))
-            moved = false;
+        if(direction == Direction.RIGHT || direction == Direction.LEFT){
+            return movement.updatePositonX(direction, shape, this.map);
+        } else if (direction == Direction.UP || direction == Direction.DOWN){
+            return movement.updatePositonY(direction, shape, this.map);
+        }
         return moved;
     }
 }
