@@ -2,6 +2,7 @@ package engine;
 
 import engine.gamePlay.HUD;
 import engine.gamePlay.Pacman;
+import engine.gamePlay.Wall;
 import engine.gamePlay.drawingMap.DrawMap;
 import engine.gamePlay.drawingMap.XmlReader;
 import engine.model.Kernel;
@@ -28,14 +29,9 @@ public class GamePlay extends Application {
 
     public void initGame() throws Exception {
         kernel = new Kernel(width, height, Color.BLACK);
-
-        Pacman pacman=  new Pacman(32*12, 32*14, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/pacman.png")));
-       // Pacman pacman = new Pacman(32*12, 32*14+1, 30, 30, kernel);
+        Pacman pacman = new Pacman(32*9, 32*9, 32, 32, kernel);
         kernel.setMainShape(pacman.getPacman());
-
-
         new DrawMap(new XmlReader(new File("src/main/resources/engine/map/levelOne.tmx"), 23, 23), kernel);
-
 
         kernel.drawStaticEntities();
         kernel.drawMovingEntities();

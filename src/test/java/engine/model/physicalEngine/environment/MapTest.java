@@ -35,8 +35,8 @@ public class MapTest {
 
     @Test
     void TestAddShape() {
-        Rectangle square = new Rectangle(new Position(101, 101), 10, 10, Color.BLUE, true, new Velocity(0, 0));
-        Rectangle rectangle = new Rectangle(new Position(10, 10), 15, 10, Color.RED, true, new Velocity(0, 0));
+        Rectangle square = new Rectangle(new Position(101, 101), 10, 10, true, new Velocity(0, 0));
+        Rectangle rectangle = new Rectangle(new Position(10, 10), 15, 10, true, new Velocity(0, 0));
         map.addShape(square);
         map.addShape(rectangle);
         assertTrue(map.getShapes().contains(rectangle));
@@ -45,14 +45,14 @@ public class MapTest {
 
     @Test
     void TestGetShapes() {
-        Rectangle rectangle = new Rectangle(new Position(10, 10), 15, 10, Color.RED, true, new Velocity(0, 0));
+        Rectangle rectangle = new Rectangle(new Position(10, 10), 15, 10, true, new Velocity(0, 0));
         map.addShape(rectangle);
         assertTrue(map.getShapes().contains(rectangle));
     }
 
     @Test
     void TestGetShapesMoving() {
-        Rectangle rectangle = new Rectangle(new Position(10, 10), 10, 10, Color.BLUE, true, new Velocity(0, 0));
+        Rectangle rectangle = new Rectangle(new Position(10, 10), 10, 10, true, new Velocity(0, 0));
         map.addShape(rectangle);
         assertTrue(map.getShapesMoving().contains(rectangle));
         assertFalse(map.getShapesStatic().contains(rectangle));
@@ -60,7 +60,7 @@ public class MapTest {
 
     @Test
     void TestGetShapesStatic() {
-        Rectangle rectangle = new Rectangle(new Position(10, 10), 10, 10, Color.BLUE, false, new Velocity(0, 0));
+        Rectangle rectangle = new Rectangle(new Position(10, 10), 10, 10, false, new Velocity(0, 0));
         map.addShape(rectangle);
         assertTrue(map.getShapesStatic().contains(rectangle));
         assertFalse(map.getShapesMoving().contains(rectangle));
@@ -68,15 +68,15 @@ public class MapTest {
 
     @Test
     void TestShapeIsInPlan() {
-        Rectangle rectangle = new Rectangle(new Position(10, 10), 10, 10, Color.BLUE, false, new Velocity(0, 0));
-        Rectangle square = new Rectangle(new Position(101, 101), 10, 10, Color.BLUE, true, new Velocity(0, 0));
+        Rectangle rectangle = new Rectangle(new Position(10, 10), 10, 10, false, new Velocity(0, 0));
+        Rectangle square = new Rectangle(new Position(101, 101), 10, 10, true, new Velocity(0, 0));
         assertTrue(map.shapeIsInPlan(rectangle));
         assertFalse(map.shapeIsInPlan(square));
     }
 
     @Test
     void TestRemoveShape() {
-        Rectangle rectangle = new Rectangle(new Position(10, 10), 10, 10, Color.BLUE, false, new Velocity(0, 0));
+        Rectangle rectangle = new Rectangle(new Position(10, 10), 10, 10, false, new Velocity(0, 0));
         map.addShape(rectangle);
         assertTrue(map.getShapes().contains(rectangle));
         map.removeShape(rectangle);

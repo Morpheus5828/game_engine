@@ -21,8 +21,9 @@ public class PhysicalEngine {
         this.map = new Map(heightMap, widthMap);
     }
 
-    public Rectangle addEntity(Position position, double width, double height, boolean isMoving, Velocity velocity, boolean collide) {
-        Rectangle entity = new Rectangle(position, width, height, isMoving, velocity, collide);
+    public Rectangle addEntity(Position position, double width, double height, boolean isMoving, Velocity velocity) {
+        Rectangle entity = new Rectangle(position, width, height, isMoving, velocity);
+        //this.map.addShape(entity);
         if (!this.map.addShape(entity))
             throw new IllegalArgumentException("One of the entities is not in the map.");
         return entity;
@@ -41,10 +42,11 @@ public class PhysicalEngine {
     public boolean moveEntity(Rectangle shape, Direction direction) {
         boolean moved = true;
         Movement movement = new Movement(direction);
-        if (!movement.updatePositonX(direction, shape, this.map))
-            moved = false;
-        if (!movement.updatePositonY(direction, shape, this.map))
-            moved = false;
+        if(direction == Direction.RIGHT || direction == Direction.LEFT){
+            return movement.updatePositonX(direction, shape, this.map);
+        } else if (direction == Direction.UP || direction == Direction.DOWN){
+            return movement.updatePositonY(direction, shape, this.map);
+        }
         return moved;
     }
 }

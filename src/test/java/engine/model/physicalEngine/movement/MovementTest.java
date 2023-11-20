@@ -24,8 +24,8 @@ public class MovementTest {
         Color color = Color.YELLOW;
         boolean moving = true;
         Velocity velocity = new Velocity(10, 10);
-        rectangle = new Rectangle(new Position(10,10), width, height, color, moving, velocity);
-        rectangle2 = new Rectangle(new Position(20,20), width, height, color, moving, velocity);
+        rectangle = new Rectangle(new Position(10,10), width, height, moving, velocity);
+        rectangle2 = new Rectangle(new Position(20,20), width, height, moving, velocity);
         map = new Map(100,100);
         map.addShape(rectangle);
     }

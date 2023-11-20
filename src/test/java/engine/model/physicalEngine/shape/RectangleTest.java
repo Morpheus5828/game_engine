@@ -29,7 +29,7 @@ public class RectangleTest {
         color = Color.YELLOW;
         moving = true;
         velocity = new Velocity(10, 10);
-        rectangle = new Rectangle(position, height, width, color, moving, velocity);
+        rectangle = new Rectangle(position, height, width, moving, velocity);
     }
 
     @Test
@@ -54,11 +54,6 @@ public class RectangleTest {
         double newHeight = 15;
         rectangle.setHeight(newHeight);
         assertEquals(newHeight, rectangle.getHeight());
-    }
-
-    @Test
-    void testGetColor() {
-        assertEquals(color, rectangle.getColor());
     }
 
     @Test
