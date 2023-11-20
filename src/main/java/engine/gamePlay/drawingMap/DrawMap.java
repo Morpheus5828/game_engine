@@ -1,19 +1,17 @@
 package engine.gamePlay.drawingMap;
 
 import engine.gamePlay.PacGum;
+import engine.gamePlay.Pacman;
 import engine.gamePlay.SuperGum;
 import engine.gamePlay.Wall;
 import engine.model.Kernel;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
 
 public class DrawMap {
     private XmlReader xmlReader;
@@ -47,8 +45,12 @@ public class DrawMap {
                     case 16 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mix_up.png")));
                     case 15 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mix_left.png")));
                     case 27 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mix_right.png")));
-                    case 69 -> new SuperGum(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/big_pacgum.png")));
-                    case 68 -> new PacGum(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mini_pacgum.png")));
+                    //case 68 -> new SuperGum(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/big_pacgum.png")));
+                    //case 69 -> new PacGum(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mini_pacgum.png")));
+                    case 70 -> {
+                        Pacman pacman = new Pacman(32+j*32, 32+i*32+1, 30, 30, kernel, new Image(new FileInputStream("src/main/resources/engine/images/pacman.png")));
+                        kernel.setMainShape(pacman.getPacman());
+                    }
                 }
 
             }
