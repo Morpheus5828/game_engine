@@ -24,7 +24,7 @@ public class FinalShape {
 
     public FinalShape(double x, double y, Image image, double width, double height, boolean moving, Velocity velocity,
                       PhysicalEngine physicalEngine, boolean isColliding) {
-        this.rectangle = physicalEngine.addEntity(new Position(x, y), width, height, moving, velocity);
+        this.rectangle = physicalEngine.addEntity(new Position(x, y), width, height, moving, velocity, isColliding);
         this.rectangleDrawing = new RectangleDrawing(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
                 rectangle.getHeight(), image);
         this.physicalEngine = physicalEngine;
