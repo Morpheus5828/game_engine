@@ -141,7 +141,7 @@ public class Kernel {
     public Rectangle addEntity(double x, double y, double width, double height, Image image, boolean isMoving,
                                double velocityX, double velocityY, boolean isColliding) {
         Velocity velocity = new Velocity(velocityX, velocityY);
-        FinalShape finalShape = new FinalShape(x, y, image, width, height, isMoving, velocity, this.physicalEngine);
+        FinalShape finalShape = new FinalShape(x, y, image, width, height, isMoving, velocity, this.physicalEngine, isColliding);
         this.finalShapes.add(finalShape);
         return finalShape.getRectangle();
     }
