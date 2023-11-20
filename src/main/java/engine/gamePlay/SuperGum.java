@@ -12,7 +12,7 @@ public class SuperGum {
     private final Category type = Category.SUPERPACGUM;
 
     public SuperGum(double x, double y, double width, double height, Kernel kernel, Image image) {
-        pacGum = kernel.addEntity(x,y , width, height, image, false, 0, 0);
+        pacGum = kernel.addEntity(x,y , width, height, image, false, 0, 0, false);
     }
 
     public SuperGum(double x, double y, double width, double height, Kernel kernel) {
