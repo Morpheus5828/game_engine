@@ -15,16 +15,16 @@ public class FinalShape {
     private PhysicalEngine physicalEngine;
 
     public FinalShape(double x, double y, Image image, double width, double height, boolean moving, Velocity velocity,
-            PhysicalEngine physicalEngine, boolean collide) {
-        this.rectangle = physicalEngine.addEntity(new Position(x, y), width, height, moving, velocity, collide);
+            PhysicalEngine physicalEngine) {
+        this.rectangle = physicalEngine.addEntity(new Position(x, y), width, height, moving, velocity);
         this.rectangleDrawing = new RectangleDrawing(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
                 rectangle.getHeight(), image);
         this.physicalEngine = physicalEngine;
     }
 
     public FinalShape(double x, double y, Color color, double width, double height, boolean moving, Velocity velocity,
-            PhysicalEngine physicalEngine, boolean collide) {
-        this.rectangle = physicalEngine.addEntity(new Position(x, y), width, height, moving, velocity, collide);
+            PhysicalEngine physicalEngine) {
+        this.rectangle = physicalEngine.addEntity(new Position(x, y), width, height, moving, velocity);
         this.rectangleDrawing = new RectangleDrawing(this.rectangle.getX(), this.rectangle.getY(), this.rectangle.getWidth(),
                 this.rectangle.getHeight(), color);
 
