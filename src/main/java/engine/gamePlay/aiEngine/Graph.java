@@ -56,8 +56,7 @@ public class Graph{
 
     public int getIndexFinalShape(double x, double y) {
         for(int i = 0 ; i < this.finalShapes.size(); i++) {
-            if(this.finalShapes.get(i).getRectangle().getX() == x && this.finalShapes.get(i).getRectangle().getY() == y  && this.finalShapes.get(i).getType() != Category.GHOST) {
-                //System.out.println(x + " " + y);
+            if(this.finalShapes.get(i).getRectangle().getX() == x && this.finalShapes.get(i).getRectangle().getY() == y ) {
                 return i;
             }
         }
