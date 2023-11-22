@@ -34,6 +34,7 @@ public class GamePlay extends Application {
 
         kernel.drawStaticEntities();
         kernel.drawMovingEntities();
+        kernel.startKeyListener();
 
         HUD = new HUD(width, height);
     }

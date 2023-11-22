@@ -1,9 +1,7 @@
 package engine.gamePlay.drawingMap;
 
-import engine.gamePlay.PacGum;
-import engine.gamePlay.Pacman;
-import engine.gamePlay.SuperGum;
-import engine.gamePlay.Wall;
+import engine.gamePlay.*;
+import engine.gamePlay.aiEngine.PinkGhost;
 import engine.model.Kernel;
 import javafx.scene.image.Image;
 import org.xml.sax.SAXException;
@@ -27,7 +25,7 @@ public class DrawMap {
     }
 
     public void createInstance() throws FileNotFoundException {
-
+        var c = 0;
         for(int i = 0; i < this.xmlReader.getWidth(); i++) {
             for(int j = 0; j < this.xmlReader.getHeight(); j++) {
                 switch (this.data[i][j]) {
@@ -45,15 +43,35 @@ public class DrawMap {
                     case 16 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mix_up.png")));
                     case 15 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mix_left.png")));
                     case 27 -> new Wall(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mix_right.png")));
-                    //case 68 -> new SuperGum(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/big_pacgum.png")));
-                    //case 69 -> new PacGum(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mini_pacgum.png")));
-                    case 70 -> {
-                        Pacman pacman = new Pacman(32+j*32, 32+i*32+1, 30, 30, kernel, new Image(new FileInputStream("src/main/resources/engine/images/pacman.png")));
-                        kernel.setMainShape(pacman.getPacman());
+                    case 68 -> {
+                        c++;
+                        new SuperGum(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/big_pacgum.png")));
                     }
+                    case 69 -> {
+                        c++;
+                        new PacGum(32+j*32, 32+i*32, 32, 32, kernel, new Image(new FileInputStream("src/main/resources/engine/images/mini_pacgum.png")));
+                    }
+                    case 70 -> {
+                        //Pacman pacman = new Pacman(32+j*32, 32+i*32+1, 30, 30, kernel, new Image(new FileInputStream("src/main/resources/engine/images/pacman.png")));
+                        //kernel.setPacman(pacman.getPacman());
+                        }
+                    case 71 -> {
+                       // Pacman pacman = new Pacman(32+j*32, 32+i*32+1, 30, 30, kernel, new Image(new FileInputStream("src/main/resources/engine/images/pacman.png")));
+                       // kernel.setPacman(pacman.getPacman());
+                        //PinkGhost pinkGhost = new PinkGhost(32+j*32, 32+i*32+1, 30, 30, kernel, new Image(new FileInputStream("src/main/resources/engine/images/ghost_pink_0.png")));
+                        //kernel.setPinkGhost(pinkGhost.getRectangle());
+
+
+                    } default -> {
+                        PinkGhost pinkGhost = new PinkGhost(32+j*32, 32+i*32+1, 30, 30, kernel, new Image(new FileInputStream("src/main/resources/engine/images/ghost_pink_0.png")));
+                        //kernel.setPinkGhost(pinkGhost.getRectangle());
+                    }
+                        //new Nothing(32+j*32, 32+i*32+1, 30, 30, kernel);
+
                 }
 
             }
         }
+        System.out.println("c = " + c);
     }
 }

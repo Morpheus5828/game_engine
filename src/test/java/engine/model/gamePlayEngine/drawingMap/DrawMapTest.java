@@ -27,13 +27,4 @@ public class DrawMapTest {
     @Test
     public void testCreateInstance() {}
 
-    @Test
-    public void testCreateGraph() {
-        this.drawMap.createGraph();
-    }
-
-    @Test
-    public void testDijkstra() {
-
-    }
 }

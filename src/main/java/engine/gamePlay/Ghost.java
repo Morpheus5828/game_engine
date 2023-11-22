@@ -11,7 +11,7 @@ public abstract class Ghost {
     private Rectangle ghost;
 
     public Ghost(double x, double y, double width, double height, Color color, Kernel kernel) {
-        kernel.addEntity(x, y, width, height, color, true, 10, 10);
+        kernel.addEntity(x, y, width, height, color, true, type ,10, 10);
     }
 
     public Rectangle getGhost() {

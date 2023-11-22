@@ -1,5 +1,6 @@
 package engine.model;
 
+import engine.gamePlay.Category;
 import engine.model.graphicalEngine.drawing.RectangleDrawing;
 import engine.model.physicalEngine.PhysicalEngine;
 import engine.model.physicalEngine.movement.Direction;
@@ -13,22 +14,25 @@ public class FinalShape {
     private RectangleDrawing rectangleDrawing;
     private Rectangle rectangle;
     private PhysicalEngine physicalEngine;
+    private Category type;
 
-    public FinalShape(double x, double y, Image image, double width, double height, boolean moving, Velocity velocity,
+    public FinalShape(double x, double y, Image image, double width, double height, boolean moving, Category type, Velocity velocity,
             PhysicalEngine physicalEngine) {
         this.rectangle = physicalEngine.addEntity(new Position(x, y), width, height, moving, velocity);
         this.rectangleDrawing = new RectangleDrawing(rectangle.getX(), rectangle.getY(), rectangle.getWidth(),
                 rectangle.getHeight(), image);
         this.physicalEngine = physicalEngine;
+        this.type = type;
     }
 
-    public FinalShape(double x, double y, Color color, double width, double height, boolean moving, Velocity velocity,
+    public FinalShape(double x, double y, Color color, double width, double height, boolean moving, Category type, Velocity velocity,
             PhysicalEngine physicalEngine) {
         this.rectangle = physicalEngine.addEntity(new Position(x, y), width, height, moving, velocity);
         this.rectangleDrawing = new RectangleDrawing(this.rectangle.getX(), this.rectangle.getY(), this.rectangle.getWidth(),
                 this.rectangle.getHeight(), color);
 
         this.physicalEngine = physicalEngine;
+        this.type = type;
     }
 
     public RectangleDrawing getRectangleDrawing() {
@@ -44,5 +48,9 @@ public class FinalShape {
         this.rectangleDrawing.setX(this.rectangle.getX());
         this.rectangleDrawing.setY(this.rectangle.getY());
         return result;
+    }
+
+    public Category getType() {
+        return type;
     }
 }

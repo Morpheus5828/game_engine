@@ -3,6 +3,8 @@ package engine.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import engine.gamePlay.Category;
+import engine.gamePlay.aiEngine.Graph;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -19,19 +21,24 @@ public class Kernel {
     private GraphicalEngine graphicalEngine;
     private EventListener eventListener;
     private List<FinalShape> finalShapes;
-    private FinalShape mainShape;
+    private FinalShape pacman;
+    private FinalShape pinkGhost;
+    private Graph graph;
+    private double width;
+    private double height;
 
     public Kernel(double width, double height, Color color) {
-        this.physicalEngine = new PhysicalEngine(width, height);
+        this.width = width;
+        this.height = height;
+        this.physicalEngine = new PhysicalEngine(this.height, this.width);
         this.graphicalEngine = new GraphicalEngine(width, height, color);
         this.eventListener = new EventListener();
         this.graphicalEngine.addEventListener(this.eventListener);
         this.finalShapes = new ArrayList<>();
-        startKeyListener();
     }
 
-    private void startKeyListener() {
-        new Thread(() -> {
+    public void startKeyListener() {
+        Thread pacManThread = new Thread(()-> {
             while (true) {
                 try {
                     moveMainShape();
@@ -40,7 +47,61 @@ public class Kernel {
                     throw new RuntimeException(e);
                 }
             }
-        }).start();
+        });
+        Thread pinkGhostThread = new Thread(()-> {
+            this.graph = new Graph(550);
+
+            //while(true) {
+                try {
+                    movePinkGhost();
+                    //Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+           // }
+        });
+        pinkGhostThread.start();
+        //pacManThread.start();
+
+
+    }
+
+    private void movePinkGhost() throws InterruptedException {
+        this.graph.createAutomatically(
+                this.finalShapes,
+                this.pinkGhost
+        );
+        this.graph.dijkstra();
+        List<FinalShape> neighbors = this.graph.getWayToGoTo(256, 32);
+        for(FinalShape shape : neighbors) {
+            System.out.println("step");
+            if(shape.getRectangle().getX() <= this.pinkGhost.getRectangle().getX()) {
+                clearShapesMoving();
+                pinkGhost.moveEntity(Direction.LEFT);
+                drawMovingEntities();
+            }
+
+            if(shape.getRectangle().getX() >= this.pinkGhost.getRectangle().getX()) {
+                clearShapesMoving();
+                pinkGhost.moveEntity(Direction.RIGHT);
+                drawMovingEntities();
+            }
+
+            if(shape.getRectangle().getY() <= this.pinkGhost.getRectangle().getY()) {
+                clearShapesMoving();
+                pinkGhost.moveEntity(Direction.UP);
+                drawMovingEntities();
+            }
+
+            if(shape.getRectangle().getY() >= this.pinkGhost.getRectangle().getY()) {
+                clearShapesMoving();
+                pinkGhost.moveEntity(Direction.DOWN);
+                drawMovingEntities();
+            }
+
+
+            Thread.sleep(1000);
+        }
     }
 
     private void moveMainShape() throws InterruptedException {
@@ -48,22 +109,22 @@ public class Kernel {
             switch (this.eventListener.getCurrentDirection()) {
                 case UP -> {
                     clearShapesMoving();
-                    mainShape.moveEntity(Direction.UP);
+                    pacman.moveEntity(Direction.UP);
                     drawMovingEntities();
                 }
                 case DOWN -> {
                     clearShapesMoving();
-                    mainShape.moveEntity(Direction.DOWN);
+                    pacman.moveEntity(Direction.DOWN);
                     drawMovingEntities();
                 }
                 case RIGHT -> {
                     clearShapesMoving();
-                    mainShape.moveEntity(Direction.RIGHT);
+                    pacman.moveEntity(Direction.RIGHT);
                     drawMovingEntities();
                 }
                 case LEFT -> {
                     clearShapesMoving();
-                    mainShape.moveEntity(Direction.LEFT);
+                    pacman.moveEntity(Direction.LEFT);
                     drawMovingEntities();
                 }
                 default -> {
@@ -73,10 +134,19 @@ public class Kernel {
         }
     }
 
-    public void setMainShape(Rectangle shape) {
+    public void setPacman(Rectangle shape) {
         for (FinalShape finalShape : finalShapes) {
             if (finalShape.getRectangle() == shape) {
-                this.mainShape = finalShape;
+                this.pacman = finalShape;
+                return;
+            }
+        }
+    }
+
+    public void setPinkGhost(Rectangle shape) {
+        for (FinalShape finalShape : finalShapes) {
+            if (finalShape.getRectangle() == shape) {
+                this.pinkGhost = finalShape;
                 return;
             }
         }
@@ -123,19 +193,26 @@ public class Kernel {
     }
 
     public Rectangle addEntity(double x, double y, double width, double height, Color color, boolean isMoving,
-            double velocityX, double velocityY) {
+        Category type, double velocityX, double velocityY) {
         Velocity velocity = new Velocity(velocityX, velocityY);
-        FinalShape finalShape = new FinalShape(x, y, color, width, height, isMoving, velocity, this.physicalEngine);
+        FinalShape finalShape = new FinalShape(x, y, color, width, height, isMoving, type, velocity, this.physicalEngine);
         this.finalShapes.add(finalShape);
         return finalShape.getRectangle();
     }
 
     public Rectangle addEntity(double x, double y, double width, double height, Image image, boolean isMoving,
-            double velocityX, double velocityY) {
+        Category type, double velocityX, double velocityY) {
         Velocity velocity = new Velocity(velocityX, velocityY);
-        FinalShape finalShape = new FinalShape(x, y, image, width, height, isMoving, velocity, this.physicalEngine);
+        FinalShape finalShape = new FinalShape(x, y, image, width, height, isMoving, type, velocity, this.physicalEngine);
         this.finalShapes.add(finalShape);
         return finalShape.getRectangle();
     }
 
+    public List<FinalShape> getFinalShapes() {
+        return finalShapes;
+    }
+
+    public FinalShape getPinkGhost() {
+        return pinkGhost;
+    }
 }

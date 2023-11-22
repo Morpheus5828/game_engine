@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="23" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="1">
+ <editorsettings>
+  <export target="gameMap..tmx" format="tmx"/>
+ </editorsettings>
  <tileset firstgid="1" source="../../tiles set.tsx"/>
  <tileset firstgid="67" source="spr cherry.tsx"/>
  <tileset firstgid="68" source="mini_ball.tsx"/>
  <tileset firstgid="69" source="pacgum_mini.tsx"/>
  <tileset firstgid="70" source="pacman.tsx"/>
+ <tileset firstgid="71" source="ghost_pink_0.tsx"/>
  <layer id="1" name="Calque de Tuiles 1" width="23" height="23">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -45,7 +49,7 @@
 15,3,3,3,25,69,12,69,2,3,3,3,3,3,4,69,12,69,24,3,3,3,27,
 12,69,69,69,69,69,12,69,69,69,69,69,69,69,69,69,12,69,69,69,69,69,12,
 23,69,2,3,3,3,25,69,13,3,4,0,2,3,14,69,24,3,3,3,4,69,23,
-69,69,69,69,69,69,69,69,12,0,0,0,0,0,12,69,69,69,69,69,69,69,69,
+69,69,69,69,69,69,69,69,12,0,0,71,0,0,12,69,69,69,69,69,69,69,69,
 1,69,2,3,3,3,14,69,24,3,3,3,3,3,25,69,13,3,3,3,4,69,1,
 12,69,69,69,69,69,12,69,69,69,69,70,69,69,69,67,12,69,69,69,69,69,12,
 15,3,3,3,14,69,12,69,2,3,3,3,3,3,4,69,12,69,13,3,3,3,27,
