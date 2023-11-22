@@ -1,5 +1,9 @@
 package engine.gamePlay;
 
+import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+
 public class HUD {
     private final double windowWidth;
     private final double windowHeight;
@@ -40,5 +44,15 @@ public class HUD {
 
     public void setLives(int lives) {
         this.lives = lives;
+    }
+
+    public void updateScore(Parent root) {
+        Text scoreField = (Text) root.lookup("#scoreField");
+        scoreField.setText(String.valueOf(getScore()));
+    }
+
+    public void updateLives(Parent root) {
+        Text livesField = (Text) root.lookup("#livesField");
+        livesField.setText(String.valueOf(getLives()));
     }
 }

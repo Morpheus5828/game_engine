@@ -1,8 +1,6 @@
 package engine;
 
 import engine.gamePlay.HUD;
-import engine.gamePlay.Pacman;
-import engine.gamePlay.Wall;
 import engine.gamePlay.drawingMap.DrawMap;
 import engine.gamePlay.drawingMap.XmlReader;
 import engine.model.Kernel;
@@ -11,21 +9,18 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.FileInputStream;
 
 public class GamePlay extends Application {
-    private double width = 800;
-    private double height = 800;
-    private Kernel kernel;
-    private HUD HUD;
+    private static double width = 800;
+    private static double height = 800;
+    private static Kernel kernel;
+    private static HUD HUD;
 
     public void initGame() throws Exception {
         kernel = new Kernel(width, height, Color.BLACK);
@@ -36,6 +31,11 @@ public class GamePlay extends Application {
         kernel.drawMovingEntities();
 
         HUD = new HUD(width, height);
+    }
+
+    public void updateHUD(Parent root) {
+        HUD.updateScore(root);
+        HUD.updateLives(root);
     }
 
     @Override
@@ -49,11 +49,9 @@ public class GamePlay extends Application {
         mainVBox.prefHeight(height);
         AnchorPane playGround = (AnchorPane) root.lookup("#playGround");
         playGround.getChildren().add(kernel.getPlayGround());
-        Text scoreField = (Text) root.lookup("#scoreField");
-        scoreField.setText(String.valueOf(HUD.getScore()));
-        Text livesField = (Text) root.lookup("#livesField");
-        livesField.setText(String.valueOf(HUD.getLives()));
         Scene scene = new Scene(root);
+
+        updateHUD(root);
 
         stage.setTitle("Pacman");
         stage.setScene(scene);

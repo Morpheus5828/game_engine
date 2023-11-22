@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
@@ -145,5 +146,4 @@ public class Kernel {
         this.finalShapes.add(finalShape);
         return finalShape.getRectangle();
     }
-
 }

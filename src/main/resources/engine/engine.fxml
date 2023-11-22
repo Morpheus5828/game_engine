@@ -15,13 +15,13 @@
                 
             </children>
         </AnchorPane>
-        <HBox fx:id="hudDisplay" layoutY="900.0">
+        <AnchorPane fx:id="hudDisplay" layoutY="900.0">
             <children>
-                <Text fx:id="score" strokeType="OUTSIDE" strokeWidth="0.0" text="Score" />
-                <Text fx:id="scoreField"/>
-                <Text fx:id="lives" strokeType="OUTSIDE" strokeWidth="0.0" text="Lives" />
-                <Text fx:id="livesField"/>
+                <Text fx:id="score" strokeType="OUTSIDE" strokeWidth="0.0" text="Score" layoutX="350" />
+                <Text fx:id="scoreField" layoutX="370" layoutY="30"/>
+                <Text fx:id="lives" strokeType="OUTSIDE" strokeWidth="0.0" text="Lives"/>
+                <Text fx:id="livesField" layoutX="20" layoutY="30"/>
             </children>
-        </HBox>
+        </AnchorPane>
     </children>
 </VBox>

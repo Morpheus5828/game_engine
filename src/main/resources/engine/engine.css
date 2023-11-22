@@ -1,4 +1,22 @@
-#score {
+#hudDisplay {
     -fx-font-weight: bold;
-    -fx-font-size: 30px;    
+    -fx-font-size: 25px;    
+    -fx-background-color: black;
+    -fx-text-alignment: center;
+}
+
+#score {
+    -fx-fill: white;
+}
+
+#lives {
+    -fx-fill: white;
+}
+
+#scoreField {
+    -fx-fill: white;
+}
+
+#livesField {
+    -fx-fill: white;
 }
