@@ -123,8 +123,8 @@ public class Movement {
                             if (apex.get(2).getY() - shape.getVelocity().getVelocityY() <= 0)
                                 return true;
                             if (apex.get(2).getY() - shape.getVelocity().getVelocityY() <= apex2.get(1).getY()
-                                    && apex.get(2).getX() - 15 > apex2.get(1).getX()
-                                    && apex.get(0).getX() + 15 < apex2.get(3).getX()
+                                    && apex.get(2).getX() > apex2.get(1).getX()
+                                    && apex.get(0).getX() < apex2.get(3).getX()
                                     && apex.get(2).getY() >= apex2.get(1).getY()) {
                                 nearest = shape2;
                                 return true;
@@ -134,8 +134,8 @@ public class Movement {
                             if (apex.get(1).getY() + shape.getVelocity().getVelocityY() >= map.getHeight())
                                 return true;
                             if (apex.get(1).getY() + shape.getVelocity().getVelocityY() >= apex2.get(0).getY()
-                                    && apex.get(3).getX() - 15 > apex2.get(0).getX()
-                                    && apex.get(1).getX() + 15 < apex2.get(2).getX()
+                                    && apex.get(3).getX() > apex2.get(0).getX()
+                                    && apex.get(1).getX() < apex2.get(2).getX()
                                     && apex.get(1).getY() <= apex2.get(0).getY()) {
                                 nearest = shape2;
                                 return true;
@@ -145,8 +145,8 @@ public class Movement {
                             if (apex.get(2).getX() + shape.getVelocity().getVelocityX() >= map.getWidth())
                                 return true;
                             if (apex.get(2).getX() + shape.getVelocity().getVelocityX() >= apex2.get(0).getX()
-                                    && apex.get(3).getY() - 15 > apex2.get(0).getY()
-                                    && apex.get(2).getY() + 15 < apex2.get(1).getY()
+                                    && apex.get(3).getY() > apex2.get(0).getY()
+                                    && apex.get(2).getY() < apex2.get(1).getY()
                                     && apex.get(2).getX() <= apex2.get(0).getX()){
                                 nearest = shape2;
                                 return true;
@@ -156,8 +156,8 @@ public class Movement {
                             if (apex.get(1).getX() - shape.getVelocity().getVelocityX() <= 0)
                                 return true;
                             if (apex.get(1).getX() - shape.getVelocity().getVelocityX() <= apex2.get(2).getX()
-                                    && apex.get(1).getY() - 15 > apex2.get(0).getY()
-                                    && apex.get(0).getY() + 15 < apex2.get(1).getY()
+                                    && apex.get(1).getY() > apex2.get(0).getY()
+                                    && apex.get(0).getY() < apex2.get(1).getY()
                                     && apex.get(1).getX() >= apex2.get(2).getX()){
                                 nearest = shape2;
                                 return true;

@@ -29,6 +29,14 @@ public class PhysicalEngine {
         return entity;
     }
 
+    public Rectangle addEntity(Position position, double width, double height, boolean isMoving, Velocity velocity, boolean isColliding) {
+        Rectangle entity = new Rectangle(position, width, height, isMoving, velocity, isColliding);
+        //this.map.addShape(entity);
+        if (!this.map.addShape(entity))
+            throw new IllegalArgumentException("One of the entities is not in the map.");
+        return entity;
+    }
+
     public Map getMap() {
         return this.map;
     }
