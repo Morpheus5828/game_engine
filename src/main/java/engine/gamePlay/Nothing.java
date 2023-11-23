@@ -11,11 +11,11 @@ public class Nothing {
     private final Category type = Category.NOTHING;
 
     public Nothing(double x, double y, double width, double height, Kernel kernel, Image image) {
-        nothing = kernel.addEntity(x,y , width, height, image, false, type, 0, 0);
+        nothing = kernel.addEntity(x,y , width, height, image, false, 0, 0, false);
     }
 
     public Nothing(double x, double y, double width, double height, Kernel kernel) {
-        kernel.addEntity(x,y , width, height, Color.BLACK, false, type, 0, 0);}
+        kernel.addEntity(x,y , width, height, Color.BLACK, false, 0, 0, false);}
 
     public Rectangle getNothing() {
         return nothing;

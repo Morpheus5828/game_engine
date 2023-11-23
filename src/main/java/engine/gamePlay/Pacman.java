@@ -11,11 +11,11 @@ public class Pacman {
     private final Category type = Category.PACMAN;
 
     public Pacman(double x, double y, double width, double height, Kernel kernel, Image image) {
-        pacman = kernel.addEntity(x, y, width, height, image, true, 16, 16);
+        pacman = kernel.addEntity(x, y, width, height, image, true, 16, 16, false);
     }
 
     public Pacman(double x, double y, double width, double height, Kernel kernel) {
-        pacman = kernel.addEntity(x, y, width, height, Color.YELLOW, true, 16, 16);
+        pacman = kernel.addEntity(x, y, width, height, Color.YELLOW, true, 16, 16, false);
     }
 
     public Rectangle getPacman() {

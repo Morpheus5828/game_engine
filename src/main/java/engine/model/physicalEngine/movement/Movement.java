@@ -9,9 +9,6 @@ public class Movement {
     /**
      * Shape has to create a movement which be call for moving.
      **/
-
-    private Direction direction;
-    private boolean mur;
     private Rectangle nearest;
 
     /**
@@ -22,9 +19,6 @@ public class Movement {
      * @see Direction
      * @see Rectangle
      */
-    public Movement(Direction direction) {
-        this.direction = direction;
-    }
 
     /**
      * Update the X position of the @Rectangle in the @Map after checking if there is nothing to collide with
@@ -45,12 +39,21 @@ public class Movement {
                 return false;
             }
         }
+        if (nearest == null) {
+            if (direction == Direction.RIGHT) {
+                shape.setPosition(0,
+                        shape.getPosition().getY());
+            } else if (direction == Direction.LEFT){
+                shape.setPosition(map.getWidth(), shape.getPosition().getY());
+            }
+            return true;
+        }
         if (direction == Direction.RIGHT) {
             shape.setPosition(nearest.getX() - nearest.getWidth() /2 - shape.getWidth() /2,
                     shape.getPosition().getY());
             return true;
         } else if (direction == Direction.LEFT) {
-            shape.setPosition(nearest.getX() + nearest.getWidth() /2 + shape.getWidth() /2,
+            shape.setPosition(nearest.getX() + nearest.getWidth() /2 + shape.getWidth() /2 + 2,
                     shape.getPosition().getY());
             return true;
         }
@@ -80,28 +83,10 @@ public class Movement {
             shape.setPosition(shape.getPosition().getX(), nearest.getY() - nearest.getHeight() /2 - shape.getHeight() /2);
             return true;
         } else if (direction == Direction.UP) {
-            shape.setPosition(shape.getPosition().getX(), nearest.getY() + nearest.getHeight() /2 + shape.getHeight() /2);
+            shape.setPosition(shape.getPosition().getX(), nearest.getY() + nearest.getHeight() /2 + shape.getHeight() /2 + 2);
             return true;
         }
         return false;
-    }
-
-    /**
-     * get the direction of the movement
-     *
-     * @return the direction of the movement
-     */
-    public Direction getDirection() {
-        return direction;
-    }
-
-    /**
-     * set the direction of the movement
-     *
-     * @param direction
-     */
-    public void setDirection(Direction direction) {
-        this.direction = direction;
     }
 
     /**
@@ -169,4 +154,29 @@ public class Movement {
         }
         return false;
     }
+
+    /*
+    public  boolean touchingBetween(Rectangle r1, Rectangle r2){
+        List<Position> apex1 = r1.getApex();
+        List<Position> apex2 = r2.getApex();
+        if (apex1.get(2).getY() <= apex2.get(1).getY()
+                    && apex1.get(2).getX() > apex2.get(1).getX()
+                    && apex1.get(0).getX() < apex2.get(3).getX()
+                    && apex1.get(2).getY() >= apex2.get(1).getY()) return true;
+        else if(apex1.get(1).getY() >= apex2.get(0).getY()
+                && apex1.get(3).getX() > apex2.get(0).getX()
+                && apex1.get(1).getX() < apex2.get(2).getX()
+                && apex1.get(1).getY() <= apex2.get(0).getY()) return true;
+        else if(apex1.get(2).getX() >= apex2.get(0).getX()
+                && apex1.get(3).getY() > apex2.get(0).getY()
+                && apex1.get(2).getY() < apex2.get(1).getY()
+                && apex1.get(2).getX() <= apex2.get(0).getX()) return true;
+        else if(apex1.get(1).getX() <= apex2.get(2).getX()
+                && apex1.get(1).getY() > apex2.get(0).getY()
+                && apex1.get(0).getY() < apex2.get(1).getY()
+                && apex1.get(1).getX() >= apex2.get(2).getX()) return true;
+        else return false;
+    }
+
+     */
 }

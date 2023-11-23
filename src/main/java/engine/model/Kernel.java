@@ -3,8 +3,7 @@ package engine.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import engine.gamePlay.Category;
-import engine.gamePlay.aiEngine.Graph;
+import engine.gamePlay.Ghost;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -22,13 +21,9 @@ public class Kernel {
     private EventListener eventListener;
     private List<FinalShape> finalShapes;
     private FinalShape mainShape;
-    private double width;
-    private double height;
 
     public Kernel(double width, double height, Color color) {
-        this.width = width;
-        this.height = height;
-        this.physicalEngine = new PhysicalEngine(this.height, this.width);
+        this.physicalEngine = new PhysicalEngine(width, height);
         this.graphicalEngine = new GraphicalEngine(width, height, color);
         this.eventListener = new EventListener();
         this.graphicalEngine.addEventListener(this.eventListener);
@@ -37,7 +32,7 @@ public class Kernel {
     }
 
     private void startKeyListener() {
-        Thread mainShape = new Thread(()-> {
+        new Thread(() -> {
             while (true) {
                 try {
                     moveMainShape();
@@ -46,12 +41,8 @@ public class Kernel {
                     throw new RuntimeException(e);
                 }
             }
-        });
-        mainShape.start();
-
-
+        }).start();
     }
-
 
     private void moveMainShape() throws InterruptedException {
         if (this.graphicalEngine.isKeyIsPressed()) {
@@ -133,23 +124,26 @@ public class Kernel {
     }
 
     public Rectangle addEntity(double x, double y, double width, double height, Color color, boolean isMoving,
-         double velocityX, double velocityY) {
+            double velocityX, double velocityY, boolean isColliding) {
         Velocity velocity = new Velocity(velocityX, velocityY);
         FinalShape finalShape = new FinalShape(x, y, color, width, height, isMoving, velocity, this.physicalEngine);
+        finalShape.getRectangle().setColliding(isColliding);
         this.finalShapes.add(finalShape);
         return finalShape.getRectangle();
     }
 
     public Rectangle addEntity(double x, double y, double width, double height, Image image, boolean isMoving,
-        double velocityX, double velocityY) {
+            double velocityX, double velocityY, boolean isColliding) {
         Velocity velocity = new Velocity(velocityX, velocityY);
         FinalShape finalShape = new FinalShape(x, y, image, width, height, isMoving, velocity, this.physicalEngine);
+        finalShape.getRectangle().setColliding(isColliding);
         this.finalShapes.add(finalShape);
         return finalShape.getRectangle();
     }
 
-    public List<FinalShape> getFinalShapes() {
-        return finalShapes;
+    /*
+    public boolean mainShapeTouching(Rectangle shape2){
+        return physicalEngine.testTouching(this.mainShape.getRectangle(), shape2);
     }
-
+     */
 }

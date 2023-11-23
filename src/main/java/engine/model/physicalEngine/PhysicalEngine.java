@@ -49,7 +49,7 @@ public class PhysicalEngine {
      */
     public boolean moveEntity(Rectangle shape, Direction direction) {
         boolean moved = true;
-        Movement movement = new Movement(direction);
+        Movement movement = new Movement();
         if(direction == Direction.RIGHT || direction == Direction.LEFT){
             return movement.updatePositonX(direction, shape, this.map);
         } else if (direction == Direction.UP || direction == Direction.DOWN){
@@ -57,4 +57,11 @@ public class PhysicalEngine {
         }
         return moved;
     }
+
+    /*
+    public boolean testTouching(Rectangle r1, Rectangle r2){
+        Movement movement = new Movement();
+        return movement.touchingBetween(r1, r2);
+    }
+     */
 }

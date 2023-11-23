@@ -11,11 +11,11 @@ public class Wall {
     private final Category type = Category.WALL;
 
     public Wall(double x, double y, double width, double height, Kernel kernel, Image image) {
-        this.wall = kernel.addEntity(x, y, width, height, image, false, type, 0, 0);
+        this.wall = kernel.addEntity(x, y, width, height, image, false, 0, 0, true);
     }
 
     public Wall(double x, double y, double width, double height, Kernel kernel) {
-        this.wall = kernel.addEntity(x, y, width, height, Color.BLUE, false, type, 0, 0);
+        this.wall = kernel.addEntity(x, y, width, height, Color.BLUE, false, 0, 0, true);
     }
 
     public Rectangle getPacman() {

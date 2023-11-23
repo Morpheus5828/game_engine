@@ -10,6 +10,8 @@ import engine.model.physicalEngine.shape.Rectangle;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
+import java.awt.*;
+
 public class FinalShape {
     private RectangleDrawing rectangleDrawing;
     private Rectangle rectangle;
