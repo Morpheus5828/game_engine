@@ -1,11 +1,13 @@
 package engine;
 
+import engine.gamePlay.Ghost;
 import engine.gamePlay.HUD;
 import engine.gamePlay.Pacman;
 import engine.gamePlay.Wall;
 import engine.gamePlay.drawingMap.DrawMap;
 import engine.gamePlay.drawingMap.XmlReader;
 import engine.model.Kernel;
+import engine.model.physicalEngine.movement.Position;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -20,21 +22,27 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.List;
 
 public class GamePlay extends Application {
     private double width = 800;
     private double height = 800;
     private Kernel kernel;
     private HUD HUD;
+    private List<Ghost> ghostsList;
+    private DrawMap map;
+    private Position initPositionGhost;
+    private Position initPositionPacman;
 
     public void initGame() throws Exception {
         kernel = new Kernel(width, height, Color.BLACK);
-
-        new DrawMap(new XmlReader(new File("src/main/resources/engine/map/levelOne.tmx"), 23, 23), kernel);
+        DrawMap map = new DrawMap(new XmlReader(new File("src/main/resources/engine/map/levelOne.tmx"), 23, 23), kernel);
+        ghostsList = map.getGhostsList();
+        initPositionGhost= map.getInitPositionGhost();
+        initPositionPacman= map.getInitPositionPacman();
 
         kernel.drawStaticEntities();
         kernel.drawMovingEntities();
-        kernel.startKeyListener();
 
         HUD = new HUD(width, height);
     }
@@ -61,10 +69,27 @@ public class GamePlay extends Application {
         stage.setResizable(false);
         stage.show();
 
+
         stage.setOnCloseRequest(event -> {
             Platform.exit();
             System.exit(0);
         });
+
+        /*
+        new Thread(() -> {
+            while (true) {
+                try {
+                    if(kernel.mainShapeTouching(ghostsList.get(0).getRectangle())){
+                        System.out.println("REINITIALISER LA POSITION DE PACMAN ET DU FANTOME");
+                    }
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
+
+         */
     }
 
     public static void main(String[] args) {

@@ -7,25 +7,14 @@ import javafx.scene.paint.Color;
 
 
 public abstract class Ghost {
-    private final Category type = Category.GHOST;
-    private Rectangle ghost;
 
-    public Ghost(double x, double y, double width, double height, Color color, Kernel kernel) {
-        kernel.addEntity(x, y, width, height, color, true, type ,10, 10);
-    }
+    private double x;
+    private double y;
+    protected Rectangle rectangle;
 
-    public Rectangle getGhost() {
-        return ghost;
-    }
 
-    public Category getType() {
-        return type;
-    }
-
-    public abstract void IA();
-
-    public Position getPosition() {
-        return ghost.getPosition();
+    public Rectangle getRectangle() {
+        return rectangle;
     }
 
 
