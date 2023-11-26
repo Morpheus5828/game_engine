@@ -12,13 +12,63 @@ public class Movement {
     private Rectangle nearest;
 
     /**
-     * Create a new movement that will be called by a @Rectangle to move in the @Map
-     * We use the different direction listed in the enum @Direction
+     * Check if the @Rectangle is colliding with another @Rectangle in the @Map
      *
-     * @param direction The direction of the movement
-     * @see Direction
-     * @see Rectangle
+     * @param shape
+     * @param map
+     * @param direction
+     * @return true if the @Rectangle is colliding with another @Rectangle in the @Map
      */
+    public boolean isColliding(Rectangle shape, Map map, Direction direction) {
+        List<Position> apex = shape.getApex();
+        for (Rectangle shape2 : map.getShapes()) {
+            if (shape2 != shape) {
+                if (shape2.isColliding()) {
+                    List<Position> apex2 = shape2.getApex();
+                    switch (direction) {
+                        case UP -> {
+                            if (apex.get(2).getY() - shape.getVelocity().getVelocityY() <= apex2.get(1).getY()
+                                    && apex.get(2).getX() > apex2.get(1).getX()
+                                    && apex.get(0).getX() < apex2.get(3).getX()
+                                    && apex.get(2).getY() >= apex2.get(1).getY()) {
+                                nearest = shape2;
+                                return true;
+                            }
+                        }
+                        case DOWN -> {
+                            if (apex.get(1).getY() + shape.getVelocity().getVelocityY() >= apex2.get(0).getY()
+                                    && apex.get(3).getX() > apex2.get(0).getX()
+                                    && apex.get(1).getX() < apex2.get(2).getX()
+                                    && apex.get(1).getY() <= apex2.get(0).getY()) {
+                                nearest = shape2;
+                                return true;
+                            }
+                        }
+                        case RIGHT -> {
+                            if (apex.get(2).getX() + shape.getVelocity().getVelocityX() >= apex2.get(0).getX()
+                                    && apex.get(3).getY() > apex2.get(0).getY()
+                                    && apex.get(2).getY() < apex2.get(1).getY()
+                                    && apex.get(2).getX() <= apex2.get(0).getX()){
+                                nearest = shape2;
+                                return true;
+                            }
+                        }
+                        case LEFT -> {
+                            if (apex.get(1).getX() - shape.getVelocity().getVelocityX() <= apex2.get(2).getX()
+                                    && apex.get(1).getY() > apex2.get(0).getY()
+                                    && apex.get(0).getY() < apex2.get(1).getY()
+                                    && apex.get(1).getX() >= apex2.get(2).getX()){
+                                nearest = shape2;
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 
     /**
      * Update the X position of the @Rectangle in the @Map after checking if there is nothing to collide with
@@ -39,6 +89,7 @@ public class Movement {
                 return false;
             }
         }
+        /*
         if (nearest == null) {
             if (direction == Direction.RIGHT) {
                 shape.setPosition(0,
@@ -48,6 +99,8 @@ public class Movement {
             }
             return true;
         }
+
+         */
         if (direction == Direction.RIGHT) {
             shape.setPosition(nearest.getX() - nearest.getWidth() /2 - shape.getWidth() /2,
                     shape.getPosition().getY());
@@ -88,95 +141,4 @@ public class Movement {
         }
         return false;
     }
-
-    /**
-     * Check if the @Rectangle is colliding with another @Rectangle in the @Map
-     *
-     * @param shape
-     * @param map
-     * @param direction
-     * @return true if the @Rectangle is colliding with another @Rectangle in the @Map
-     */
-    public boolean isColliding(Rectangle shape, Map map, Direction direction) {
-        List<Position> apex = shape.getApex();
-        for (Rectangle shape2 : map.getShapes()) {
-            if (shape2 != shape) {
-                if (shape2.isColliding()) {
-                    List<Position> apex2 = shape2.getApex();
-                    switch (direction) {
-                        case UP -> {
-                            if (apex.get(2).getY() - shape.getVelocity().getVelocityY() <= 0)
-                                return true;
-                            if (apex.get(2).getY() - shape.getVelocity().getVelocityY() <= apex2.get(1).getY()
-                                    && apex.get(2).getX() > apex2.get(1).getX()
-                                    && apex.get(0).getX() < apex2.get(3).getX()
-                                    && apex.get(2).getY() >= apex2.get(1).getY()) {
-                                nearest = shape2;
-                                return true;
-                            }
-                        }
-                        case DOWN -> {
-                            if (apex.get(1).getY() + shape.getVelocity().getVelocityY() >= map.getHeight())
-                                return true;
-                            if (apex.get(1).getY() + shape.getVelocity().getVelocityY() >= apex2.get(0).getY()
-                                    && apex.get(3).getX() > apex2.get(0).getX()
-                                    && apex.get(1).getX() < apex2.get(2).getX()
-                                    && apex.get(1).getY() <= apex2.get(0).getY()) {
-                                nearest = shape2;
-                                return true;
-                            }
-                        }
-                        case RIGHT -> {
-                            if (apex.get(2).getX() + shape.getVelocity().getVelocityX() >= map.getWidth())
-                                return true;
-                            if (apex.get(2).getX() + shape.getVelocity().getVelocityX() >= apex2.get(0).getX()
-                                    && apex.get(3).getY() > apex2.get(0).getY()
-                                    && apex.get(2).getY() < apex2.get(1).getY()
-                                    && apex.get(2).getX() <= apex2.get(0).getX()){
-                                nearest = shape2;
-                                return true;
-                            }
-                        }
-                        case LEFT -> {
-                            if (apex.get(1).getX() - shape.getVelocity().getVelocityX() <= 0)
-                                return true;
-                            if (apex.get(1).getX() - shape.getVelocity().getVelocityX() <= apex2.get(2).getX()
-                                    && apex.get(1).getY() > apex2.get(0).getY()
-                                    && apex.get(0).getY() < apex2.get(1).getY()
-                                    && apex.get(1).getX() >= apex2.get(2).getX()){
-                                nearest = shape2;
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    /*
-    public  boolean touchingBetween(Rectangle r1, Rectangle r2){
-        List<Position> apex1 = r1.getApex();
-        List<Position> apex2 = r2.getApex();
-        if (apex1.get(2).getY() <= apex2.get(1).getY()
-                    && apex1.get(2).getX() > apex2.get(1).getX()
-                    && apex1.get(0).getX() < apex2.get(3).getX()
-                    && apex1.get(2).getY() >= apex2.get(1).getY()) return true;
-        else if(apex1.get(1).getY() >= apex2.get(0).getY()
-                && apex1.get(3).getX() > apex2.get(0).getX()
-                && apex1.get(1).getX() < apex2.get(2).getX()
-                && apex1.get(1).getY() <= apex2.get(0).getY()) return true;
-        else if(apex1.get(2).getX() >= apex2.get(0).getX()
-                && apex1.get(3).getY() > apex2.get(0).getY()
-                && apex1.get(2).getY() < apex2.get(1).getY()
-                && apex1.get(2).getX() <= apex2.get(0).getX()) return true;
-        else if(apex1.get(1).getX() <= apex2.get(2).getX()
-                && apex1.get(1).getY() > apex2.get(0).getY()
-                && apex1.get(0).getY() < apex2.get(1).getY()
-                && apex1.get(1).getX() >= apex2.get(2).getX()) return true;
-        else return false;
-    }
-
-     */
 }
