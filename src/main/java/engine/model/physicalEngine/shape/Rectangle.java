@@ -6,34 +6,69 @@ import java.util.List;
 import engine.model.physicalEngine.environment.Map;
 import engine.model.physicalEngine.movement.*;
 
+/**
+ * The Rectangle class is a class that represent a rectangle. A rectangle is a shape that has a
+ * Position, a length, a width, a Velocity, this rectangle can be moving or not and it can collide.
+ * You can give a Direction to the rectangle to make it move where you want it to go. The rectangle
+ * have a head, it's also a Position, the head will move according the direction.
+ *
+ * @see Position
+ * @see Velocity
+ * @see Direction
+ */
 public class Rectangle {
-    private Position position;
-    private double width;
-    private double height;
-    private boolean moving;
-    private boolean colliding;
-    private Velocity Velocity;
-    private Direction direction;
-    private Position head;
-    
     /**
-     * Rectangle constructor.
-     * Create an object rectangle which has a @Position, a length, a width, a @Velocity, this rectangle can be moving or not and if it can collide or not.
-     * You can give a @Direction to the rectangle to make it move where you want it to go.
-     * The rectangle have a head, it's also a @Position, the head will move according the direction so if we go right first, and then we go to the left
-     * the rectangle is going to flip.
-     *
-     * @param position : the @Position of this @Rectangle
-     * @param width : its width
-     * @param height : its height
-     * @param moving : true if it can move
-     * @param velocity : its @Velocity
-     *
-     * @see Position
-     * @see Velocity
-     * @see Direction
+     * The position of the center of the rectangle.
      */
+    private Position position;
 
+    /**
+     * The width of the rectangle.
+     */
+    private double width;
+
+    /**
+     * The height of the rectangle.
+     */
+    private double height;
+
+    /**
+     * True if the rectangle can move, false if not.
+     */
+    private boolean moving;
+
+    /**
+     * True if the rectangle can collide, false if not.
+     */
+    private boolean colliding;
+
+    /**
+     * The velocity of the rectangle.
+     */
+    private Velocity Velocity;
+
+    /**
+     * The direction of the rectangle.
+     */
+    private Direction direction;
+
+    /**
+     * The head of the rectangle.
+     */
+    private Position head;
+
+    /**
+     * Rectangle constructor. Create an object rectangle which has a Position, a length, a width, a
+     * Velocity, this rectangle can be moving or not and it can collide by default. You can give a
+     * Direction to the rectangle to make it move where you want it to go. The rectangle have a head,
+     * it's also a Position, the head will move according the direction.
+     *
+     * @param position - the position of the center of the rectangle
+     * @param width    - the width of the rectangle
+     * @param height   - the height of the rectangle
+     * @param moving   - true if the rectangle can move, false if not
+     * @param velocity - the velocity of the rectangle
+     */
     public Rectangle(Position position, double width, double height, boolean moving, Velocity velocity) {
         this.position = position;
         this.width = width;
@@ -45,7 +80,21 @@ public class Rectangle {
         this.head = new Position(position.getX() + height / 2, position.getY());
     }
 
-    public Rectangle(Position position, double width, double height, boolean moving, Velocity velocity, boolean isColliding) {
+    /**
+     * Rectangle constructor. Create an object rectangle which has a Position, a length, a width, a
+     * Velocity, this rectangle can be moving or not and it can collide. You can give a Direction to the
+     * rectangle to make it move where you want it to go. The rectangle have a head, it's also a
+     * Position, the head will move according the direction.
+     *
+     * @param position    - the position of the center of the rectangle
+     * @param width       - the width of the rectangle
+     * @param height      - the height of the rectangle
+     * @param moving      - true if the rectangle can move, false if not
+     * @param velocity    - the velocity of the rectangle
+     * @param isColliding - true if the rectangle can collide, false if not
+     */
+    public Rectangle(Position position, double width, double height, boolean moving, Velocity velocity,
+            boolean isColliding) {
         this.position = position;
         this.width = width;
         this.height = height;
@@ -97,6 +146,7 @@ public class Rectangle {
 
     /**
      * Return the width of the rectangle.
+     * 
      * @return width
      */
     public double getWidth() {
@@ -105,6 +155,7 @@ public class Rectangle {
 
     /**
      * Set the width of the rectangle.
+     * 
      * @param width
      */
     public void setWidth(double width) {
@@ -113,6 +164,7 @@ public class Rectangle {
 
     /**
      * Return the height of the rectangle.
+     * 
      * @return height
      */
     public double getHeight() {
@@ -121,6 +173,7 @@ public class Rectangle {
 
     /**
      * Set the height of the rectangle.
+     * 
      * @param height
      */
     public void setHeight(double height) {
@@ -128,13 +181,11 @@ public class Rectangle {
     }
 
     /**
-     * Create the 4 apexes of the rectangle and put them in a list.
-     * The apexes are the 4 corners of the rectangle.
-     * When a rectangle is created, only the center of the rectangle is added to the @Map but we virtually create the other apex.
+     * Create the 4 apexes of the rectangle and put them in a list. The apexes are the 4 corners of the
+     * rectangle. When a rectangle is created, only the center of the rectangle is added to the Map but
+     * we virtually create the other apex.
      *
-     *
-     * @return a list of the @Position of the 4 apexes of the rectangle
-     * @see Position
+     * @return a list of the Position of the 4 apexes of the rectangle
      */
     public List<Position> getApex() {
         List<Position> apex = new ArrayList<>();
@@ -148,8 +199,7 @@ public class Rectangle {
     /**
      * Return the head of the rectangle.
      *
-     * @return the @Position of the head of the rectangle
-     * @see Position
+     * @return the Position of the head of the rectangle
      */
     public Position getHead() {
         return this.head;
@@ -159,17 +209,15 @@ public class Rectangle {
      * Set the head of the rectangle.
      *
      * @param position
-     * @see Position
      */
     public void setHead(Position position) {
         this.head = position;
     }
 
     /**
-     * Give us the @Position of the rectangle.
+     * Give us the Position of the rectangle.
      *
      * @return the position of the rectangle
-     * @see Position
      */
 
     public Position getPosition() {
@@ -177,10 +225,9 @@ public class Rectangle {
     }
 
     /**
-     * Change the @Position of the rectangle by another @Position.
+     * Change the Position of the rectangle by another Position.
      *
      * @param point
-     * @see Position
      */
 
     public void setPosition(Position point) {
@@ -188,31 +235,28 @@ public class Rectangle {
     }
 
     /**
-     * Set the X and/or the Y of the @Position of the rectangle.
+     * Set the X and/or the Y of the Position of the rectangle.
      *
      * @param x
      * @param y
-     * @see Position
      */
     public void setPosition(double x, double y) {
         this.position.setPosition(x, y);
     }
 
     /**
-     * Return the X of the @Position of the rectangle.
+     * Return the X of the Position of the rectangle.
      *
-     * @return the X of the @Position of the rectangle
-     * @see Position
+     * @return the X of the Position of the rectangle
      */
     public double getX() {
         return this.position.getX();
     }
 
     /**
-     * Return the Y of the @Position of the rectangle.
+     * Return the Y of the Position of the rectangle.
      *
-     * @return the Y of the @Position of the rectangle
-     * @see Position
+     * @return the Y of the Position of the rectangle
      */
 
     public double getY() {
@@ -259,10 +303,9 @@ public class Rectangle {
     }
 
     /**
-     * Return the @Velocity of the rectangle.
+     * Return the Velocity of the rectangle.
      *
-     * @return the @Velocity of the rectangle
-     * @see Velocity
+     * @return the Velocity of the rectangle
      */
 
     public Velocity getVelocity() {
@@ -270,10 +313,9 @@ public class Rectangle {
     }
 
     /**
-     * Set the @Velocity of the rectangle with a new @Velocity.
+     * Set the Velocity of the rectangle with a new Velocity.
      *
      * @param velocity
-     * @see Velocity
      */
 
     public void setVelocity(Velocity velocity) {
@@ -281,10 +323,9 @@ public class Rectangle {
     }
 
     /**
-     * Return the @Direction of the rectangle.
+     * Return the Direction of the rectangle.
      *
-     * @return the @Direction of the rectangle
-     * @see Direction
+     * @return the Direction of the rectangle
      */
 
     public Direction getDirection() {
@@ -292,10 +333,9 @@ public class Rectangle {
     }
 
     /**
-     * Set the @Direction of the rectangle with a new @Direction.
+     * Set the Direction of the rectangle with a new Direction.
      *
      * @param direction
-     * @see Direction
      */
 
     public void setDirection(Direction direction) {

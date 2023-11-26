@@ -1,13 +1,22 @@
 package engine.model.physicalEngine.movement;
 
+/**
+ * This class is used to represent a position in a 2D space
+ */
 public class Position {
+    /**
+     * The x coordinate of the position
+     */
     private double x;
+
+    /**
+     * The y coordinate of the position
+     */
     private double y;
 
     /**
-     * Constructor of Position
-     * Create an object position with x and y coordinates.
-     * That can be easily used to represent a point in a 2D space.
+     * Constructor of Position. Create an object position with x and y coordinates. That can be easily
+     * used to represent a point in a 2D space.
      *
      * @param x
      * @param y
@@ -19,7 +28,8 @@ public class Position {
     }
 
     /**
-     * return the x coordinate of the position
+     * Return the x coordinate of the position
+     * 
      * @return x
      */
     public double getX() {
@@ -27,7 +37,8 @@ public class Position {
     }
 
     /**
-     * return the y coordinate of the position
+     * Return the y coordinate of the position
+     * 
      * @return y
      */
     public double getY() {
@@ -35,7 +46,8 @@ public class Position {
     }
 
     /**
-     * set the x coordinate of the position
+     * Set the x coordinate of the position
+     * 
      * @param x
      */
     public void setX(double x) {
@@ -43,7 +55,8 @@ public class Position {
     }
 
     /**
-     * set the y coordinate of the position
+     * Set the y coordinate of the position
+     * 
      * @param y
      */
     public void setY(double y) {
@@ -51,7 +64,8 @@ public class Position {
     }
 
     /**
-     * set the x and y coordinates of the position
+     * Set the x and y coordinates of the position
+     * 
      * @param x
      * @param y
      */

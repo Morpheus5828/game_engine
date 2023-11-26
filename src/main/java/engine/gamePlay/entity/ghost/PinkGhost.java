@@ -1,29 +1,23 @@
-package engine.gamePlay.aiEngine;
+package engine.gamePlay.entity.ghost;
 
-import engine.gamePlay.Category;
-import engine.gamePlay.Ghost;
-import engine.gamePlay.Pacman;
 import engine.model.Kernel;
-import engine.model.physicalEngine.shape.Rectangle;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class PinkGhost extends Ghost {
-
     private double x;
     private double y;
 
-
     public PinkGhost(double x, double y, double width, double height, Kernel kernel, Image image) {
         super();
-        this.rectangle = kernel.addEntity(x,y , width, height, image, true, 16, 16, false);
+        this.rectangle = kernel.addEntity(x, y, width, height, image, true, 16, 16, false);
         this.x = x;
         this.y = y;
     }
 
     public PinkGhost(double x, double y, double width, double height, Kernel kernel, Color color) {
         super();
-        this.rectangle = kernel.addEntity(x,y , width, height, color, true, 16, 16, false);
+        this.rectangle = kernel.addEntity(x, y, width, height, color, true, 16, 16, false);
         this.x = x;
         this.y = y;
     }

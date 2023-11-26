@@ -18,12 +18,13 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
 
 public class GraphTest {
     private Graph graph;
@@ -51,14 +52,14 @@ public class GraphTest {
     @Test
     public void testDijkstraFinalShape() {
         this.graph = new Graph(7);
-        FinalShape src = new FinalShape(32 * 16, 32 * 16, Color.PINK, 32, 32, false, Category.PACMAN, new Velocity(0, 0), new PhysicalEngine(32*23, 32*23));
-        FinalShape one = new FinalShape(32 * 16, 32 * 15, Color.PINK, 32, 32, false, Category.PACMAN,new Velocity(0, 0), new PhysicalEngine(32*23, 32*23));
-        FinalShape two = new FinalShape(32 * 17, 32 * 15, Color.PINK, 32, 32, false, Category.PACMAN,new Velocity(0, 0), new PhysicalEngine(32*23, 32*23));
-        FinalShape three = new FinalShape(32 * 18, 32 * 15, Color.PINK, 32, 32, false, Category.PACMAN,new Velocity(0, 0), new PhysicalEngine(32*23, 32*23));
-        FinalShape four = new FinalShape(33 * 19, 32 * 15, Color.PINK, 32, 32, false, Category.PACMAN,new Velocity(0, 0), new PhysicalEngine(32*23, 32*23));
-        FinalShape five = new FinalShape(33 * 20, 32 * 15, Color.PINK, 32, 32, false, Category.PACMAN,new Velocity(0, 0), new PhysicalEngine(32*23, 32*23));
-        FinalShape six = new FinalShape(33 * 20, 32 * 14, Color.PINK, 32, 32, false, Category.PACMAN,new Velocity(0, 0), new PhysicalEngine(32*23, 32*23));
-        FinalShape dest = new FinalShape(33 * 20, 32 * 16, Color.PINK, 32, 32, false, Category.PACMAN,new Velocity(0, 0), new PhysicalEngine(32*23, 32*23));
+        FinalShape src = new FinalShape(32 * 16, 32 * 16, Color.PINK, 32, 32, false, new Velocity(0, 0), new PhysicalEngine(32*23, 32*23));
+        FinalShape one = new FinalShape(32 * 16, 32 * 15, Color.PINK, 32, 32, false, new Velocity(0, 0), new PhysicalEngine(32*23, 32*23));
+        FinalShape two = new FinalShape(32 * 17, 32 * 15, Color.PINK, 32, 32, false, new Velocity(0, 0), new PhysicalEngine(32*23, 32*23));
+        FinalShape three = new FinalShape(32 * 18, 32 * 15, Color.PINK, 32, 32, false, new Velocity(0, 0), new PhysicalEngine(32*23, 32*23));
+        FinalShape four = new FinalShape(33 * 19, 32 * 15, Color.PINK, 32, 32, false, new Velocity(0, 0), new PhysicalEngine(32*23, 32*23));
+        FinalShape five = new FinalShape(33 * 20, 32 * 15, Color.PINK, 32, 32, false, new Velocity(0, 0), new PhysicalEngine(32*23, 32*23));
+        FinalShape six = new FinalShape(33 * 20, 32 * 14, Color.PINK, 32, 32, false, new Velocity(0, 0), new PhysicalEngine(32*23, 32*23));
+        FinalShape dest = new FinalShape(33 * 20, 32 * 16, Color.PINK, 32, 32, false, new Velocity(0, 0), new PhysicalEngine(32*23, 32*23));
 
         List<FinalShape> nodes = new ArrayList<>();
         nodes.add(src);
@@ -107,13 +108,15 @@ public class GraphTest {
     @Test
     public void testCreateAutomatically() throws ParserConfigurationException, IOException, SAXException {
         Kernel kernel = new Kernel(800, 800, Color.BLUE);
-        new DrawMap(new XmlReader(new File("src/main/resources/engine/map/levelOne.tmx"), 23, 23), kernel);
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("engine/map/levelOne.tmx");
+        BufferedReader file = new BufferedReader(new InputStreamReader(inputStream));
+        new DrawMap(new XmlReader(file, 23, 23), kernel);
 
         this.graph = new Graph(530);
-        this.graph.createAutomatically(
-                kernel.getFinalShapes(),
-                kernel.getPinkGhost()
-        );
+        // this.graph.createAutomatically(
+        //         kernel.getFinalShapes(),
+        //         kernel.getPinkGhost()
+        // );
         this.graph.dijkstra();
 
         List<Map.Entry<Integer, List<Integer>>> entry = new ArrayList<>(graph.getShortestPaths().entrySet());

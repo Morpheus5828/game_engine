@@ -4,40 +4,61 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
+/**
+ * This class is used to represent a map in a 2D space. Implement Drawing.
+ * 
+ * @see Drawing
+ */
 public class MapDrawing implements Drawing {
+    /**
+     * The width of the map
+     */
     private double width;
+
+    /**
+     * The length of the map
+     */
     private double height;
+
+    /**
+     * The color of the map
+     */
     private Color color;
+
+    /**
+     * The image of the map
+     */
     private Image image;
 
     /**
-     * Constructor of MapDrawing
-     * Draw a map with a specific width, length and color.
-     * Implement the Drawing interface.
+     * Constructor of MapDrawing. Draw a map with a specific width, length and color.
      *
      * @param width
      * @param height
      * @param color
-     *
-     * @see Drawing
      */
-
     public MapDrawing(double width, double height, Color color) {
         this.width = width;
         this.height = height;
         this.color = color;
     }
 
+    /**
+     * Constructor of MapDrawing. Draw a map with a specific width, length and image.
+     *
+     * @param width
+     * @param height
+     * @param image
+     */
     public MapDrawing(double width, double height, Image image) {
         this.width = width;
         this.height = height;
         this.image = image;
     }
+
     /**
-     * return the width of the map
+     * Return the width of the map
+     * 
      * @return width
      */
     public double getWidth() {
@@ -45,8 +66,9 @@ public class MapDrawing implements Drawing {
     }
 
     /**
-     * return the length of the map
-     * @return length
+     * Return the height of the map
+     * 
+     * @return height
      */
     public double getheight() {
         return height;
@@ -54,16 +76,13 @@ public class MapDrawing implements Drawing {
 
     /**
      * return the color of the map
+     * 
      * @return color
      */
     public Color getColor() {
         return color;
     }
 
-    /**
-     * Draw the map with a specific width, length and color
-     * @param context
-     */
     @Override
     public void drawColor(GraphicsContext context) {
         context.setFill(this.color);

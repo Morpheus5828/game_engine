@@ -2,17 +2,40 @@ package engine.model.inputOutputEngine;
 
 import java.awt.event.KeyEvent;
 
+/**
+ * This class is used to manage the inputs of the game. It will manage the keyboard inputs.
+ * 
+ * @see KeyEvent
+ * @see Direction
+ */
 public class EventListener {
+    /**
+     * The current direction.
+     */
     private Direction currentDirection;
 
+    /**
+     * Constructor of the EventListener. The EventListener is the engine that will manage the inputs of
+     * the game. It will manage the keyboard inputs.
+     */
     public EventListener() {
         currentDirection = Direction.NONE;
     }
 
+    /**
+     * Return the current direction.
+     * 
+     * @return currentDirection
+     */
     public Direction getCurrentDirection() {
         return currentDirection;
     }
 
+    /**
+     * Get the key pressed and set the current direction.
+     * 
+     * @param keyCode
+     */
     public void keyPressed(int keyCode) {
         switch (keyCode) {
         case KeyEvent.VK_UP:
@@ -30,6 +53,11 @@ public class EventListener {
         }
     }
 
+    /**
+     * Get the key released and set the current direction to NONE.
+     * 
+     * @param keyCode
+     */
     public void keyReleased(int keyCode) {
         if (keyCode == KeyEvent.VK_UP && currentDirection == Direction.UP) {
             currentDirection = Direction.NONE;

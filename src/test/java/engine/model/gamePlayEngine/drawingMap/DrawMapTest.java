@@ -11,6 +11,9 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
 
 public class DrawMapTest {
     private XmlReader xmlReader;
@@ -19,7 +22,9 @@ public class DrawMapTest {
 
     @BeforeEach
     public void init() throws ParserConfigurationException, IOException, SAXException {
-        this.xmlReader = new XmlReader(new File("src/main/resources/engine/map/levelOne.tmx"), 23, 23);
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("engine/map/levelOne.tmx");
+        BufferedReader file = new BufferedReader(new InputStreamReader(inputStream));
+        this.xmlReader = new XmlReader(file, 23, 23);
         this.kernel = new Kernel(600, 600, Color.BLACK);
         this.drawMap = new DrawMap(this.xmlReader, this.kernel);
     }

@@ -1,50 +1,76 @@
 package engine;
 
-import engine.gamePlay.Ghost;
 import engine.gamePlay.HUD;
-import engine.gamePlay.Pacman;
-import engine.gamePlay.Wall;
 import engine.gamePlay.drawingMap.DrawMap;
 import engine.gamePlay.drawingMap.XmlReader;
 import engine.model.Kernel;
-import engine.model.physicalEngine.movement.Position;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.List;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
 
+/**
+ * This class is used to represent the game.
+ * 
+ * @see Application
+ */
 public class GamePlay extends Application {
+    /**
+     * The width of the window.
+     */
     private double width = 800;
-    private double height = 800;
-    private Kernel kernel;
-    private HUD HUD;
-    private List<Ghost> ghostsList;
-    private DrawMap map;
-    private Position initPositionGhost;
-    private Position initPositionPacman;
 
+    /**
+     * The height of the window.
+     */
+    private double height = 800;
+
+    /**
+     * The kernel of the game.
+     */
+    private Kernel kernel;
+
+    /**
+     * The HUD of the game.
+     */
+    private HUD HUD;
+
+    /**
+     * Initialize the game.
+     * 
+     * @throws Exception
+     */
     public void initGame() throws Exception {
         kernel = new Kernel(width, height, Color.BLACK);
-        DrawMap map = new DrawMap(new XmlReader(new File("src/main/resources/engine/map/levelOne.tmx"), 23, 23), kernel);
-        ghostsList = map.getGhostsList();
-        initPositionGhost= map.getInitPositionGhost();
-        initPositionPacman= map.getInitPositionPacman();
+
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("engine/map/levelOne.tmx");
+        BufferedReader file = new BufferedReader(new InputStreamReader(inputStream));
+        DrawMap map = new DrawMap(new XmlReader(file, 23, 23), kernel);
 
         kernel.drawStaticEntities();
         kernel.drawMovingEntities();
 
-        HUD = new HUD(width, height);
+        HUD = new HUD();
+    }
+
+    /**
+     * Update the HUD.
+     * 
+     * @param root
+     */
+    public void updateHUD(Parent root) {
+        HUD.updateScore(root);
+        HUD.updateLives(root);
     }
 
     @Override
@@ -64,35 +90,20 @@ public class GamePlay extends Application {
         livesField.setText(String.valueOf(HUD.getLives()));
         Scene scene = new Scene(root);
 
+        updateHUD(root);
+
         stage.setTitle("Pacman");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
 
-
         stage.setOnCloseRequest(event -> {
             Platform.exit();
             System.exit(0);
         });
-
-        /*
-        new Thread(() -> {
-            while (true) {
-                try {
-                    if(kernel.mainShapeTouching(ghostsList.get(0).getRectangle())){
-                        System.out.println("REINITIALISER LA POSITION DE PACMAN ET DU FANTOME");
-                    }
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }).start();
-
-         */
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         launch();
     }
 }

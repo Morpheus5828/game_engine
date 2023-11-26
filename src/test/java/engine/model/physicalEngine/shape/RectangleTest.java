@@ -12,14 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import engine.model.physicalEngine.movement.*;
-import javafx.scene.paint.Color;
 
 public class RectangleTest {
     private Rectangle rectangle;
     private Position position;
     private double height;
     private double width;
-    private Color color;
     private boolean moving;
     private Velocity velocity;
 
@@ -28,7 +26,6 @@ public class RectangleTest {
         position = new Position(10, 10);
         height = 10;
         width = 10;
-        color = Color.YELLOW;
         moving = true;
         velocity = new Velocity(10, 10);
         rectangle = new Rectangle(position, width, height, moving, velocity);

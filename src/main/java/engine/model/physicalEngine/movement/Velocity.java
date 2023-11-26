@@ -1,15 +1,23 @@
 package engine.model.physicalEngine.movement;
 
+/**
+ * This class is used to represent a velocity in a 2D space
+ */
 public class Velocity {
+    /**
+     * The velocity on the x-axis
+     */
     private double velocityX;
+
+    /**
+     * The velocity on the y-axis
+     */
     private double velocityY;
 
     /**
-     * Constructor of Velocity.
-     * The velocity is basically the speed of an entity.
-     * The velocity is composed of two components: velocityX and velocityY.
-     * The velocityX is the speed of the entity on the x-axis.
-     * The velocityY is the speed of the entity on the y-axis.
+     * Constructor of Velocity. The velocity is basically the speed of an entity. The velocity is
+     * composed of two components: velocityX and velocityY. The velocityX is the speed of the entity on
+     * the x-axis. The velocityY is the speed of the entity on the y-axis.
      *
      * @param velocityX
      * @param velocityY
@@ -22,6 +30,7 @@ public class Velocity {
 
     /**
      * Return the velocity on the x-axis.
+     * 
      * @return velocityX
      */
     public double getVelocityX() {
@@ -30,6 +39,7 @@ public class Velocity {
 
     /**
      * Return the velocity on the y-axis.
+     * 
      * @return velocityY
      */
 
@@ -39,6 +49,7 @@ public class Velocity {
 
     /**
      * Set the velocity on the x-axis.
+     * 
      * @param velocityX
      */
 
@@ -48,6 +59,7 @@ public class Velocity {
 
     /**
      * Set the velocity on the y-axis.
+     * 
      * @param velocityY
      */
 
@@ -57,6 +69,7 @@ public class Velocity {
 
     /**
      * Set the velocity on the x-axis and the y-axis.
+     * 
      * @param velocityX
      * @param velocityY
      */
@@ -67,6 +80,7 @@ public class Velocity {
 
     /**
      * Add a bonus to the velocity on the x-axis and the y-axis.
+     * 
      * @param bonusX
      * @param bonusY
      */

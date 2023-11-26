@@ -3,7 +3,6 @@ package engine.model.physicalEngine.environment;
 import engine.model.physicalEngine.movement.Position;
 import engine.model.physicalEngine.movement.Velocity;
 import engine.model.physicalEngine.shape.Rectangle;
-import javafx.scene.paint.Color;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -8,16 +8,17 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
-import java.io.File;
 import java.io.IOException;
+import java.io.BufferedReader;
+import org.xml.sax.InputSource;
 
 public class XmlReader {
     private int[][] data;
     private int width;
     private int height;
-    private File file;
+    private BufferedReader file;
 
-    public XmlReader(File file, int width, int height) {
+    public XmlReader(BufferedReader file, int width, int height) {
         this.file = file;
         this.width = width;
         this.height = height;
@@ -27,7 +28,7 @@ public class XmlReader {
     public String extractData() throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
-        Document doc = db.parse(file);
+        Document doc = db.parse(new InputSource(file));
         doc.getDocumentElement().normalize();
         NodeList nodeList = doc.getElementsByTagName("data");
         return nodeList.item(1).getTextContent();

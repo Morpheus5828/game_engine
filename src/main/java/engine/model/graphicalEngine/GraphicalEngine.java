@@ -8,6 +8,14 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+/**
+ * This class is used to represent a graphical engine. The role of the GraphicalEngine is to draw
+ * the map and the entities.
+ * 
+ * @see GraphicsContext
+ * @see Canvas
+ * @see Group
+ */
 public class GraphicalEngine {
     private GraphicsContext playGroundGraphicsContext;
     private GraphicsContext graphicsContext;
@@ -17,15 +25,7 @@ public class GraphicalEngine {
     private boolean keyIsPressed = false;
 
     /**
-     * Constructor of GraphicalEngine
-     * The role of the GraphicalEngine is to draw the map and the entities.
-     * It is also used to clear the canvas.
-     * The playGround is a JavaFX object that contains the canvas.
-     * The canvas is the place where the map and the entities are drawn.
-     * The canvas is a JavaFX object.
-     * The canvas has the width and the length of the window.
-     * The GraphicsContext is the object that allows to draw on the canvas.
-     * The Group is a JavaFX object that contains the canvas.
+     * Constructor of GraphicalEngine. Draw a map with a specific width, length and color.
      *
      * @param width
      * @param height
@@ -43,6 +43,12 @@ public class GraphicalEngine {
         drawPlayGround(width, height, color);
     }
 
+    /**
+     * Add an event listener to the canvas
+     * 
+     * @param movementController
+     * @see EventListener
+     */
     public void addEventListener(EventListener movementController) {
         this.canvas.setFocusTraversable(true);
         this.playGround.setOnKeyPressed(event -> {
@@ -51,16 +57,27 @@ public class GraphicalEngine {
         });
     }
 
+    /**
+     * Return if a key is pressed
+     * 
+     * @return boolean
+     */
     public boolean isKeyIsPressed() {
         return keyIsPressed;
     }
 
+    /**
+     * Set if a key is pressed
+     * 
+     * @param keyIsPressed
+     */
     public void setKeyIsPressed(boolean keyIsPressed) {
         this.keyIsPressed = keyIsPressed;
     }
 
     /**
      * Return the GraphicsContext of the canvas
+     * 
      * @return GraphicsContext
      */
     public GraphicsContext getGraphicsContext() {
@@ -69,6 +86,7 @@ public class GraphicalEngine {
 
     /**
      * Return the Group of the canvas
+     * 
      * @return Group
      */
     public Group getPlayGround() {
@@ -77,10 +95,10 @@ public class GraphicalEngine {
 
     /**
      * Draw the map on the canvas
+     * 
      * @param width
      * @param height
      * @param color
-     *
      * @see MapDrawing
      */
 
@@ -90,19 +108,28 @@ public class GraphicalEngine {
     }
 
     /**
-     * Draw the entities on the canvas
+     * Draw the entities with the color on the canvas
+     * 
      * @param drawing
-     *
      * @see Drawing
      */
     public void drawColor(Drawing drawing) {
         drawing.drawColor(this.graphicsContext);
     }
 
+    /**
+     * Draw the entities with the image on the canvas
+     * 
+     * @param drawing
+     * @see Drawing
+     */
     public void drawImage(Drawing drawing) {
         drawing.drawImage(this.graphicsContext);
     }
 
+    /**
+     * Clear the canvas
+     */
     public void clearShape(double x, double y, double width, double height) {
         this.graphicsContext.clearRect(x, y, width, height);
     }
