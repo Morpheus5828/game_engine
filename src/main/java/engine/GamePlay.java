@@ -6,13 +6,11 @@ import engine.gamePlay.drawingMap.XmlReader;
 import engine.gamePlay.entity.Pacman;
 import engine.gamePlay.entity.ghost.Ghost;
 import engine.model.Kernel;
-import engine.model.physicalEngine.movement.Position;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -105,7 +103,6 @@ public class GamePlay extends Application {
         stage.setResizable(false);
         stage.show();
 
-
         stage.setOnCloseRequest(event -> {
             Platform.exit();
             System.exit(0);
@@ -122,7 +119,9 @@ public class GamePlay extends Application {
                             ghostsList.get(0).reinit();
                         } else {
                             try {
-                                initGame();
+
+                                Platform.exit();
+                                System.exit(0);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
