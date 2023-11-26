@@ -119,11 +119,9 @@ public class GamePlay extends Application {
         new Thread(() -> {
             while (true) {
                 try {
-                    for (PacGum pacGum : pacGumsList) {
-                          if(pacGum.getRectangle().shapeTouching(pacman.getPacman())) {
-                              pacGumsList.remove(pacGum);
-                              updateHUD(root);
-                          }
+                    if (pacman.getPacman().shapeTouching(pacGumsList.get(0).getRectangle())) {
+                        pacGumsList.remove(0);
+                        updateHUD(root);
                     }
                     if (ghostsList.get(0).getRectangle().shapeTouching(pacman.getPacman())) {
                         HUD.removeLife();
