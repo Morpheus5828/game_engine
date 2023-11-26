@@ -35,15 +35,15 @@ public class MovementTest {
 
     //Remarque : l'axe des y est inversé
     @Test
-    public void testIsColliding() {
+    public void testWillCollide() {
         map.addShape(rectangle2);
-        assertFalse(movement.isColliding(rectangle, map, Direction.RIGHT));
-        assertFalse(movement.isColliding(rectangle, map, Direction.DOWN));
+        assertFalse(movement.willCollide(rectangle, map, Direction.RIGHT));
+        assertFalse(movement.willCollide(rectangle, map, Direction.DOWN));
         map.removeShape(rectangle2);
         map.addShape(rectangle3);
         map.addShape(rectangle4);
-        assertTrue(movement.isColliding(rectangle, map, Direction.RIGHT));
-        assertTrue(movement.isColliding(rectangle, map, Direction.DOWN));
+        assertTrue(movement.willCollide(rectangle, map, Direction.RIGHT));
+        assertTrue(movement.willCollide(rectangle, map, Direction.DOWN));
     }
 
 

@@ -7,19 +7,20 @@ import java.util.List;
 
 public class Movement {
     /**
-     * Shape has to create a movement which be call for moving.
+     * If obstacle != null, the shape in movement will stop before this obstacle
      **/
-    private Rectangle nearest;
+    private Rectangle obstacle;
 
     /**
-     * Check if the @Rectangle is colliding with another @Rectangle in the @Map
+     * Check if the @Rectangle will collide with another @Rectangle in the @Map following a @Direction
      *
-     * @param shape
-     * @param map
-     * @param direction
-     * @return true if the @Rectangle is colliding with another @Rectangle in the @Map
+     * @param shape : the @Rectangle in movement
+     * @param map : the @Map
+     * @param direction : the @Direction following by the @Rectangle
+     *                  
+     * @return true if the @Rectangle will collide with another @Rectangle in the @Map
      */
-    public boolean isColliding(Rectangle shape, Map map, Direction direction) {
+    public boolean willCollide(Rectangle shape, Map map, Direction direction) {
         List<Position> apex = shape.getApex();
         for (Rectangle shape2 : map.getShapes()) {
             if (shape2 != shape) {
@@ -31,7 +32,7 @@ public class Movement {
                                     && apex.get(2).getX() > apex2.get(1).getX()
                                     && apex.get(0).getX() < apex2.get(3).getX()
                                     && apex.get(2).getY() >= apex2.get(1).getY()) {
-                                nearest = shape2;
+                                obstacle = shape2;
                                 return true;
                             }
                         }
@@ -40,7 +41,7 @@ public class Movement {
                                     && apex.get(3).getX() > apex2.get(0).getX()
                                     && apex.get(1).getX() < apex2.get(2).getX()
                                     && apex.get(1).getY() <= apex2.get(0).getY()) {
-                                nearest = shape2;
+                                obstacle = shape2;
                                 return true;
                             }
                         }
@@ -49,7 +50,7 @@ public class Movement {
                                     && apex.get(3).getY() > apex2.get(0).getY()
                                     && apex.get(2).getY() < apex2.get(1).getY()
                                     && apex.get(2).getX() <= apex2.get(0).getX()){
-                                nearest = shape2;
+                                obstacle = shape2;
                                 return true;
                             }
                         }
@@ -58,7 +59,7 @@ public class Movement {
                                     && apex.get(1).getY() > apex2.get(0).getY()
                                     && apex.get(0).getY() < apex2.get(1).getY()
                                     && apex.get(1).getX() >= apex2.get(2).getX()){
-                                nearest = shape2;
+                                obstacle = shape2;
                                 return true;
                             }
                         }
@@ -71,26 +72,27 @@ public class Movement {
 
 
     /**
-     * Update the X position of the @Rectangle in the @Map after checking if there is nothing to collide with
+     * Update the X position of the @Rectangle in the @Map depending on whether the @Rectangle will collide or not
      *
-     * @param direction
-     * @param shape
-     * @param map
+     * @param direction : the @Direction following by the @Rectangle
+     * @param shape : the @Rectangle in movement
+     * @param map : the @Map
      */
     public boolean updatePositonX(Direction direction, Rectangle shape, Map map) {
-        if (!isColliding(shape, map, direction)) {
+        if (!willCollide(shape, map, direction)) {
             if (direction == Direction.RIGHT) {
                 shape.setPosition(shape.getPosition().getX() + shape.getVelocity().getVelocityX(),
                         shape.getPosition().getY());
-                return false;
+                return true;
             } else if (direction == Direction.LEFT) {
                 shape.setPosition(shape.getPosition().getX() - shape.getVelocity().getVelocityX(),
                         shape.getPosition().getY());
-                return false;
+                return true;
             }
+            else return false;
         }
         /*
-        if (nearest == null) {
+        if (obstacle == null) {
             if (direction == Direction.RIGHT) {
                 shape.setPosition(0,
                         shape.getPosition().getY());
@@ -102,26 +104,26 @@ public class Movement {
 
          */
         if (direction == Direction.RIGHT) {
-            shape.setPosition(nearest.getX() - nearest.getWidth() /2 - shape.getWidth() /2,
+            shape.setPosition(obstacle.getX() - obstacle.getWidth() /2 - shape.getWidth() /2,
                     shape.getPosition().getY());
             return true;
         } else if (direction == Direction.LEFT) {
-            shape.setPosition(nearest.getX() + nearest.getWidth() /2 + shape.getWidth() /2 + 2,
+            shape.setPosition(obstacle.getX() + obstacle.getWidth() /2 + shape.getWidth() /2 + 2,
                     shape.getPosition().getY());
             return true;
         }
-        return true;
+        return false;
     }
 
     /**
-     * Update the Y position of the @Rectangle in the @Map after checking if there is nothing to collide with
+     * Update the Y position of the @Rectangle in the @Map depending on whether the @Rectangle will collide or not
      *
-     * @param direction
-     * @param shape
-     * @param map
+     * @param direction : the @Direction following by the @Rectangle
+     * @param shape : the @Rectangle in movement
+     * @param map : the @Map
      */
     public boolean updatePositonY(Direction direction, Rectangle shape, Map map) {
-        if (!isColliding(shape, map, direction)) {
+        if (!willCollide(shape, map, direction)) {
             if (direction == Direction.UP) {
                 shape.setPosition(shape.getPosition().getX(),
                         shape.getPosition().getY() - shape.getVelocity().getVelocityY());
@@ -133,10 +135,10 @@ public class Movement {
             return false;
         }
         if (direction == Direction.DOWN) {
-            shape.setPosition(shape.getPosition().getX(), nearest.getY() - nearest.getHeight() /2 - shape.getHeight() /2);
+            shape.setPosition(shape.getPosition().getX(), obstacle.getY() - obstacle.getHeight() /2 - shape.getHeight() /2);
             return true;
         } else if (direction == Direction.UP) {
-            shape.setPosition(shape.getPosition().getX(), nearest.getY() + nearest.getHeight() /2 + shape.getHeight() /2 + 2);
+            shape.setPosition(shape.getPosition().getX(), obstacle.getY() + obstacle.getHeight() /2 + shape.getHeight() /2 + 2);
             return true;
         }
         return false;
