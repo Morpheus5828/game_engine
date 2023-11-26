@@ -3,6 +3,7 @@ package engine;
 import engine.gamePlay.HUD;
 import engine.gamePlay.drawingMap.DrawMap;
 import engine.gamePlay.drawingMap.XmlReader;
+import engine.gamePlay.entity.PacGum;
 import engine.gamePlay.entity.Pacman;
 import engine.gamePlay.entity.ghost.Ghost;
 import engine.model.Kernel;
@@ -51,6 +52,8 @@ public class GamePlay extends Application {
     private HUD HUD;
     private List<Ghost> ghostsList;
     private Pacman pacman;
+    private List<PacGum> pacGumsList;
+    private int scorehandler = 0;
 
     /**
      * Initialize the game.
@@ -63,6 +66,9 @@ public class GamePlay extends Application {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("engine/map/levelOne.tmx");
         BufferedReader file = new BufferedReader(new InputStreamReader(inputStream));
         DrawMap map = new DrawMap(new XmlReader(file, 23, 23), kernel);
+        pacGumsList = map.getPacGumsList();
+        scorehandler = pacGumsList.size();
+        System.out.println(scorehandler);
         ghostsList = map.getGhostsList();
         pacman = map.getPacman();
         kernel.drawStaticEntities();
@@ -77,6 +83,8 @@ public class GamePlay extends Application {
      * @param root
      */
     public void updateHUD(Parent root) {
+        int actual = scorehandler - pacGumsList.size();
+        HUD.addScore(actual * 100);
         HUD.updateScore(root);
         HUD.updateLives(root);
     }
@@ -114,6 +122,12 @@ public class GamePlay extends Application {
         new Thread(() -> {
             while (true) {
                 try {
+                    for (PacGum pacGum : pacGumsList) {
+                          if(pacGum.getRectangle().shapeTouching(pacman.getPacman())) {
+                              pacGumsList.remove(pacGum);
+                              updateHUD(root);
+                          }
+                    }
                     if (ghostsList.get(0).getRectangle().shapeTouching(pacman.getPacman())) {
                         HUD.removeLife();
                         updateHUD(root);

@@ -63,5 +63,9 @@ public class PacGum {
     public Position getPosition() {
         return pacGum.getRectangle().getPosition();
     }
+    public FinalShape getRectangle() {
+        return pacGum;
+    }
+
 
 }
