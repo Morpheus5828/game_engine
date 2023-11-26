@@ -3,6 +3,7 @@ package engine.model.physicalEngine.shape;
 import java.util.ArrayList;
 import java.util.List;
 
+import engine.model.physicalEngine.environment.Map;
 import engine.model.physicalEngine.movement.*;
 
 public class Rectangle {
@@ -22,11 +23,11 @@ public class Rectangle {
      * The rectangle have a head, it's also a @Position, the head will move according the direction so if we go right first, and then we go to the left
      * the rectangle is going to flip.
      *
-     * @param position
-     * @param width
-     * @param height
-     * @param moving
-     * @param velocity
+     * @param position : the @Position of this @Rectangle
+     * @param width : its width
+     * @param height : its height
+     * @param moving : true if it can move
+     * @param velocity : its @Velocity
      *
      * @see Position
      * @see Velocity
@@ -53,6 +54,45 @@ public class Rectangle {
         this.Velocity = velocity;
         this.direction = Direction.NONE;
         this.head = new Position(position.getX() + height / 2, position.getY());
+    }
+
+    /**
+     * Check if the @Rectangle is out of @Map
+     *
+     * @param map : the @Map
+     *
+     * @return true if this @Rectangle touches another @Rectangle
+     */
+    public boolean outOfMap(Map map){
+        return ( getY() < 0 || getY() > map.getHeight() || getX() < 0 || getX() > map.getWidth());
+    }
+
+    /**
+     * Check if this @Rectangle touches another @Rectangle
+     *
+     * @param r2 : the other @Rectangle
+     *
+     * @return true if this @Rectangle touches another @Rectangle
+     */
+    public boolean isTouching(Rectangle r2){
+        List<Position> apex1 = this.getApex();
+        List<Position> apex2 = r2.getApex();
+        if (apex1.get(2).getY() <= apex2.get(1).getY()
+                    && apex1.get(2).getX() > apex2.get(1).getX()
+                    && apex1.get(0).getX() < apex2.get(3).getX()
+                    && apex1.get(2).getY() >= apex2.get(1).getY()) return true;
+        else if(apex1.get(1).getY() >= apex2.get(0).getY()
+                && apex1.get(3).getX() > apex2.get(0).getX()
+                && apex1.get(1).getX() < apex2.get(2).getX()
+                && apex1.get(1).getY() <= apex2.get(0).getY()) return true;
+        else if(apex1.get(2).getX() >= apex2.get(0).getX()
+                && apex1.get(3).getY() > apex2.get(0).getY()
+                && apex1.get(2).getY() < apex2.get(1).getY()
+                && apex1.get(2).getX() <= apex2.get(0).getX()) return true;
+        else return apex1.get(1).getX() <= apex2.get(2).getX()
+                    && apex1.get(1).getY() > apex2.get(0).getY()
+                    && apex1.get(0).getY() < apex2.get(1).getY()
+                    && apex1.get(1).getX() >= apex2.get(2).getX();
     }
 
     /**

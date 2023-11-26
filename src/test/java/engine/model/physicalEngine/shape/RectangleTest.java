@@ -2,7 +2,9 @@ package engine.model.physicalEngine.shape;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import engine.model.physicalEngine.environment.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +31,28 @@ public class RectangleTest {
         color = Color.YELLOW;
         moving = true;
         velocity = new Velocity(10, 10);
-        rectangle = new Rectangle(position, height, width, moving, velocity);
+        rectangle = new Rectangle(position, width, height, moving, velocity);
+    }
+
+    @Test
+    public void testOutOfMap(){
+        Map map = new Map(100, 100);
+        assertFalse(rectangle.outOfMap(map));
+        Rectangle rectangle2 = new Rectangle(new Position(-1, 10), width, height, moving, velocity);
+        assertTrue(rectangle2.outOfMap(map));
+        Rectangle rectangle3 = new Rectangle(new Position(map.getWidth() + 1, 10), width, height, moving, velocity);
+        assertTrue(rectangle3.outOfMap(map));
+        Rectangle rectangle4 = new Rectangle(new Position(10, -1), width, height, moving, velocity);
+        assertTrue(rectangle4.outOfMap(map));
+        Rectangle rectangle5 = new Rectangle(new Position(10, map.getHeight() + 1), width, height, moving, velocity);
+        assertTrue(rectangle5.outOfMap(map));
+    }
+
+    @Test
+    public void testIsTouching(){
+        Rectangle rectangle2 = new Rectangle(new Position(20, 10), width, height, moving, velocity);
+        assertTrue(rectangle.isTouching(rectangle2));
+        assertFalse(rectangle.isTouching(new Rectangle(new Position(40, 40), width, height, moving, velocity)));
     }
 
     @Test
