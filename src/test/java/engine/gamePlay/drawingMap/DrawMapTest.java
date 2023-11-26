@@ -1,4 +1,4 @@
-package engine.model.gamePlayEngine.drawingMap;
+package engine.gamePlay.drawingMap;
 
 import engine.gamePlay.drawingMap.DrawMap;
 import engine.gamePlay.drawingMap.XmlReader;
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;

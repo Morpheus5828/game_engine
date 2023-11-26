@@ -1,4 +1,4 @@
-package engine.model.gamePlayEngine.drawingMap;
+package engine.gamePlay.drawingMap;
 
 import engine.gamePlay.drawingMap.XmlReader;
 import org.junit.jupiter.api.BeforeEach;

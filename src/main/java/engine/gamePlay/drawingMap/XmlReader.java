@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import org.xml.sax.InputSource;
 
+/**
+ * The XmlReader class is responsible for reading the XML file and converting it into a two-dimensional array.
+ */
 public class XmlReader {
     private int[][] data;
     private int width;

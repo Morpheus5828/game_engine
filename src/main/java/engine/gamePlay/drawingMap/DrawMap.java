@@ -1,6 +1,5 @@
 package engine.gamePlay.drawingMap;
 
-import engine.gamePlay.*;
 import engine.gamePlay.entity.PacGum;
 import engine.gamePlay.entity.Pacman;
 import engine.gamePlay.entity.SuperPacGum;
@@ -14,12 +13,15 @@ import javafx.scene.paint.Color;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
+
+/**
+ * The DrawMap class is responsible for creating and initializing the game map based on the XML data.
+ */
 public class DrawMap {
     private XmlReader xmlReader;
     private int[][] data;

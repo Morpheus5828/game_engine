@@ -1,18 +1,16 @@
-package gamePlayEngine;
+package engine.gamePlay;
 
-import engine.gamePlay.HUD;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HUDTest {
-
     private HUD hud;
 
     @BeforeEach
     void setUp() {
-        hud = new HUD(800, 600);
+        hud = new HUD();
     }
 
     @Test

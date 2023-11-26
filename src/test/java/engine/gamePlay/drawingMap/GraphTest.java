@@ -1,6 +1,5 @@
-package engine.model.gamePlayEngine.drawingMap;
+package engine.gamePlay.drawingMap;
 
-import engine.gamePlay.Category;
 import engine.gamePlay.aiEngine.Graph;
 import engine.gamePlay.drawingMap.DrawMap;
 import engine.gamePlay.drawingMap.XmlReader;
@@ -8,7 +7,6 @@ import engine.model.FinalShape;
 import engine.model.Kernel;
 import engine.model.physicalEngine.PhysicalEngine;
 import engine.model.physicalEngine.movement.Velocity;
-import engine.model.physicalEngine.shape.Rectangle;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
