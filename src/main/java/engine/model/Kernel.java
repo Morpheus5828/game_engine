@@ -15,7 +15,7 @@ import engine.model.physicalEngine.movement.Direction;
 
 /**
  * This class is used to represent a kernel. The role of the kernel is to manage all the engines.
- * 
+ *
  * @see PhysicalEngine
  * @see GraphicalEngine
  * @see EventListener
@@ -48,7 +48,7 @@ public class Kernel {
 
     /**
      * Constructor of Kernel. Create a kernel with a specific width, height and color.
-     * 
+     *
      * @param width
      * @param height
      * @param color
@@ -80,7 +80,7 @@ public class Kernel {
 
     /**
      * Moves the main shape according to the direction of the event listener.
-     * 
+     *
      * @throws InterruptedException
      */
     private void moveMainShape() throws InterruptedException {
@@ -115,7 +115,7 @@ public class Kernel {
 
     /**
      * Sets the main shape.
-     * 
+     *
      * @param shape
      */
     public void setMainShape(FinalShape shape) {
@@ -174,7 +174,7 @@ public class Kernel {
 
     /**
      * Get the play ground of the graphical engine.
-     * 
+     *
      * @return Group
      */
     public Group getPlayGround() {
@@ -183,7 +183,7 @@ public class Kernel {
 
     /**
      * Get the physical engine.
-     * 
+     *
      * @return PhgysicalEngine
      */
     public PhysicalEngine getPhysicalEngine() {
@@ -193,7 +193,7 @@ public class Kernel {
     /**
      * Add a new entity to the list of final shapes. This method is used to add a new entity to the
      * game.
-     * 
+     *
      * @param x
      * @param y
      * @param width
@@ -217,7 +217,7 @@ public class Kernel {
     /**
      * Add a new entity to the list of final shapes. This method is used to add a new entity to the
      * game.
-     * 
+     *
      * @param x
      * @param y
      * @param width

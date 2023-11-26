@@ -20,6 +20,8 @@ public class PinkGhost extends Ghost {
         this.rectangle = kernel.addEntity(x, y, width, height, color, true, 16, 16, false);
         this.x = x;
         this.y = y;
+        this.initPositionX = x;
+        this.initPositionY = y;
     }
 
     public void IA() {

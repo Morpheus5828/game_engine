@@ -90,6 +90,10 @@ public class DrawMap {
         return pacGumsList;
     }
 
+    public Pacman getPacman() {
+        return pacman;
+    }
+
     public List<Ghost> getGhostsList() {
         return ghostsList;
     }

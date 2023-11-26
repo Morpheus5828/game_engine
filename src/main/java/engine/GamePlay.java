@@ -3,12 +3,16 @@ package engine;
 import engine.gamePlay.HUD;
 import engine.gamePlay.drawingMap.DrawMap;
 import engine.gamePlay.drawingMap.XmlReader;
+import engine.gamePlay.entity.Pacman;
+import engine.gamePlay.entity.ghost.Ghost;
 import engine.model.Kernel;
+import engine.model.physicalEngine.movement.Position;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -18,10 +22,11 @@ import javafx.stage.Stage;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
+import java.util.List;
 
 /**
  * This class is used to represent the game.
- * 
+ *
  * @see Application
  */
 public class GamePlay extends Application {
@@ -44,10 +49,12 @@ public class GamePlay extends Application {
      * The HUD of the game.
      */
     private HUD HUD;
+    private List<Ghost> ghostsList;
+    private Pacman pacman;
 
     /**
      * Initialize the game.
-     * 
+     *
      * @throws Exception
      */
     public void initGame() throws Exception {
@@ -56,7 +63,8 @@ public class GamePlay extends Application {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("engine/map/levelOne.tmx");
         BufferedReader file = new BufferedReader(new InputStreamReader(inputStream));
         DrawMap map = new DrawMap(new XmlReader(file, 23, 23), kernel);
-
+        ghostsList = map.getGhostsList();
+        pacman = map.getPacman();
         kernel.drawStaticEntities();
         kernel.drawMovingEntities();
 
@@ -65,7 +73,7 @@ public class GamePlay extends Application {
 
     /**
      * Update the HUD.
-     * 
+     *
      * @param root
      */
     public void updateHUD(Parent root) {
@@ -97,10 +105,35 @@ public class GamePlay extends Application {
         stage.setResizable(false);
         stage.show();
 
+
         stage.setOnCloseRequest(event -> {
             Platform.exit();
             System.exit(0);
         });
+
+        new Thread(() -> {
+            while (true) {
+                try {
+                    if (ghostsList.get(0).getRectangle().shapeTouching(pacman.getPacman())) {
+                        HUD.removeLife();
+                        updateHUD(root);
+                        if (HUD.getLives() > 0) {
+                            pacman.reinitPacman();
+                            ghostsList.get(0).reinit();
+                        } else {
+                            try {
+                                initGame();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
     }
 
     public static void main(String[] args) throws Exception {

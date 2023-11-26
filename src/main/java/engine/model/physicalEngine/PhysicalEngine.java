@@ -7,7 +7,7 @@ import engine.model.physicalEngine.movement.*;
 /**
  * This class is used to manage the physics of the game. It will manage the entity, the movements
  * and the map.
- * 
+ *
  * @see Map
  */
 public class PhysicalEngine {
@@ -57,7 +57,7 @@ public class PhysicalEngine {
     public Rectangle addEntity(Position position, double width, double height, boolean isMoving, Velocity velocity,
             boolean isColliding) {
         Rectangle entity = new Rectangle(position, width, height, isMoving, velocity, isColliding);
-        // this.map.addShape(entity);
+        //this.map.addShape(entity);
         if (!this.map.addShape(entity))
             throw new IllegalArgumentException("One of the entities is not in the map.");
         return entity;
@@ -65,7 +65,7 @@ public class PhysicalEngine {
 
     /**
      * Return the map of the game.
-     * 
+     *
      * @return map
      */
     public Map getMap() {
@@ -87,5 +87,10 @@ public class PhysicalEngine {
             return movement.updatePositonY(direction, shape, this.map);
         }
         return moved;
+    }
+
+
+    public boolean testTouching(Rectangle r1, Rectangle r2){
+        return r1.isTouching(r2);
     }
 }

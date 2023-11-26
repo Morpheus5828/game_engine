@@ -20,6 +20,16 @@ public class Pacman {
     private FinalShape pacman;
 
     /**
+     * InitPositionX
+     */
+    private double initPositionX;
+
+    /**
+     * InitPositionY
+     */
+    private double initPositionY;
+
+    /**
      * The Category of the Pacman.
      */
     private final Category type = Category.PACMAN;
@@ -36,6 +46,8 @@ public class Pacman {
      */
     public Pacman(double x, double y, double width, double height, Kernel kernel, Image image) {
         pacman = kernel.addEntity(x, y, width, height, image, true, 16, 16, false);
+        initPositionX = x;
+        initPositionY = y;
     }
 
     /**
@@ -76,5 +88,9 @@ public class Pacman {
      */
     public Position getPosition() {
         return pacman.getRectangle().getPosition();
+    }
+
+    public void reinitPacman(){
+        pacman.reinit(initPositionX, initPositionY);
     }
 }

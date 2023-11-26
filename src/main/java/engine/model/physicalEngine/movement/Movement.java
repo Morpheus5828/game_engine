@@ -83,6 +83,16 @@ public class Movement {
      * @param map       : the Map
      */
     public boolean updatePositonX(Direction direction, Rectangle shape, Map map) {
+        if (shape.outOfMap(map)) {
+            if (direction == Direction.RIGHT) {
+                shape.setPosition(0,
+                        shape.getY());
+            } else if (direction == Direction.LEFT){
+                shape.setPosition(map.getWidth(), shape.getY());
+            }
+            return true;
+        }
+
         if (!willCollide(shape, map, direction)) {
             if (direction == Direction.RIGHT) {
                 shape.setPosition(shape.getPosition().getX() + shape.getVelocity().getVelocityX(),
@@ -96,11 +106,11 @@ public class Movement {
                 return false;
         }
         if (direction == Direction.RIGHT) {
-            shape.setPosition(obstacle.getX() - obstacle.getWidth() / 2 - shape.getWidth() / 2,
+            shape.setPosition(obstacle.getX() - obstacle.getWidth() /2 - shape.getWidth() /2,
                     shape.getPosition().getY());
             return true;
         } else if (direction == Direction.LEFT) {
-            shape.setPosition(obstacle.getX() + obstacle.getWidth() / 2 + shape.getWidth() / 2 + 2,
+            shape.setPosition(obstacle.getX() + obstacle.getWidth() /2 + shape.getWidth() /2 + 2,
                     shape.getPosition().getY());
             return true;
         }
@@ -116,6 +126,17 @@ public class Movement {
      * @param map       : the Map
      */
     public boolean updatePositonY(Direction direction, Rectangle shape, Map map) {
+
+        if (shape.outOfMap(map)) {
+            if (direction == Direction.UP) {
+                shape.setPosition(shape.getX(), map.getHeight()
+                        );
+            } else if (direction == Direction.DOWN){
+                shape.setPosition(shape.getX(), 0);
+            }
+            return true;
+        }
+
         if (!willCollide(shape, map, direction)) {
             if (direction == Direction.UP) {
                 shape.setPosition(shape.getPosition().getX(),

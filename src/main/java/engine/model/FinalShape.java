@@ -106,4 +106,12 @@ public class FinalShape {
         this.rectangleDrawing.setY(this.rectangle.getY());
         return result;
     }
+
+    public boolean shapeTouching(FinalShape f){
+        return physicalEngine.testTouching(this.getRectangle(), f.getRectangle());
+    }
+
+    public void reinit(double x, double y){
+        this.getRectangle().setPosition(x, y);
+    }
 }

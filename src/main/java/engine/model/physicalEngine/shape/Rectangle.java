@@ -231,7 +231,7 @@ public class Rectangle {
      */
 
     public void setPosition(Position point) {
-        this.position = point;
+        this.position = point; //TODO : erreur objet
     }
 
     /**
